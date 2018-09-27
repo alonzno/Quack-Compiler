@@ -12,6 +12,17 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //                                                                            //
+//  SECTION 1: %top{ user code %}                                             //
+//                                                                            //
+////////////////////////////////////////////////////////////////////////////////
+
+#line 1 "lexerspec.l"
+
+    #include <fstream>
+
+
+////////////////////////////////////////////////////////////////////////////////
+//                                                                            //
 //  REGEX MATCHER                                                             //
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,12 +101,12 @@ int Lexer::lex()
               out().put(matcher().input());
             }
             break;
-          case 1: // rule at line 5: ["]
-#line 5 "lexerspec.l"
+          case 1: // rule at line 8: ["]
+#line 8 "lexerspec.l"
 { push_state(dq); out() << "&ldquo;"; }
             break;
-          case 2: // rule at line 6: [']
-#line 6 "lexerspec.l"
+          case 2: // rule at line 9: [']
+#line 9 "lexerspec.l"
 { push_state(sq); out() << "&lsquo;"; }
             break;
         }
@@ -114,16 +125,16 @@ int Lexer::lex()
               out().put(matcher().input());
             }
             break;
-          case 1: // rule at line 7: [^"']*
-#line 7 "lexerspec.l"
+          case 1: // rule at line 10: [^"']*
+#line 10 "lexerspec.l"
 { out() << text(); }
             break;
-          case 2: // rule at line 9: ["]
-#line 9 "lexerspec.l"
+          case 2: // rule at line 12: ["]
+#line 12 "lexerspec.l"
 { out()<< "&rdquo;"; pop_state(); }
             break;
-          case 3: // rule at line 10: [']
-#line 10 "lexerspec.l"
+          case 3: // rule at line 13: [']
+#line 13 "lexerspec.l"
 { push_state(sq); out() << "&lsquo;"; }
             break;
         }
@@ -142,12 +153,12 @@ int Lexer::lex()
               out().put(matcher().input());
             }
             break;
-          case 1: // rule at line 8: [^']*
-#line 8 "lexerspec.l"
+          case 1: // rule at line 11: [^']*
+#line 11 "lexerspec.l"
 { out() << text(); }
             break;
-          case 2: // rule at line 11: [']
-#line 11 "lexerspec.l"
+          case 2: // rule at line 14: [']
+#line 14 "lexerspec.l"
 { pop_state(); out() << "&rsquo;"; }
 
             break;
@@ -165,5 +176,20 @@ int Lexer::lex()
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
-#line 14 "lexerspec.l"
-int main() { return Lexer().lex(); }
+#line 17 "lexerspec.l"
+
+int main(int argc, char **argv)
+{
+    if (argc < 2){
+        std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
+        exit(1);
+    }
+
+    std::ifstream input_stream(argv[1], std::ios::binary);
+    if (!input_stream.is_open()) {
+        std::cerr << "Failed to open" << argv[1] << std::endl;
+        exit(2);
+    }
+
+    Lexer(input_stream, std::cout ).lex();
+}
