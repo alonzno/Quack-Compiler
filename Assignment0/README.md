@@ -15,4 +15,4 @@
 
 Output will be written to standard output
 
-This program will currently add HTML entities for corresponding double and single quotes to make them curly.  Some other use cases for apostrophes have not be properly implemented yet (contractions, plural characters, or possessive case nouns).
+Currently, this program will add HTML entities for corresponding double and single quotes to make them curly.  Some other use cases for apostrophes have not be properly implemented yet (contractions, plural characters, or possessive case nouns).
