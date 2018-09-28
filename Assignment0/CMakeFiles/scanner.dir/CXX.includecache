@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/alonzoaltamirano/Repos/Quack-Compiler/Assignment0/lex.yy.cpp
+fstream
+-
+reflex/matcher.h
+-
+reflex/abslexer.h
+-
+
