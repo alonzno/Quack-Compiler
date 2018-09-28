@@ -2,10 +2,9 @@ cmake_minimum_required(VERSION 3.12)
 project(Scanner)
 set(CMAKE_CXX_STANDARD 14)
 
-# Where are the reflex include and library files?
-#
-set(REFLEX_LIB "/usr/local/lib/libreflex.a")
-set(REFLEX_INCLUDE "/usr/local/include/reflex")
+
+find_library(REFLEX_LIB "libreflex.a")
+find_path(REFLEX_INCLUDE "reflex")
 
 add_custom_command(
         OUTPUT lex.yy.cpp
