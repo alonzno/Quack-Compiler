@@ -49,6 +49,9 @@ std::string BAD_NL_STR =
    * how to declare an exclusive scanner state. 
    */ 
 %x comment
+%x string
+%x tri-string
+%x identifier
 
 %%
 
@@ -59,7 +62,11 @@ std::string BAD_NL_STR =
   /* Multi-character punctuation with names */
 ==    { return parser::token::EQUALS; }
 [<]=  { return parser::token::ATMOST; }
+[>]=  { return parser::token::ATLEAST; }
 
+
+    /* Single-line comment */
+[/][/].*[\n]  { ; }
 
    /* Single character punctuation.  Because a character
     * in C or C++ can be treated as an integer, Bison lets
@@ -67,7 +74,7 @@ std::string BAD_NL_STR =
     * JFlex/Cup do not let you do this in Java.
     * Here are a few ... there are more. 
     */
-[-+*/]  { return text()[0]; }
+[-+*/(){}:,;=.]  { return text()[0]; }
 
   /* Keywords are essentially another kind of punctuation,
    * but since they also match the identifier pattern, we
@@ -78,8 +85,18 @@ std::string BAD_NL_STR =
    * Here are a couple of examples. 
    */
 
-class  { return parser::token::CLASS; }
-def    { return parser::token::DEF; }
+class   { return parser::token::CLASS; }
+def     { return parser::token::DEF; }
+if      { return parser::token::IF; }
+elif    { return parser::token::ELIF; }
+else    { return parser::token::ELSE; }
+and     { return parser::token::AND; }
+or      { return parser::token::OR; }
+not     { return parser::token::NOT; }
+extends { return parser::token::EXTENDS; }
+return  { return parser::token::RETURN; }
+while   { return parser::token::WHILE; }
+typecase { return parser::token::TYPECASE; }
 
 
    /* The following tokens are value-bearing:
@@ -102,7 +119,41 @@ def    { return parser::token::DEF; }
    * You almost certainly scanner states for triple quotes.
    * The tricky bit is catching errors, such as disallowed escape sequences
    * and unclosed quotes.
-   */ 
+   */
+
+    /* Single-line string */
+["]     { start(string); }
+<string>[\n]            { string_buf.clear();
+                          report::error("Unclosed string literal at line " 
+                          + std::to_string(lineno()));
+                          start(INITIAL);}
+
+<string>\\0              { string_buf.append("\0"); }
+<string>\\b              { string_buf.append("\b"); }
+<string>\\t              { string_buf.append("\t"); }
+<string>\\n              { string_buf.append("\n"); }
+<string>\\r              { string_buf.append("\r"); }
+<string>\\f              { string_buf.append("\f"); }
+<string>\\["]            { string_buf.append("\""); }
+<string>\\\\            { string_buf.append("\\"); }
+<string>[^"\\]          { string_buf.append(text()); }
+<string>["]   { std::vector<char> char_array(string_buf.begin(), string_buf.end()); 
+                char_array.push_back(0); //Add null terminator
+                yylval.str = &char_array[0];
+                string_buf.clear();
+                start(INITIAL); 
+                return parser::token::STRING_LIT; }
+
+    /* Multiline String */
+\"\"\"                  { start(tri_string); }
+<tri_string> \"\"\"    { std::vector<char> char_array(string_buf.begin(), string_buf.end()); 
+                char_array.push_back(0); //Add null terminator
+                yylval.str = &char_array[0];
+                string_buf.clear();
+                start(INITIAL); 
+                return parser::token::STRING_LIT; }
+<tri_string> .* { string_buf.append(str()); }
+
 
   /* Ignore whitespace */
 [ \t\n]*  { ; }
@@ -112,6 +163,10 @@ def    { return parser::token::DEF; }
 <comment>[^*]*   { ; }
 <comment>[*][^/] { ; }
 <comment>[*][/]  { start(INITIAL); }
+
+    /* Identifier */
+[_a-zA-Z][_a-zA-Z0-9]*   { yylval.str = strdup(text()); return parser::token::IDENT; }
+
 
 .  {   report::error("Unexpected character '" + std::string(text()) + "'" +
        " at line " + std::to_string(lineno()) +
