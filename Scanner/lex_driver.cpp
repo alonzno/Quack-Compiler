@@ -63,12 +63,13 @@ int main(int argc, char **argv) {
             perror(argv[index]);
             exit(1);
         }
+
         yy::Lexer lexer = yy::Lexer(reflex::Input(f));
         while ((token = lexer.yylex(&yylval, &yyloc))!=EOF) {
             if (count++ > limit) break;
-            std::cout << token_name(token) << "\t(" << token << ")\t@"
-                //<< yylval.str //For debugging
+            std::cout  << token_name(token) << "\t(" << token << ")\t@"
+                << yylval.str //For debugging
                 << yyloc << std::endl;
-        }
+            }
     }
 }

@@ -74,7 +74,7 @@ std::string BAD_NL_STR =
     * JFlex/Cup do not let you do this in Java.
     * Here are a few ... there are more. 
     */
-[-+*/(){}:,;=.]  { return text()[0]; }
+[-+*/(){}:,;=.<>]  { return text()[0]; }
 
   /* Keywords are essentially another kind of punctuation,
    * but since they also match the identifier pattern, we
@@ -136,6 +136,7 @@ typecase { return parser::token::TYPECASE; }
 <string>\\f              { string_buf.append("\f"); }
 <string>\\["]            { string_buf.append("\""); }
 <string>\\\\            { string_buf.append("\\"); }
+<string>\\[^0btnrf"\\]  { report::error("Unrecognized escape sequence '" + str() + "'");}
 <string>[^"\\]          { string_buf.append(text()); }
 <string>["]   { std::vector<char> char_array(string_buf.begin(), string_buf.end()); 
                 char_array.push_back(0); //Add null terminator
@@ -152,6 +153,16 @@ typecase { return parser::token::TYPECASE; }
                 string_buf.clear();
                 start(INITIAL); 
                 return parser::token::STRING_LIT; }
+<tri_string>[\n]              { string_buf.append("\n"); }
+    /*
+<tri_string>[\0]              { string_buf.append("\0"); }
+<tri_string>[\b]              { string_buf.append("\b"); }
+<tri_string>[\t]              { string_buf.append("\t"); }
+<tri_string>[\r]              { string_buf.append("\r"); }
+<tri_string>[\f]              { string_buf.append("\f"); }
+<tri_string>\["]            { string_buf.append("\""); }
+<tri_string>\\\\            { string_buf.append("\\"); }
+    */
 <tri_string> .* { string_buf.append(str()); }
 
 
