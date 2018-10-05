@@ -50,8 +50,7 @@ std::string BAD_NL_STR =
    */ 
 %x comment
 %x string
-%x tri-string
-%x identifier
+%x tri_string
 
 %%
 
@@ -138,33 +137,19 @@ typecase { return parser::token::TYPECASE; }
 <string>\\\\            { string_buf.append("\\"); }
 <string>\\[^0btnrf"\\]  { report::error("Unrecognized escape sequence '" + str() + "'");}
 <string>[^"\\]          { string_buf.append(text()); }
-<string>["]   { std::vector<char> char_array(string_buf.begin(), string_buf.end()); 
-                char_array.push_back(0); //Add null terminator
-                yylval.str = &char_array[0];
+<string>["]   { yylval.str = strdup(string_buf.c_str());
                 string_buf.clear();
                 start(INITIAL); 
                 return parser::token::STRING_LIT; }
 
     /* Multiline String */
-\"\"\"                  { start(tri_string); }
-<tri_string> \"\"\"    { std::vector<char> char_array(string_buf.begin(), string_buf.end()); 
-                char_array.push_back(0); //Add null terminator
-                yylval.str = &char_array[0];
+\"\"\"                  { start(tri_string);}
+<tri_string>(.|\n)*["]["]["]    { 
+                string_buf.append(str().substr(0,size()-3));
+                yylval.str = strdup(string_buf.c_str());
                 string_buf.clear();
                 start(INITIAL); 
                 return parser::token::STRING_LIT; }
-<tri_string>[\n]              { string_buf.append("\n"); }
-    /*
-<tri_string>[\0]              { string_buf.append("\0"); }
-<tri_string>[\b]              { string_buf.append("\b"); }
-<tri_string>[\t]              { string_buf.append("\t"); }
-<tri_string>[\r]              { string_buf.append("\r"); }
-<tri_string>[\f]              { string_buf.append("\f"); }
-<tri_string>\["]            { string_buf.append("\""); }
-<tri_string>\\\\            { string_buf.append("\\"); }
-    */
-<tri_string> .* { string_buf.append(str()); }
-
 
   /* Ignore whitespace */
 [ \t\n]*  { ; }
