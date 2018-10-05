@@ -27,6 +27,7 @@ include_directories(
         ${CMAKE_CURRENT_BINARY_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}
         ${REFLEX_INCLUDE}
+        "/home/faculty/michal/classes/cis461/RE-flex/include/"
 )
 
 if(FALSE)
