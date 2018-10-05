@@ -68,9 +68,7 @@ int main(int argc, char **argv) {
         while ((token = lexer.yylex(&yylval, &yyloc))!=EOF) {
             if (count++ > limit) break;
             std::cout  << token_name(token) << "\t(" << token << ")\t@"
-                //<< yylval.str //For debugging
                 << yyloc << std::endl;
-            if (token_name(token) == "IDENT" || token_name(token) == "STRING_LIT"){std::cout << yylval.str << std::endl; }
             }
     }
 }
