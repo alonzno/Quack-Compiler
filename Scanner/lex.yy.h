@@ -79,7 +79,6 @@ class Lexer : public reflex::AbstractLexer<reflex::Matcher> {
   static const int INITIAL = 0;
   static const int comment = 1;
   static const int string = 2;
-  static const int tri_string = 3;
   virtual int yylex(yy::parser::semantic_type *yylval, yy::location *yylloc)
   {
     yylloc->step();

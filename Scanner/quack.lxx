@@ -50,8 +50,6 @@ std::string BAD_NL_STR =
    */ 
 %x comment
 %x string
-%x tri_string
-
 %%
 
   /* We start with some tokens that are not value-bearing,
@@ -143,9 +141,8 @@ typecase { return parser::token::TYPECASE; }
                 return parser::token::STRING_LIT; }
 
     /* Multiline String */
-\"\"\"                  { start(tri_string);}
-<tri_string>(.|\n)*["]["]["]    { 
-                string_buf.append(str().substr(0,size()-3));
+\"\"\"(.|\n)*["]["]["]    { 
+                string_buf.append(str().substr(3,size()-3));
                 yylval.str = strdup(string_buf.c_str());
                 string_buf.clear();
                 start(INITIAL); 
