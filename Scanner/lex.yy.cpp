@@ -174,7 +174,7 @@ int yy::Lexer::yylex(yy::parser::semantic_type& yylval)
           case 0:
             if (matcher().at_end())
             {
-#line 169 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+#line 171 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 { return EOF; }
 
             }
@@ -303,8 +303,8 @@ int yy::Lexer::yylex(yy::parser::semantic_type& yylval)
 #line 122 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 { start(string); }
             break;
-          case 20: // rule at line 144: """(?:.|\n)*["]["]["]
-#line 144 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+          case 20: // rule at line 145: """(?:.|\n)*["]["]["]
+#line 145 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 {
                 string_buf.append(str().substr(3,size()-3));
                 yylval.str = strdup(string_buf.c_str());
@@ -314,24 +314,24 @@ int yy::Lexer::yylex(yy::parser::semantic_type& yylval)
 
   /* Ignore whitespace */
             break;
-          case 21: // rule at line 152: [\x09\x0a\x20]*
-#line 152 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+          case 21: // rule at line 153: [\x09\x0a\x20]*
+#line 153 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 { ; }
 
    /* Multi-line comments */
             break;
-          case 22: // rule at line 155: [/][\x2a]
-#line 155 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+          case 22: // rule at line 156: [/][\x2a]
+#line 156 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 { start(comment); }
             break;
-          case 23: // rule at line 161: [A-Z_a-z][0-9A-Z_a-z]*
-#line 161 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+          case 23: // rule at line 163: [A-Z_a-z][0-9A-Z_a-z]*
+#line 163 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 { yylval.str = strdup(text()); return parser::token::IDENT; }
 
 
             break;
-          case 24: // rule at line 164: .
-#line 164 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+          case 24: // rule at line 166: .
+#line 166 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 {   report::error("Unexpected character '" + std::string(text()) + "'" +
        " at line " + std::to_string(lineno()) +
        ", column " + std::to_string(columno()));
@@ -347,25 +347,24 @@ int yy::Lexer::yylex(yy::parser::semantic_type& yylval)
           case 0:
             if (matcher().at_end())
             {
-#line 169 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
-{ return EOF; }
-
+#line 159 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+{ report::error("EOF in comment"); }
             }
             else
             {
               out().put(matcher().input());
             }
             break;
-          case 1: // rule at line 156: [^\x2a]*
-#line 156 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
-{ ; }
-            break;
-          case 2: // rule at line 157: [\x2a][^/]
+          case 1: // rule at line 157: [^\x2a]*
 #line 157 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 { ; }
             break;
-          case 3: // rule at line 158: [\x2a][/]
+          case 2: // rule at line 158: [\x2a][^/]
 #line 158 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+{ ; }
+            break;
+          case 3: // rule at line 160: [\x2a][/]
+#line 160 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 { start(INITIAL); }
 
     /* Identifier */
@@ -379,9 +378,8 @@ int yy::Lexer::yylex(yy::parser::semantic_type& yylval)
           case 0:
             if (matcher().at_end())
             {
-#line 169 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
-{ return EOF; }
-
+#line 127 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+{ report::error("EOF encountered in string literal at line " + std::to_string(lineno())); }
             }
             else
             {
@@ -394,7 +392,6 @@ int yy::Lexer::yylex(yy::parser::semantic_type& yylval)
                           report::error("Unclosed string literal at line "
                           + std::to_string(lineno()));
                           start(INITIAL);}
-
             break;
           case 2: // rule at line 128: \\0
 #line 128 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
@@ -444,6 +441,7 @@ int yy::Lexer::yylex(yy::parser::semantic_type& yylval)
                 return parser::token::STRING_LIT; }
 
     /* Multiline String */
+
             break;
         }
         break;
@@ -459,7 +457,7 @@ int yy::Lexer::yylex(yy::parser::semantic_type& yylval)
 //                                                                            //
 ////////////////////////////////////////////////////////////////////////////////
 
-#line 172 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
+#line 174 "/Users/alonzoaltamirano/Repos/Quack-Compiler/Scanner/quack.lxx"
 
 /* No main program here */
 

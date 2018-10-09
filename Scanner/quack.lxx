@@ -123,8 +123,8 @@ typecase { return parser::token::TYPECASE; }
 <string>[\n]            { string_buf.clear();
                           report::error("Unclosed string literal at line " 
                           + std::to_string(lineno()));
-                          start(INITIAL);}
-
+                          start(INITIAL); }
+<string><<EOF>>          { report::error("EOF encountered in string literal at line " + std::to_string(lineno())); }
 <string>\\0              { string_buf.append("\0"); }
 <string>\\b              { string_buf.append("\b"); }
 <string>\\t              { string_buf.append("\t"); }
@@ -141,6 +141,7 @@ typecase { return parser::token::TYPECASE; }
                 return parser::token::STRING_LIT; }
 
     /* Multiline String */
+
 \"\"\"(.|\n)*["]["]["]    { 
                 string_buf.append(str().substr(3,size()-3));
                 yylval.str = strdup(string_buf.c_str());
@@ -155,6 +156,7 @@ typecase { return parser::token::TYPECASE; }
 [/][*]  { start(comment); }
 <comment>[^*]*   { ; }
 <comment>[*][^/] { ; }
+<comment><<EOF>>   { report::error("EOF in comment"); }
 <comment>[*][/]  { start(INITIAL); }
 
     /* Identifier */
