@@ -1,0 +1,31 @@
+%skeleton "lalr1.cc"
+%require "3.0"
+
+%code requires{
+    namespace yy {
+        class Lexer;
+    }
+    #include "ASTNode.h"
+}
+
+%locations
+%define parse.trace
+
+%parse-param { yy::Lexer& lexer }
+%parse-param { AST::ASTNode** root }
+
+%code{
+    #include "lex.yy.h"
+    #undef yylex
+    #define yylex lexer.yylex
+
+    void dump(AST::ASTNode* n);
+}
+
+%union {
+    int num;
+    char* str;
+    AST::ASTNode* node;
+    AST::Block* block;
+}
+
