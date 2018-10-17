@@ -59,7 +59,7 @@ include CMakeFiles/parser.dir/flags.make
 
 quack.tab.cxx: quack.yxx
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating quack.tab.cxx, quack.tab.hxx, location.hh, position.hh, stack.hh"
-	bison -d /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/quack.yxx
+	bison -r all -Wconflicts-sr -d /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/quack.yxx
 
 quack.tab.hxx: quack.tab.cxx
 	@$(CMAKE_COMMAND) -E touch_nocreate quack.tab.hxx

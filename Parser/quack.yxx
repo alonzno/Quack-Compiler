@@ -40,7 +40,7 @@
     AST::Block* block;
 }
 
-// Start tokens
+/* Start tokens */
 %token CLASS
 %token DEF
 %token EXTENDS
@@ -60,6 +60,15 @@
 %token <num> INT_LIT
 %token <str> STRING_LIT
 %token NEG
+
+%left '*' '/'
+%left '+' '-'
+%left EQUALS
+%left ATLEAST
+%left ATMOST
+%left '>' '<'
+%left AND NOT OR
+%left '.'
 
 // Abstract syntax tree nodes
 // %type <node> expr leaf program stmt assignment
@@ -122,7 +131,7 @@ statement_block: '{' statements '}' { };
 
 statement: IF r_expr statement_block more_elif opt_else { };
 
-more_elif: ELIF r_expr statement_block
+more_elif: more_elif ELIF r_expr statement_block
          | %empty { };
 
 opt_else: ELSE statement_block
