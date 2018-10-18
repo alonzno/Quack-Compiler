@@ -26,6 +26,8 @@ namespace report {
 
     /* An error that we can locate in the input */
     void error_at(const yy::location& loc, const std::string& msg);
+    
+    void error_at(const yy::location& loc, const std::string& msg, const char * file);
 
     /* An error that we can't locate in the input */
     void error(const std::string& msg);

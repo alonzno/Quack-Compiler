@@ -30,6 +30,14 @@ void error_at(const yy::location& loc, const std::string& msg)
     }
 }
 
+void error_at(const yy::location& loc, const std::string& msg, const char *file)
+{
+    std::cerr << file << ":" << loc << ": " << msg <<std::endl;
+    if (++error_count > error_limit) {
+        bail();
+    }
+}
+
 /* An error that we can't locate in the input */
 void error(const std::string& msg)
 {

@@ -23,6 +23,6 @@ int main(int argc, char **argv)
     file.open(std::string(argv[1]));
 
     yy::Lexer *lexer  = new yy::Lexer(file);
-    yy::parser *parser = new yy::parser(*lexer);
+    yy::parser *parser = new yy::parser(*lexer, argv[1]);
     parser->parse();
 }

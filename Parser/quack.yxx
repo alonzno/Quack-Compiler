@@ -23,7 +23,7 @@
 %define parse.trace
 
 %parse-param { yy::Lexer& lexer }  /* Construct parser object with lexer */
-
+%parse-param { char *filename }
 %code{
     #include "lex.yy.h"
     #undef yylex
@@ -84,7 +84,7 @@
 /* A program is a sequence of zero or more class definitions
 *  followed by zero or more statements
 */
-program: classes statements { std::cout << "Parsed Successfully" << std::endl; } ;
+program: classes statements { std::cout << "Finished parse with no errors" << std::endl; } ;
 
 /* Zero or more class definitions */
 classes: classes class 
@@ -226,7 +226,7 @@ type_alt: type_alt IDENT ':' IDENT statement_block
 
 void yy::parser::error(const location_type& loc, const std::string& msg)
 {
-  report::error_at(loc, msg);
+  report::error_at(loc, msg, filename);
 }
 
 void dump(AST::ASTNode* n) {
