@@ -1,17 +1,18 @@
 # How to Configure
 
 ## You will need:
-* Re/Flex
+* reflex
+* bison
 * g++
 * make
 * cmake
 
 ## Instructions
 * Step 1: `git clone https://github.com/alonzno/Quack-Compiler.git`
-* Step 2: `cd Scanner`
+* Step 2: `cd Parser`
 * Step 3  `cmake .`
 * Step 4: `make`
-* Step 5: `./lexer <filename>`
+* Step 5: `./parser <filename>`
 
-This program tokenizes a stream of Quack code.  Output will be written to standard output
+This program determines if a given Quack language file can be parsed successfully, or if it has syntax errors.  If syntax errors exist, the first one is reported along with its location.
 
