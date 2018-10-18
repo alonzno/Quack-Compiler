@@ -33,7 +33,7 @@ include_directories(
 add_executable(parser
         quack.tab.cxx lex.yy.cpp lex.yy.h
         parser.cpp ASTNode.cpp ASTNode.h Messages.h Messages.cpp )
-
+if(FALSE)
 add_executable(lexer
         lex_driver.cpp
         lex.yy.cpp lex.yy.h
@@ -41,7 +41,7 @@ add_executable(lexer
         quack.tab.hxx
         ASTNode.cpp ASTNode.h Messages.h Messages.cpp
         names.h)
-
+endif()
 
 target_link_libraries(parser ${REFLEX_LIB})
-target_link_libraries(lexer ${REFLEX_LIB})
+#target_link_libraries(lexer ${REFLEX_LIB})
