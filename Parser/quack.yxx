@@ -226,7 +226,7 @@ type_alt: type_alt IDENT ':' IDENT statement_block
 
 void yy::parser::error(const location_type& loc, const std::string& msg)
 {
-  report::error_at(loc, msg, filename);
+  report::error_at(loc.begin.line, msg, filename);
 }
 
 void dump(AST::ASTNode* n) {

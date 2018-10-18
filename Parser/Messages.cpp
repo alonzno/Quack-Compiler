@@ -30,7 +30,7 @@ void error_at(const yy::location& loc, const std::string& msg)
     }
 }
 
-void error_at(const yy::location& loc, const std::string& msg, const char *file)
+void error_at(const int& loc, const std::string& msg, const char *file)
 {
     std::cerr << file << ":" << loc << ": " << msg <<std::endl;
     if (++error_count > error_limit) {
