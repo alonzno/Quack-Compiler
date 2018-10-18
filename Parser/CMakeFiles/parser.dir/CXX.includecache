@@ -14,26 +14,10 @@ sstream
 vector
 -
 
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/Messages.cpp
-Messages.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/Messages.h
-location.hh
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/location.hh
-
 /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/Messages.h
 location.hh
 /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/location.hh
 string
--
-
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/lex.yy.cpp
-quack.tab.hxx
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/quack.tab.hxx
-Messages.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/Messages.h
-reflex/matcher.h
--
-reflex/abslexer.h
 -
 
 /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/lex.yy.h
@@ -55,6 +39,12 @@ lex.yy.h
 /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/lex.yy.h
 Messages.h
 /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/Messages.h
+iostream
+-
+fstream
+-
+string
+-
 
 /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/position.hh
 algorithm
@@ -63,16 +53,6 @@ iostream
 -
 string
 -
-
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/quack.tab.cxx
-quack.tab.hxx
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/quack.tab.hxx
-lex.yy.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/lex.yy.h
-libintl.h
--
-Messages.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/Messages.h
 
 /Users/alonzoaltamirano/Repos/Quack-Compiler/Parser/quack.tab.hxx
 ASTNode.h

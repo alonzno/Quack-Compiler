@@ -505,7 +505,7 @@ State 13
 
 State 14
 
-   28 l_expr: IDENT .  [ATLEAST, ATMOST, EQUALS, AND, OR, '*', '/', '+', '-', '>', '<', '.', ')', ':', ',', '{', '=', ';']
+   28 l_expr: IDENT .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', '*', '/', '.', ')', ':', ',', '{', '=', ';']
    53 r_expr: IDENT . '(' actual_args ')'
 
     '('  shift, and go to state 33
@@ -611,7 +611,7 @@ State 20
    18 opt_ident: . ':' IDENT
    19          | . %empty  ['=']
    27 statement: l_expr . opt_ident '=' r_expr ';'
-   33 r_expr: l_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '*', '/', '+', '-', '>', '<', '.', ';']
+   33 r_expr: l_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', '*', '/', '.', ';']
 
     ':'  shift, and go to state 36
 
@@ -643,12 +643,12 @@ State 21
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
     ';'      shift, and go to state 50
 
@@ -721,12 +721,12 @@ State 27
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
     '{'      shift, and go to state 54
 
@@ -756,12 +756,12 @@ State 28
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
     '{'      shift, and go to state 54
 
@@ -790,12 +790,12 @@ State 29
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
 
     $default  reduce using rule 55 (opt_r_expr)
@@ -830,12 +830,12 @@ State 31
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
     '{'      shift, and go to state 58
 
@@ -854,24 +854,33 @@ State 32
    44       | r_expr . '>' r_expr
    45       | r_expr . AND r_expr
    46       | r_expr . OR r_expr
-   47       | NOT r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '*', '/', '+', '-', '>', '<', ')', ',', '{', ';']
+   47       | NOT r_expr .  [AND, OR, ')', ',', '{', ';']
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    '.'  shift, and go to state 49
+    ATLEAST  shift, and go to state 38
+    ATMOST   shift, and go to state 39
+    EQUALS   shift, and go to state 40
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
+    '+'      shift, and go to state 45
+    '-'      shift, and go to state 46
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
+    '.'      shift, and go to state 49
 
     $default  reduce using rule 47 (r_expr)
 
-    Conflict between rule 47 and token ATLEAST resolved as reduce (ATLEAST < NOT).
-    Conflict between rule 47 and token ATMOST resolved as reduce (ATMOST < NOT).
-    Conflict between rule 47 and token EQUALS resolved as reduce (EQUALS < NOT).
+    Conflict between rule 47 and token ATLEAST resolved as shift (NOT < ATLEAST).
+    Conflict between rule 47 and token ATMOST resolved as shift (NOT < ATMOST).
+    Conflict between rule 47 and token EQUALS resolved as shift (NOT < EQUALS).
     Conflict between rule 47 and token AND resolved as reduce (%left AND).
     Conflict between rule 47 and token OR resolved as reduce (%left OR).
-    Conflict between rule 47 and token '*' resolved as reduce ('*' < NOT).
-    Conflict between rule 47 and token '/' resolved as reduce ('/' < NOT).
-    Conflict between rule 47 and token '+' resolved as reduce ('+' < NOT).
-    Conflict between rule 47 and token '-' resolved as reduce ('-' < NOT).
-    Conflict between rule 47 and token '>' resolved as reduce ('>' < NOT).
-    Conflict between rule 47 and token '<' resolved as reduce ('<' < NOT).
+    Conflict between rule 47 and token '>' resolved as shift (NOT < '>').
+    Conflict between rule 47 and token '<' resolved as shift (NOT < '<').
+    Conflict between rule 47 and token '+' resolved as shift (NOT < '+').
+    Conflict between rule 47 and token '-' resolved as shift (NOT < '-').
+    Conflict between rule 47 and token '*' resolved as shift (NOT < '*').
+    Conflict between rule 47 and token '/' resolved as shift (NOT < '/').
     Conflict between rule 47 and token '.' resolved as shift (NOT < '.').
 
 
@@ -923,7 +932,7 @@ State 34
    35       | r_expr . '-' r_expr
    36       | r_expr . '*' r_expr
    37       | r_expr . '/' r_expr
-   38       | '-' r_expr .  ['*', '/', '+', '-', ')', ',', '{', ';']
+   38       | '-' r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', ')', ',', '{', ';']
    40       | r_expr . EQUALS r_expr
    41       | r_expr . ATLEAST r_expr
    42       | r_expr . ATMOST r_expr
@@ -933,28 +942,23 @@ State 34
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    ATLEAST  shift, and go to state 38
-    ATMOST   shift, and go to state 39
-    EQUALS   shift, and go to state 40
-    AND      shift, and go to state 41
-    OR       shift, and go to state 42
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
-    '.'      shift, and go to state 49
+    '*'  shift, and go to state 47
+    '/'  shift, and go to state 48
+    '.'  shift, and go to state 49
 
     $default  reduce using rule 38 (r_expr)
 
-    Conflict between rule 38 and token ATLEAST resolved as shift ('-' < ATLEAST).
-    Conflict between rule 38 and token ATMOST resolved as shift ('-' < ATMOST).
-    Conflict between rule 38 and token EQUALS resolved as shift ('-' < EQUALS).
-    Conflict between rule 38 and token AND resolved as shift ('-' < AND).
-    Conflict between rule 38 and token OR resolved as shift ('-' < OR).
-    Conflict between rule 38 and token '*' resolved as reduce ('*' < '-').
-    Conflict between rule 38 and token '/' resolved as reduce ('/' < '-').
+    Conflict between rule 38 and token ATLEAST resolved as reduce (ATLEAST < '-').
+    Conflict between rule 38 and token ATMOST resolved as reduce (ATMOST < '-').
+    Conflict between rule 38 and token EQUALS resolved as reduce (EQUALS < '-').
+    Conflict between rule 38 and token AND resolved as reduce (AND < '-').
+    Conflict between rule 38 and token OR resolved as reduce (OR < '-').
+    Conflict between rule 38 and token '>' resolved as reduce ('>' < '-').
+    Conflict between rule 38 and token '<' resolved as reduce ('<' < '-').
     Conflict between rule 38 and token '+' resolved as reduce (%left '+').
     Conflict between rule 38 and token '-' resolved as reduce (%left '-').
-    Conflict between rule 38 and token '>' resolved as shift ('-' < '>').
-    Conflict between rule 38 and token '<' resolved as shift ('-' < '<').
+    Conflict between rule 38 and token '*' resolved as shift ('-' < '*').
+    Conflict between rule 38 and token '/' resolved as shift ('-' < '/').
     Conflict between rule 38 and token '.' resolved as shift ('-' < '.').
 
 
@@ -980,12 +984,12 @@ State 35
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
     ')'      shift, and go to state 61
 
@@ -1194,7 +1198,6 @@ State 43
    34       | . r_expr '+' r_expr
    35       | . r_expr '-' r_expr
    36       | . r_expr '*' r_expr
-   36       | r_expr '*' . r_expr
    37       | . r_expr '/' r_expr
    38       | . '-' r_expr
    39       | . '(' r_expr ')'
@@ -1203,6 +1206,7 @@ State 43
    42       | . r_expr ATMOST r_expr
    43       | . r_expr '<' r_expr
    44       | . r_expr '>' r_expr
+   44       | r_expr '>' . r_expr
    45       | . r_expr AND r_expr
    46       | . r_expr OR r_expr
    47       | . NOT r_expr
@@ -1231,13 +1235,13 @@ State 44
    35       | . r_expr '-' r_expr
    36       | . r_expr '*' r_expr
    37       | . r_expr '/' r_expr
-   37       | r_expr '/' . r_expr
    38       | . '-' r_expr
    39       | . '(' r_expr ')'
    40       | . r_expr EQUALS r_expr
    41       | . r_expr ATLEAST r_expr
    42       | . r_expr ATMOST r_expr
    43       | . r_expr '<' r_expr
+   43       | r_expr '<' . r_expr
    44       | . r_expr '>' r_expr
    45       | . r_expr AND r_expr
    46       | . r_expr OR r_expr
@@ -1338,6 +1342,7 @@ State 47
    34       | . r_expr '+' r_expr
    35       | . r_expr '-' r_expr
    36       | . r_expr '*' r_expr
+   36       | r_expr '*' . r_expr
    37       | . r_expr '/' r_expr
    38       | . '-' r_expr
    39       | . '(' r_expr ')'
@@ -1346,7 +1351,6 @@ State 47
    42       | . r_expr ATMOST r_expr
    43       | . r_expr '<' r_expr
    44       | . r_expr '>' r_expr
-   44       | r_expr '>' . r_expr
    45       | . r_expr AND r_expr
    46       | . r_expr OR r_expr
    47       | . NOT r_expr
@@ -1375,13 +1379,13 @@ State 48
    35       | . r_expr '-' r_expr
    36       | . r_expr '*' r_expr
    37       | . r_expr '/' r_expr
+   37       | r_expr '/' . r_expr
    38       | . '-' r_expr
    39       | . '(' r_expr ')'
    40       | . r_expr EQUALS r_expr
    41       | . r_expr ATLEAST r_expr
    42       | . r_expr ATMOST r_expr
    43       | . r_expr '<' r_expr
-   43       | r_expr '<' . r_expr
    44       | . r_expr '>' r_expr
    45       | . r_expr AND r_expr
    46       | . r_expr OR r_expr
@@ -1555,12 +1559,12 @@ State 59
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
 
     $default  reduce using rule 52 (seq_r_expr)
@@ -1634,7 +1638,7 @@ State 64
    37       | r_expr . '/' r_expr
    40       | r_expr . EQUALS r_expr
    41       | r_expr . ATLEAST r_expr
-   41       | r_expr ATLEAST r_expr .  [ATLEAST, EQUALS, '*', '/', '+', '-', ')', ',', '{', ';']
+   41       | r_expr ATLEAST r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', ')', ',', '{', ';']
    42       | r_expr . ATMOST r_expr
    43       | r_expr . '<' r_expr
    44       | r_expr . '>' r_expr
@@ -1642,26 +1646,25 @@ State 64
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    ATMOST  shift, and go to state 39
-    AND     shift, and go to state 41
-    OR      shift, and go to state 42
-    '>'     shift, and go to state 47
-    '<'     shift, and go to state 48
-    '.'     shift, and go to state 49
+    '+'  shift, and go to state 45
+    '-'  shift, and go to state 46
+    '*'  shift, and go to state 47
+    '/'  shift, and go to state 48
+    '.'  shift, and go to state 49
 
     $default  reduce using rule 41 (r_expr)
 
     Conflict between rule 41 and token ATLEAST resolved as reduce (%left ATLEAST).
-    Conflict between rule 41 and token ATMOST resolved as shift (ATLEAST < ATMOST).
-    Conflict between rule 41 and token EQUALS resolved as reduce (EQUALS < ATLEAST).
-    Conflict between rule 41 and token AND resolved as shift (ATLEAST < AND).
-    Conflict between rule 41 and token OR resolved as shift (ATLEAST < OR).
-    Conflict between rule 41 and token '*' resolved as reduce ('*' < ATLEAST).
-    Conflict between rule 41 and token '/' resolved as reduce ('/' < ATLEAST).
-    Conflict between rule 41 and token '+' resolved as reduce ('+' < ATLEAST).
-    Conflict between rule 41 and token '-' resolved as reduce ('-' < ATLEAST).
-    Conflict between rule 41 and token '>' resolved as shift (ATLEAST < '>').
-    Conflict between rule 41 and token '<' resolved as shift (ATLEAST < '<').
+    Conflict between rule 41 and token ATMOST resolved as reduce (%left ATMOST).
+    Conflict between rule 41 and token EQUALS resolved as reduce (%left EQUALS).
+    Conflict between rule 41 and token AND resolved as reduce (AND < ATLEAST).
+    Conflict between rule 41 and token OR resolved as reduce (OR < ATLEAST).
+    Conflict between rule 41 and token '>' resolved as reduce (%left '>').
+    Conflict between rule 41 and token '<' resolved as reduce (%left '<').
+    Conflict between rule 41 and token '+' resolved as shift (ATLEAST < '+').
+    Conflict between rule 41 and token '-' resolved as shift (ATLEAST < '-').
+    Conflict between rule 41 and token '*' resolved as shift (ATLEAST < '*').
+    Conflict between rule 41 and token '/' resolved as shift (ATLEAST < '/').
     Conflict between rule 41 and token '.' resolved as shift (ATLEAST < '.').
 
 
@@ -1675,32 +1678,32 @@ State 65
    40       | r_expr . EQUALS r_expr
    41       | r_expr . ATLEAST r_expr
    42       | r_expr . ATMOST r_expr
-   42       | r_expr ATMOST r_expr .  [ATLEAST, ATMOST, EQUALS, '*', '/', '+', '-', ')', ',', '{', ';']
+   42       | r_expr ATMOST r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', ')', ',', '{', ';']
    43       | r_expr . '<' r_expr
    44       | r_expr . '>' r_expr
    45       | r_expr . AND r_expr
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    AND  shift, and go to state 41
-    OR   shift, and go to state 42
-    '>'  shift, and go to state 47
-    '<'  shift, and go to state 48
+    '+'  shift, and go to state 45
+    '-'  shift, and go to state 46
+    '*'  shift, and go to state 47
+    '/'  shift, and go to state 48
     '.'  shift, and go to state 49
 
     $default  reduce using rule 42 (r_expr)
 
-    Conflict between rule 42 and token ATLEAST resolved as reduce (ATLEAST < ATMOST).
+    Conflict between rule 42 and token ATLEAST resolved as reduce (%left ATLEAST).
     Conflict between rule 42 and token ATMOST resolved as reduce (%left ATMOST).
-    Conflict between rule 42 and token EQUALS resolved as reduce (EQUALS < ATMOST).
-    Conflict between rule 42 and token AND resolved as shift (ATMOST < AND).
-    Conflict between rule 42 and token OR resolved as shift (ATMOST < OR).
-    Conflict between rule 42 and token '*' resolved as reduce ('*' < ATMOST).
-    Conflict between rule 42 and token '/' resolved as reduce ('/' < ATMOST).
-    Conflict between rule 42 and token '+' resolved as reduce ('+' < ATMOST).
-    Conflict between rule 42 and token '-' resolved as reduce ('-' < ATMOST).
-    Conflict between rule 42 and token '>' resolved as shift (ATMOST < '>').
-    Conflict between rule 42 and token '<' resolved as shift (ATMOST < '<').
+    Conflict between rule 42 and token EQUALS resolved as reduce (%left EQUALS).
+    Conflict between rule 42 and token AND resolved as reduce (AND < ATMOST).
+    Conflict between rule 42 and token OR resolved as reduce (OR < ATMOST).
+    Conflict between rule 42 and token '>' resolved as reduce (%left '>').
+    Conflict between rule 42 and token '<' resolved as reduce (%left '<').
+    Conflict between rule 42 and token '+' resolved as shift (ATMOST < '+').
+    Conflict between rule 42 and token '-' resolved as shift (ATMOST < '-').
+    Conflict between rule 42 and token '*' resolved as shift (ATMOST < '*').
+    Conflict between rule 42 and token '/' resolved as shift (ATMOST < '/').
     Conflict between rule 42 and token '.' resolved as shift (ATMOST < '.').
 
 
@@ -1712,7 +1715,7 @@ State 66
    36       | r_expr . '*' r_expr
    37       | r_expr . '/' r_expr
    40       | r_expr . EQUALS r_expr
-   40       | r_expr EQUALS r_expr .  [EQUALS, '*', '/', '+', '-', ')', ',', '{', ';']
+   40       | r_expr EQUALS r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', ')', ',', '{', ';']
    41       | r_expr . ATLEAST r_expr
    42       | r_expr . ATMOST r_expr
    43       | r_expr . '<' r_expr
@@ -1721,27 +1724,25 @@ State 66
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    ATLEAST  shift, and go to state 38
-    ATMOST   shift, and go to state 39
-    AND      shift, and go to state 41
-    OR       shift, and go to state 42
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
-    '.'      shift, and go to state 49
+    '+'  shift, and go to state 45
+    '-'  shift, and go to state 46
+    '*'  shift, and go to state 47
+    '/'  shift, and go to state 48
+    '.'  shift, and go to state 49
 
     $default  reduce using rule 40 (r_expr)
 
-    Conflict between rule 40 and token ATLEAST resolved as shift (EQUALS < ATLEAST).
-    Conflict between rule 40 and token ATMOST resolved as shift (EQUALS < ATMOST).
+    Conflict between rule 40 and token ATLEAST resolved as reduce (%left ATLEAST).
+    Conflict between rule 40 and token ATMOST resolved as reduce (%left ATMOST).
     Conflict between rule 40 and token EQUALS resolved as reduce (%left EQUALS).
-    Conflict between rule 40 and token AND resolved as shift (EQUALS < AND).
-    Conflict between rule 40 and token OR resolved as shift (EQUALS < OR).
-    Conflict between rule 40 and token '*' resolved as reduce ('*' < EQUALS).
-    Conflict between rule 40 and token '/' resolved as reduce ('/' < EQUALS).
-    Conflict between rule 40 and token '+' resolved as reduce ('+' < EQUALS).
-    Conflict between rule 40 and token '-' resolved as reduce ('-' < EQUALS).
-    Conflict between rule 40 and token '>' resolved as shift (EQUALS < '>').
-    Conflict between rule 40 and token '<' resolved as shift (EQUALS < '<').
+    Conflict between rule 40 and token AND resolved as reduce (AND < EQUALS).
+    Conflict between rule 40 and token OR resolved as reduce (OR < EQUALS).
+    Conflict between rule 40 and token '>' resolved as reduce (%left '>').
+    Conflict between rule 40 and token '<' resolved as reduce (%left '<').
+    Conflict between rule 40 and token '+' resolved as shift (EQUALS < '+').
+    Conflict between rule 40 and token '-' resolved as shift (EQUALS < '-').
+    Conflict between rule 40 and token '*' resolved as shift (EQUALS < '*').
+    Conflict between rule 40 and token '/' resolved as shift (EQUALS < '/').
     Conflict between rule 40 and token '.' resolved as shift (EQUALS < '.').
 
 
@@ -1758,25 +1759,34 @@ State 67
    43       | r_expr . '<' r_expr
    44       | r_expr . '>' r_expr
    45       | r_expr . AND r_expr
-   45       | r_expr AND r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '*', '/', '+', '-', '>', '<', ')', ',', '{', ';']
+   45       | r_expr AND r_expr .  [AND, OR, ')', ',', '{', ';']
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    '.'  shift, and go to state 49
+    ATLEAST  shift, and go to state 38
+    ATMOST   shift, and go to state 39
+    EQUALS   shift, and go to state 40
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
+    '+'      shift, and go to state 45
+    '-'      shift, and go to state 46
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
+    '.'      shift, and go to state 49
 
     $default  reduce using rule 45 (r_expr)
 
-    Conflict between rule 45 and token ATLEAST resolved as reduce (ATLEAST < AND).
-    Conflict between rule 45 and token ATMOST resolved as reduce (ATMOST < AND).
-    Conflict between rule 45 and token EQUALS resolved as reduce (EQUALS < AND).
+    Conflict between rule 45 and token ATLEAST resolved as shift (AND < ATLEAST).
+    Conflict between rule 45 and token ATMOST resolved as shift (AND < ATMOST).
+    Conflict between rule 45 and token EQUALS resolved as shift (AND < EQUALS).
     Conflict between rule 45 and token AND resolved as reduce (%left AND).
     Conflict between rule 45 and token OR resolved as reduce (%left OR).
-    Conflict between rule 45 and token '*' resolved as reduce ('*' < AND).
-    Conflict between rule 45 and token '/' resolved as reduce ('/' < AND).
-    Conflict between rule 45 and token '+' resolved as reduce ('+' < AND).
-    Conflict between rule 45 and token '-' resolved as reduce ('-' < AND).
-    Conflict between rule 45 and token '>' resolved as reduce ('>' < AND).
-    Conflict between rule 45 and token '<' resolved as reduce ('<' < AND).
+    Conflict between rule 45 and token '>' resolved as shift (AND < '>').
+    Conflict between rule 45 and token '<' resolved as shift (AND < '<').
+    Conflict between rule 45 and token '+' resolved as shift (AND < '+').
+    Conflict between rule 45 and token '-' resolved as shift (AND < '-').
+    Conflict between rule 45 and token '*' resolved as shift (AND < '*').
+    Conflict between rule 45 and token '/' resolved as shift (AND < '/').
     Conflict between rule 45 and token '.' resolved as shift (AND < '.').
 
 
@@ -1794,24 +1804,33 @@ State 68
    44       | r_expr . '>' r_expr
    45       | r_expr . AND r_expr
    46       | r_expr . OR r_expr
-   46       | r_expr OR r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '*', '/', '+', '-', '>', '<', ')', ',', '{', ';']
+   46       | r_expr OR r_expr .  [AND, OR, ')', ',', '{', ';']
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    '.'  shift, and go to state 49
+    ATLEAST  shift, and go to state 38
+    ATMOST   shift, and go to state 39
+    EQUALS   shift, and go to state 40
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
+    '+'      shift, and go to state 45
+    '-'      shift, and go to state 46
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
+    '.'      shift, and go to state 49
 
     $default  reduce using rule 46 (r_expr)
 
-    Conflict between rule 46 and token ATLEAST resolved as reduce (ATLEAST < OR).
-    Conflict between rule 46 and token ATMOST resolved as reduce (ATMOST < OR).
-    Conflict between rule 46 and token EQUALS resolved as reduce (EQUALS < OR).
+    Conflict between rule 46 and token ATLEAST resolved as shift (OR < ATLEAST).
+    Conflict between rule 46 and token ATMOST resolved as shift (OR < ATMOST).
+    Conflict between rule 46 and token EQUALS resolved as shift (OR < EQUALS).
     Conflict between rule 46 and token AND resolved as reduce (%left AND).
     Conflict between rule 46 and token OR resolved as reduce (%left OR).
-    Conflict between rule 46 and token '*' resolved as reduce ('*' < OR).
-    Conflict between rule 46 and token '/' resolved as reduce ('/' < OR).
-    Conflict between rule 46 and token '+' resolved as reduce ('+' < OR).
-    Conflict between rule 46 and token '-' resolved as reduce ('-' < OR).
-    Conflict between rule 46 and token '>' resolved as reduce ('>' < OR).
-    Conflict between rule 46 and token '<' resolved as reduce ('<' < OR).
+    Conflict between rule 46 and token '>' resolved as shift (OR < '>').
+    Conflict between rule 46 and token '<' resolved as shift (OR < '<').
+    Conflict between rule 46 and token '+' resolved as shift (OR < '+').
+    Conflict between rule 46 and token '-' resolved as shift (OR < '-').
+    Conflict between rule 46 and token '*' resolved as shift (OR < '*').
+    Conflict between rule 46 and token '/' resolved as shift (OR < '/').
     Conflict between rule 46 and token '.' resolved as shift (OR < '.').
 
 
@@ -1821,42 +1840,37 @@ State 69
    34 r_expr: r_expr . '+' r_expr
    35       | r_expr . '-' r_expr
    36       | r_expr . '*' r_expr
-   36       | r_expr '*' r_expr .  ['*', '/', ')', ',', '{', ';']
    37       | r_expr . '/' r_expr
    40       | r_expr . EQUALS r_expr
    41       | r_expr . ATLEAST r_expr
    42       | r_expr . ATMOST r_expr
    43       | r_expr . '<' r_expr
    44       | r_expr . '>' r_expr
+   44       | r_expr '>' r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', ')', ',', '{', ';']
    45       | r_expr . AND r_expr
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    ATLEAST  shift, and go to state 38
-    ATMOST   shift, and go to state 39
-    EQUALS   shift, and go to state 40
-    AND      shift, and go to state 41
-    OR       shift, and go to state 42
-    '+'      shift, and go to state 45
-    '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
-    '.'      shift, and go to state 49
+    '+'  shift, and go to state 45
+    '-'  shift, and go to state 46
+    '*'  shift, and go to state 47
+    '/'  shift, and go to state 48
+    '.'  shift, and go to state 49
 
-    $default  reduce using rule 36 (r_expr)
+    $default  reduce using rule 44 (r_expr)
 
-    Conflict between rule 36 and token ATLEAST resolved as shift ('*' < ATLEAST).
-    Conflict between rule 36 and token ATMOST resolved as shift ('*' < ATMOST).
-    Conflict between rule 36 and token EQUALS resolved as shift ('*' < EQUALS).
-    Conflict between rule 36 and token AND resolved as shift ('*' < AND).
-    Conflict between rule 36 and token OR resolved as shift ('*' < OR).
-    Conflict between rule 36 and token '*' resolved as reduce (%left '*').
-    Conflict between rule 36 and token '/' resolved as reduce (%left '/').
-    Conflict between rule 36 and token '+' resolved as shift ('*' < '+').
-    Conflict between rule 36 and token '-' resolved as shift ('*' < '-').
-    Conflict between rule 36 and token '>' resolved as shift ('*' < '>').
-    Conflict between rule 36 and token '<' resolved as shift ('*' < '<').
-    Conflict between rule 36 and token '.' resolved as shift ('*' < '.').
+    Conflict between rule 44 and token ATLEAST resolved as reduce (%left ATLEAST).
+    Conflict between rule 44 and token ATMOST resolved as reduce (%left ATMOST).
+    Conflict between rule 44 and token EQUALS resolved as reduce (%left EQUALS).
+    Conflict between rule 44 and token AND resolved as reduce (AND < '>').
+    Conflict between rule 44 and token OR resolved as reduce (OR < '>').
+    Conflict between rule 44 and token '>' resolved as reduce (%left '>').
+    Conflict between rule 44 and token '<' resolved as reduce (%left '<').
+    Conflict between rule 44 and token '+' resolved as shift ('>' < '+').
+    Conflict between rule 44 and token '-' resolved as shift ('>' < '-').
+    Conflict between rule 44 and token '*' resolved as shift ('>' < '*').
+    Conflict between rule 44 and token '/' resolved as shift ('>' < '/').
+    Conflict between rule 44 and token '.' resolved as shift ('>' < '.').
 
 
 State 70
@@ -1866,48 +1880,43 @@ State 70
    35       | r_expr . '-' r_expr
    36       | r_expr . '*' r_expr
    37       | r_expr . '/' r_expr
-   37       | r_expr '/' r_expr .  ['*', '/', ')', ',', '{', ';']
    40       | r_expr . EQUALS r_expr
    41       | r_expr . ATLEAST r_expr
    42       | r_expr . ATMOST r_expr
    43       | r_expr . '<' r_expr
+   43       | r_expr '<' r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', ')', ',', '{', ';']
    44       | r_expr . '>' r_expr
    45       | r_expr . AND r_expr
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    ATLEAST  shift, and go to state 38
-    ATMOST   shift, and go to state 39
-    EQUALS   shift, and go to state 40
-    AND      shift, and go to state 41
-    OR       shift, and go to state 42
-    '+'      shift, and go to state 45
-    '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
-    '.'      shift, and go to state 49
+    '+'  shift, and go to state 45
+    '-'  shift, and go to state 46
+    '*'  shift, and go to state 47
+    '/'  shift, and go to state 48
+    '.'  shift, and go to state 49
 
-    $default  reduce using rule 37 (r_expr)
+    $default  reduce using rule 43 (r_expr)
 
-    Conflict between rule 37 and token ATLEAST resolved as shift ('/' < ATLEAST).
-    Conflict between rule 37 and token ATMOST resolved as shift ('/' < ATMOST).
-    Conflict between rule 37 and token EQUALS resolved as shift ('/' < EQUALS).
-    Conflict between rule 37 and token AND resolved as shift ('/' < AND).
-    Conflict between rule 37 and token OR resolved as shift ('/' < OR).
-    Conflict between rule 37 and token '*' resolved as reduce (%left '*').
-    Conflict between rule 37 and token '/' resolved as reduce (%left '/').
-    Conflict between rule 37 and token '+' resolved as shift ('/' < '+').
-    Conflict between rule 37 and token '-' resolved as shift ('/' < '-').
-    Conflict between rule 37 and token '>' resolved as shift ('/' < '>').
-    Conflict between rule 37 and token '<' resolved as shift ('/' < '<').
-    Conflict between rule 37 and token '.' resolved as shift ('/' < '.').
+    Conflict between rule 43 and token ATLEAST resolved as reduce (%left ATLEAST).
+    Conflict between rule 43 and token ATMOST resolved as reduce (%left ATMOST).
+    Conflict between rule 43 and token EQUALS resolved as reduce (%left EQUALS).
+    Conflict between rule 43 and token AND resolved as reduce (AND < '<').
+    Conflict between rule 43 and token OR resolved as reduce (OR < '<').
+    Conflict between rule 43 and token '>' resolved as reduce (%left '>').
+    Conflict between rule 43 and token '<' resolved as reduce (%left '<').
+    Conflict between rule 43 and token '+' resolved as shift ('<' < '+').
+    Conflict between rule 43 and token '-' resolved as shift ('<' < '-').
+    Conflict between rule 43 and token '*' resolved as shift ('<' < '*').
+    Conflict between rule 43 and token '/' resolved as shift ('<' < '/').
+    Conflict between rule 43 and token '.' resolved as shift ('<' < '.').
 
 
 State 71
 
    29 l_expr: r_expr . '.' IDENT
    34 r_expr: r_expr . '+' r_expr
-   34       | r_expr '+' r_expr .  ['*', '/', '+', '-', ')', ',', '{', ';']
+   34       | r_expr '+' r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', ')', ',', '{', ';']
    35       | r_expr . '-' r_expr
    36       | r_expr . '*' r_expr
    37       | r_expr . '/' r_expr
@@ -1920,28 +1929,23 @@ State 71
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    ATLEAST  shift, and go to state 38
-    ATMOST   shift, and go to state 39
-    EQUALS   shift, and go to state 40
-    AND      shift, and go to state 41
-    OR       shift, and go to state 42
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
-    '.'      shift, and go to state 49
+    '*'  shift, and go to state 47
+    '/'  shift, and go to state 48
+    '.'  shift, and go to state 49
 
     $default  reduce using rule 34 (r_expr)
 
-    Conflict between rule 34 and token ATLEAST resolved as shift ('+' < ATLEAST).
-    Conflict between rule 34 and token ATMOST resolved as shift ('+' < ATMOST).
-    Conflict between rule 34 and token EQUALS resolved as shift ('+' < EQUALS).
-    Conflict between rule 34 and token AND resolved as shift ('+' < AND).
-    Conflict between rule 34 and token OR resolved as shift ('+' < OR).
-    Conflict between rule 34 and token '*' resolved as reduce ('*' < '+').
-    Conflict between rule 34 and token '/' resolved as reduce ('/' < '+').
+    Conflict between rule 34 and token ATLEAST resolved as reduce (ATLEAST < '+').
+    Conflict between rule 34 and token ATMOST resolved as reduce (ATMOST < '+').
+    Conflict between rule 34 and token EQUALS resolved as reduce (EQUALS < '+').
+    Conflict between rule 34 and token AND resolved as reduce (AND < '+').
+    Conflict between rule 34 and token OR resolved as reduce (OR < '+').
+    Conflict between rule 34 and token '>' resolved as reduce ('>' < '+').
+    Conflict between rule 34 and token '<' resolved as reduce ('<' < '+').
     Conflict between rule 34 and token '+' resolved as reduce (%left '+').
     Conflict between rule 34 and token '-' resolved as reduce (%left '-').
-    Conflict between rule 34 and token '>' resolved as shift ('+' < '>').
-    Conflict between rule 34 and token '<' resolved as shift ('+' < '<').
+    Conflict between rule 34 and token '*' resolved as shift ('+' < '*').
+    Conflict between rule 34 and token '/' resolved as shift ('+' < '/').
     Conflict between rule 34 and token '.' resolved as shift ('+' < '.').
 
 
@@ -1950,7 +1954,7 @@ State 72
    29 l_expr: r_expr . '.' IDENT
    34 r_expr: r_expr . '+' r_expr
    35       | r_expr . '-' r_expr
-   35       | r_expr '-' r_expr .  ['*', '/', '+', '-', ')', ',', '{', ';']
+   35       | r_expr '-' r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', ')', ',', '{', ';']
    36       | r_expr . '*' r_expr
    37       | r_expr . '/' r_expr
    40       | r_expr . EQUALS r_expr
@@ -1962,28 +1966,23 @@ State 72
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    ATLEAST  shift, and go to state 38
-    ATMOST   shift, and go to state 39
-    EQUALS   shift, and go to state 40
-    AND      shift, and go to state 41
-    OR       shift, and go to state 42
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
-    '.'      shift, and go to state 49
+    '*'  shift, and go to state 47
+    '/'  shift, and go to state 48
+    '.'  shift, and go to state 49
 
     $default  reduce using rule 35 (r_expr)
 
-    Conflict between rule 35 and token ATLEAST resolved as shift ('-' < ATLEAST).
-    Conflict between rule 35 and token ATMOST resolved as shift ('-' < ATMOST).
-    Conflict between rule 35 and token EQUALS resolved as shift ('-' < EQUALS).
-    Conflict between rule 35 and token AND resolved as shift ('-' < AND).
-    Conflict between rule 35 and token OR resolved as shift ('-' < OR).
-    Conflict between rule 35 and token '*' resolved as reduce ('*' < '-').
-    Conflict between rule 35 and token '/' resolved as reduce ('/' < '-').
+    Conflict between rule 35 and token ATLEAST resolved as reduce (ATLEAST < '-').
+    Conflict between rule 35 and token ATMOST resolved as reduce (ATMOST < '-').
+    Conflict between rule 35 and token EQUALS resolved as reduce (EQUALS < '-').
+    Conflict between rule 35 and token AND resolved as reduce (AND < '-').
+    Conflict between rule 35 and token OR resolved as reduce (OR < '-').
+    Conflict between rule 35 and token '>' resolved as reduce ('>' < '-').
+    Conflict between rule 35 and token '<' resolved as reduce ('<' < '-').
     Conflict between rule 35 and token '+' resolved as reduce (%left '+').
     Conflict between rule 35 and token '-' resolved as reduce (%left '-').
-    Conflict between rule 35 and token '>' resolved as shift ('-' < '>').
-    Conflict between rule 35 and token '<' resolved as shift ('-' < '<').
+    Conflict between rule 35 and token '*' resolved as shift ('-' < '*').
+    Conflict between rule 35 and token '/' resolved as shift ('-' < '/').
     Conflict between rule 35 and token '.' resolved as shift ('-' < '.').
 
 
@@ -1993,35 +1992,33 @@ State 73
    34 r_expr: r_expr . '+' r_expr
    35       | r_expr . '-' r_expr
    36       | r_expr . '*' r_expr
+   36       | r_expr '*' r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', '*', '/', ')', ',', '{', ';']
    37       | r_expr . '/' r_expr
    40       | r_expr . EQUALS r_expr
    41       | r_expr . ATLEAST r_expr
    42       | r_expr . ATMOST r_expr
    43       | r_expr . '<' r_expr
    44       | r_expr . '>' r_expr
-   44       | r_expr '>' r_expr .  [ATLEAST, ATMOST, EQUALS, '*', '/', '+', '-', '>', '<', ')', ',', '{', ';']
    45       | r_expr . AND r_expr
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    AND  shift, and go to state 41
-    OR   shift, and go to state 42
     '.'  shift, and go to state 49
 
-    $default  reduce using rule 44 (r_expr)
+    $default  reduce using rule 36 (r_expr)
 
-    Conflict between rule 44 and token ATLEAST resolved as reduce (ATLEAST < '>').
-    Conflict between rule 44 and token ATMOST resolved as reduce (ATMOST < '>').
-    Conflict between rule 44 and token EQUALS resolved as reduce (EQUALS < '>').
-    Conflict between rule 44 and token AND resolved as shift ('>' < AND).
-    Conflict between rule 44 and token OR resolved as shift ('>' < OR).
-    Conflict between rule 44 and token '*' resolved as reduce ('*' < '>').
-    Conflict between rule 44 and token '/' resolved as reduce ('/' < '>').
-    Conflict between rule 44 and token '+' resolved as reduce ('+' < '>').
-    Conflict between rule 44 and token '-' resolved as reduce ('-' < '>').
-    Conflict between rule 44 and token '>' resolved as reduce (%left '>').
-    Conflict between rule 44 and token '<' resolved as reduce (%left '<').
-    Conflict between rule 44 and token '.' resolved as shift ('>' < '.').
+    Conflict between rule 36 and token ATLEAST resolved as reduce (ATLEAST < '*').
+    Conflict between rule 36 and token ATMOST resolved as reduce (ATMOST < '*').
+    Conflict between rule 36 and token EQUALS resolved as reduce (EQUALS < '*').
+    Conflict between rule 36 and token AND resolved as reduce (AND < '*').
+    Conflict between rule 36 and token OR resolved as reduce (OR < '*').
+    Conflict between rule 36 and token '>' resolved as reduce ('>' < '*').
+    Conflict between rule 36 and token '<' resolved as reduce ('<' < '*').
+    Conflict between rule 36 and token '+' resolved as reduce ('+' < '*').
+    Conflict between rule 36 and token '-' resolved as reduce ('-' < '*').
+    Conflict between rule 36 and token '*' resolved as reduce (%left '*').
+    Conflict between rule 36 and token '/' resolved as reduce (%left '/').
+    Conflict between rule 36 and token '.' resolved as shift ('*' < '.').
 
 
 State 74
@@ -2031,39 +2028,37 @@ State 74
    35       | r_expr . '-' r_expr
    36       | r_expr . '*' r_expr
    37       | r_expr . '/' r_expr
+   37       | r_expr '/' r_expr .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', '*', '/', ')', ',', '{', ';']
    40       | r_expr . EQUALS r_expr
    41       | r_expr . ATLEAST r_expr
    42       | r_expr . ATMOST r_expr
    43       | r_expr . '<' r_expr
-   43       | r_expr '<' r_expr .  [ATLEAST, ATMOST, EQUALS, '*', '/', '+', '-', '>', '<', ')', ',', '{', ';']
    44       | r_expr . '>' r_expr
    45       | r_expr . AND r_expr
    46       | r_expr . OR r_expr
    48       | r_expr . '.' IDENT '(' actual_args ')'
 
-    AND  shift, and go to state 41
-    OR   shift, and go to state 42
     '.'  shift, and go to state 49
 
-    $default  reduce using rule 43 (r_expr)
+    $default  reduce using rule 37 (r_expr)
 
-    Conflict between rule 43 and token ATLEAST resolved as reduce (ATLEAST < '<').
-    Conflict between rule 43 and token ATMOST resolved as reduce (ATMOST < '<').
-    Conflict between rule 43 and token EQUALS resolved as reduce (EQUALS < '<').
-    Conflict between rule 43 and token AND resolved as shift ('<' < AND).
-    Conflict between rule 43 and token OR resolved as shift ('<' < OR).
-    Conflict between rule 43 and token '*' resolved as reduce ('*' < '<').
-    Conflict between rule 43 and token '/' resolved as reduce ('/' < '<').
-    Conflict between rule 43 and token '+' resolved as reduce ('+' < '<').
-    Conflict between rule 43 and token '-' resolved as reduce ('-' < '<').
-    Conflict between rule 43 and token '>' resolved as reduce (%left '>').
-    Conflict between rule 43 and token '<' resolved as reduce (%left '<').
-    Conflict between rule 43 and token '.' resolved as shift ('<' < '.').
+    Conflict between rule 37 and token ATLEAST resolved as reduce (ATLEAST < '/').
+    Conflict between rule 37 and token ATMOST resolved as reduce (ATMOST < '/').
+    Conflict between rule 37 and token EQUALS resolved as reduce (EQUALS < '/').
+    Conflict between rule 37 and token AND resolved as reduce (AND < '/').
+    Conflict between rule 37 and token OR resolved as reduce (OR < '/').
+    Conflict between rule 37 and token '>' resolved as reduce ('>' < '/').
+    Conflict between rule 37 and token '<' resolved as reduce ('<' < '/').
+    Conflict between rule 37 and token '+' resolved as reduce ('+' < '/').
+    Conflict between rule 37 and token '-' resolved as reduce ('-' < '/').
+    Conflict between rule 37 and token '*' resolved as reduce (%left '*').
+    Conflict between rule 37 and token '/' resolved as reduce (%left '/').
+    Conflict between rule 37 and token '.' resolved as shift ('/' < '.').
 
 
 State 75
 
-   29 l_expr: r_expr '.' IDENT .  [ATLEAST, ATMOST, EQUALS, AND, OR, '*', '/', '+', '-', '>', '<', '.', ')', ':', ',', '{', '=', ';']
+   29 l_expr: r_expr '.' IDENT .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', '*', '/', '.', ')', ':', ',', '{', '=', ';']
    48 r_expr: r_expr '.' IDENT . '(' actual_args ')'
 
     '('  shift, and go to state 85
@@ -2217,12 +2212,12 @@ State 84
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
     ';'      shift, and go to state 99
 
@@ -2485,12 +2480,12 @@ State 104
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
     '{'      shift, and go to state 54
 
@@ -2533,12 +2528,12 @@ State 107
     EQUALS   shift, and go to state 40
     AND      shift, and go to state 41
     OR       shift, and go to state 42
-    '*'      shift, and go to state 43
-    '/'      shift, and go to state 44
+    '>'      shift, and go to state 43
+    '<'      shift, and go to state 44
     '+'      shift, and go to state 45
     '-'      shift, and go to state 46
-    '>'      shift, and go to state 47
-    '<'      shift, and go to state 48
+    '*'      shift, and go to state 47
+    '/'      shift, and go to state 48
     '.'      shift, and go to state 49
 
     $default  reduce using rule 51 (seq_r_expr)

@@ -61,13 +61,10 @@
 %token <str> STRING_LIT
 %token NEG
 
-%left '*' '/'
-%left '+' '-'
-%left EQUALS
-%left ATLEAST
-%left ATMOST
-%left '>' '<'
 %left AND NOT OR
+%left EQUALS ATMOST ATLEAST '>' '<'
+%left '+' '-'
+%left '*' '/'
 %left '.'
 
 // Abstract syntax tree nodes
