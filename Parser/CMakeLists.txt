@@ -8,6 +8,8 @@ find_path(REFLEX_INCLUDE "reflex"
     PATHS "/home/faculty/michal/classes/cis461/RE-flex/include/")
 find_program(REFLEX "reflex"
     PATHS "/home/faculty/michal/classes/cis461/RE-flex/bin/")
+find_program(BISON "bison"
+    PATHS "/home/faculty/michal/classes/cis461/RE-flex/bin/")
 
 
 add_custom_command(
