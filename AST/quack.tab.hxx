@@ -147,11 +147,14 @@ namespace yy {
 
     int   num;
     char* str;
-    AST::ASTNode* node;
-    // block needs a more explicit type to use the 'append' method
-    AST::Block* block;
+    AST::ASTNode *node;
+    AST::Block *block;
+    AST::Ident *ident;
+    AST::Arg *arg;
+    AST::Class *clazz;
+    AST::Stub *stub;
 
-#line 155 "quack.tab.hxx" // lalr1.cc:395
+#line 158 "quack.tab.hxx" // lalr1.cc:395
     };
 #else
     typedef YYSTYPE semantic_type;
@@ -189,7 +192,11 @@ namespace yy {
         IDENT = 273,
         INT_LIT = 274,
         STRING_LIT = 275,
-        NEG = 276
+        NEG = 276,
+        Abstract = 277,
+        syntax = 278,
+        tree = 279,
+        nodes = 280
       };
     };
 
@@ -496,12 +503,12 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 242,     ///< Last index in yytable_.
-      yynnts_ = 24,  ///< Number of nonterminal symbols.
+      yylast_ = 227,     ///< Last index in yytable_.
+      yynnts_ = 25,  ///< Number of nonterminal symbols.
       yyfinal_ = 3, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 37  ///< Number of tokens.
+      yyntokens_ = 41  ///< Number of tokens.
     };
 
 
@@ -513,7 +520,7 @@ namespace yy {
 
 
 } // yy
-#line 517 "quack.tab.hxx" // lalr1.cc:395
+#line 524 "quack.tab.hxx" // lalr1.cc:395
 
 
 

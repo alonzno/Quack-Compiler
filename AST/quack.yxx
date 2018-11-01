@@ -36,9 +36,12 @@
 %union {
     int   num;
     char* str;
-    AST::ASTNode* node;
-    // block needs a more explicit type to use the 'append' method
-    AST::Block* block;
+    AST::ASTNode *node;
+    AST::Block *block;
+    AST::Ident *ident;
+    AST::Arg *arg;
+    AST::Class *clazz;
+    AST::Stub *stub;
 }
 
 /* Start tokens */
@@ -68,10 +71,13 @@
 %left '*' '/'
 %left '.'
 
-// Abstract syntax tree nodes
-// %type <node> expr leaf program stmt assignment
-// %type <block> block if_alternatives
-// %type <node> ifstmt
+Abstract syntax tree nodes
+%type <block> program classes statements 
+%type <ident> opt_extends
+%type <arg> arg
+%type <clazz> class
+%type <stub> methods 
+
 
 // Precedence.  We are using an ambiguous expression grammar
 // for compactness.  We declare operator precedence from lowest
@@ -85,7 +91,7 @@
 /* A program is a sequence of zero or more class definitions
 *  followed by zero or more statements
 */
-program: classes statements { std::cout << "Finished parse with no errors" << std::endl; } ;
+program: classes statements {}; 
 
 /* Zero or more class definitions */
 classes: classes class 
@@ -100,10 +106,15 @@ class: class_signature class_body { };
 
 class_signature: CLASS IDENT '(' formal_args ')' opt_extends { };
 
-formal_args: IDENT ':' IDENT more_idents
+formal_args: args   { }
            | %empty { };
 
-opt_extends: EXTENDS IDENT
+args: arg         { }
+    | arg ',' arg { }
+
+arg: IDENT ':' IDENT { };
+
+opt_extends: EXTENDS IDENT { }
                 | %empty { };
 
 more_idents: more_idents ',' IDENT ':' IDENT

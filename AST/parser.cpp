@@ -50,6 +50,7 @@ int main(int argc, char **argv)
     file.open(std::string(argv[1]));
     Driver driver(file);
     if (driver.parse_result()) {
+        std::cout << "Finished parse with no errors" << std::endl;
         driver.json(std::cout);
     }
     //yy::Lexer *lexer  = new yy::Lexer(file);

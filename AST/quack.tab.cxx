@@ -574,277 +574,301 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 88 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { std::cout << "Finished parse with no errors" << std::endl; }
+#line 94 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+    {}
 #line 580 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 4:
-#line 92 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+#line 98 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 586 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 6:
-#line 96 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+#line 102 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 592 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 7:
-#line 99 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+#line 105 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 598 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 8:
-#line 101 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+#line 107 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 604 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 10:
-#line 104 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 9:
+#line 109 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 610 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 12:
-#line 107 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 10:
+#line 110 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 616 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 14:
-#line 110 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 11:
+#line 112 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 622 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 15:
-#line 112 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 12:
+#line 113 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 628 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 17:
-#line 117 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 13:
+#line 115 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 634 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 18:
-#line 119 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 14:
+#line 117 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 640 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 20:
-#line 122 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 15:
+#line 118 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 646 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 21:
-#line 126 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 16:
+#line 123 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 652 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 22:
-#line 130 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 18:
+#line 128 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 658 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 24:
-#line 133 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 19:
+#line 130 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 664 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 27:
-#line 140 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 21:
+#line 133 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 670 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 28:
-#line 144 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 22:
+#line 137 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 676 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 30:
-#line 149 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 23:
+#line 141 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 682 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 31:
-#line 153 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 25:
+#line 144 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 688 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 32:
-#line 157 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 28:
+#line 151 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 694 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 33:
-#line 159 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 29:
+#line 155 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 700 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 34:
-#line 161 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 31:
+#line 160 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 706 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 35:
-#line 165 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 32:
+#line 164 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 712 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 36:
-#line 167 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 33:
+#line 168 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 718 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 37:
-#line 169 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 34:
+#line 170 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 724 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 38:
-#line 171 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 35:
+#line 172 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 730 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 39:
-#line 175 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 36:
+#line 176 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 736 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 40:
-#line 177 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 37:
+#line 178 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 742 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 41:
-#line 181 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 38:
+#line 180 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 748 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 42:
-#line 183 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 39:
+#line 182 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 754 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 43:
-#line 185 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 40:
+#line 186 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 760 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 44:
-#line 187 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 41:
+#line 188 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 766 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 45:
-#line 189 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 42:
+#line 192 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 772 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 46:
-#line 191 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 43:
+#line 194 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 778 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 47:
-#line 193 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 44:
+#line 196 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 784 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 48:
-#line 195 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 45:
+#line 198 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 790 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 49:
-#line 199 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 46:
+#line 200 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 796 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 51:
+  case 47:
 #line 202 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 802 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 53:
-#line 205 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 48:
+#line 204 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 808 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 54:
-#line 207 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 49:
+#line 206 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 814 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 55:
-#line 211 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 50:
+#line 210 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 820 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 57:
-#line 214 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 52:
+#line 213 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 826 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 58:
-#line 218 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 54:
+#line 216 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 832 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 59:
-#line 220 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 55:
+#line 218 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 838 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 61:
-#line 223 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+  case 56:
+#line 222 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
 #line 844 "quack.tab.cxx" // lalr1.cc:870
     break;
 
+  case 58:
+#line 225 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+    { }
+#line 850 "quack.tab.cxx" // lalr1.cc:870
+    break;
 
-#line 848 "quack.tab.cxx" // lalr1.cc:870
+  case 59:
+#line 229 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+    { }
+#line 856 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 60:
+#line 231 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+    { }
+#line 862 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 62:
+#line 234 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+    { }
+#line 868 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+
+#line 872 "quack.tab.cxx" // lalr1.cc:870
             default:
               break;
             }
@@ -1012,162 +1036,155 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -29;
+  const signed char parser::yypact_ninf_ = -24;
 
-  const signed char parser::yytable_ninf_ = -21;
+  const signed char parser::yytable_ninf_ = -22;
 
   const short
   parser::yypact_[] =
   {
-     -29,    13,    21,   -29,     7,   120,   -29,    -6,    -1,   213,
-     213,   213,   213,   213,     1,   -29,   -29,   213,   213,   -29,
-      17,    80,   -29,   -29,   -29,    24,   -29,   138,   138,   201,
-      25,   160,    -5,   213,    27,   182,    44,    28,   213,   213,
-     213,   213,   213,   213,   213,   213,   213,   213,   213,    46,
-     -29,   120,    36,    38,   -29,   -29,   -29,   -29,   -29,   201,
-      41,   -29,   -29,   213,    55,    55,    55,    -5,    -5,    55,
-      55,    27,    27,    42,    42,    43,    10,    59,    68,    40,
-       8,    11,    53,   -29,    97,   213,    69,   -29,   -29,   -29,
-      70,   -29,   -29,   213,    56,   -29,    66,   -29,   213,   -29,
-      71,    85,    67,   -29,   138,   -29,    82,   201,   -29,    24,
-      99,   -29,    56,    88,    84,   -29,    96,   110,    56,   -29,
-     -29
+     -24,    25,    23,   -24,    10,   127,   -24,     5,    11,    -6,
+      -6,    -6,    -6,    -6,    12,   -24,   -24,    -6,    -6,   -24,
+     -21,    84,   -24,   -24,   -24,    29,   -24,   141,   141,   192,
+       8,   158,   199,    -6,    -5,   175,    35,    15,    -6,    -6,
+      -6,    -6,    -6,    -6,    -6,    -6,    -6,    -6,    -6,    37,
+     -24,   127,    26,    27,   -24,    28,   -24,   -24,   -24,   -24,
+     -24,   192,    30,   -24,   -24,    -6,    42,    42,    42,   199,
+     199,    42,    42,    -5,    -5,    43,    43,    39,     3,    56,
+      71,    29,    40,     9,     2,    45,   -24,   103,    -6,    59,
+     -24,   -24,   -24,    63,   -24,   -24,   -24,    -6,    48,   -24,
+      46,   -24,    -6,   -24,    52,    54,   -24,   141,   -24,    72,
+     192,   -24,    29,   -24,    48,    55,   -24,    58,    48,   -24
   };
 
   const unsigned char
   parser::yydefact_[] =
   {
        4,     0,     6,     1,     0,     2,     3,     0,     0,     0,
-       0,    57,     0,     0,    29,    33,    32,     0,     0,     5,
-      34,     0,    58,     6,     7,    10,    34,     0,     0,    56,
-       0,     0,    48,    51,    39,     0,     0,     0,     0,     0,
+       0,    58,     0,     0,    30,    34,    33,     0,     0,     5,
+      35,     0,    59,     6,     7,    10,    35,     0,     0,    57,
+       0,     0,    49,    52,    40,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-      31,    17,     0,     0,     6,    24,    27,    55,    61,    53,
-       0,    40,    19,     0,    42,    43,    41,    46,    47,    45,
-      44,    35,    36,    37,    38,    30,     0,     0,    12,     0,
-      26,     0,    50,    54,     0,    51,     0,    15,    16,    14,
-       0,     8,    21,     0,     0,    22,     0,    59,     0,    28,
-       0,     0,     9,    11,     0,    25,     0,    52,    49,    10,
-       0,    23,     0,     0,     0,    60,    20,     0,     0,    13,
-      18
+      32,    18,     0,     0,     9,    11,     6,    25,    28,    56,
+      62,    54,     0,    41,    20,     0,    43,    44,    42,    47,
+      48,    46,    45,    36,    37,    38,    39,    31,     0,     0,
+      15,     0,     0,    27,     0,    51,    55,     0,    52,     0,
+      16,    17,    13,     0,     8,    12,    22,     0,     0,    23,
+       0,    60,     0,    29,     0,     0,    14,     0,    26,     0,
+      53,    50,    10,    24,     0,     0,    61,    21,     0,    19
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -29,   -29,   -29,   -11,   -29,   -29,    23,   -29,   -29,   -29,
-     -29,   -29,   -18,   -28,   -29,   -29,   -29,    -4,    -7,    49,
-     -29,   -29,   -29,   -29
+     -24,   -24,   -24,   -13,   -24,   -24,   -20,   -24,    20,   -24,
+     -24,   -24,   -24,   -15,   -23,   -24,   -24,   -24,     1,    -9,
+      16,   -24,   -24,   -24,   -24
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-      -1,     1,     2,     5,     6,     7,    53,    91,   102,    24,
-      76,    88,    37,    55,    19,    80,    95,    26,    21,    60,
-      82,    30,    22,    81
+      -1,     1,     2,     5,     6,     7,    53,    54,    55,    94,
+      24,    78,    91,    37,    57,    19,    83,    99,    26,    21,
+      62,    85,    30,    22,    84
   };
 
   const signed char
   parser::yytable_[] =
   {
-      56,    20,    27,    28,    29,    31,    32,    38,    39,    40,
-      34,    35,    51,     3,    86,    93,    94,    43,    44,    45,
-      46,    47,    48,    49,     4,     8,    59,    23,    25,    96,
-      33,    64,    65,    66,    67,    68,    69,    70,    71,    72,
-      73,    74,    52,    79,    87,    97,     9,    20,    36,    10,
-      11,    12,   -20,    47,    48,    49,    84,    13,    14,    15,
-      16,    57,    62,    63,    75,    17,   105,    77,    78,    18,
-      49,    83,    85,    90,    92,    20,   111,    89,    59,    45,
-      46,    47,    48,    49,   115,    98,   104,   101,   103,    54,
-     120,   107,    38,    39,    40,    41,    42,   106,   118,   110,
-     112,   108,    43,    44,    45,    46,    47,    48,    49,    38,
-      39,    40,    41,    42,   109,   117,    50,   114,   116,    43,
-      44,    45,    46,    47,    48,    49,     9,    36,   119,    10,
-      11,    12,   113,    99,   100,     0,     0,    13,    14,    15,
-      16,     0,     0,     0,     0,    17,     0,     0,     0,    18,
-      38,    39,    40,    41,    42,     0,     0,     0,     0,     0,
-      43,    44,    45,    46,    47,    48,    49,     0,     0,     0,
-       0,    54,    38,    39,    40,    41,    42,     0,     0,     0,
-       0,     0,    43,    44,    45,    46,    47,    48,    49,     0,
-       0,     0,     0,    58,    38,    39,    40,    41,    42,     0,
-       0,     0,     0,     0,    43,    44,    45,    46,    47,    48,
-      49,     0,    61,    38,    39,    40,    41,    42,     0,     0,
-       0,     0,     0,    43,    44,    45,    46,    47,    48,    49,
-      13,    14,    15,    16,     0,     0,     0,     0,    17,     0,
-       0,     0,    18
+      27,    28,    29,    31,    32,    58,    20,    89,    34,    35,
+      51,    13,    14,    15,    16,    36,    97,    98,   -21,    17,
+     100,    47,    48,    49,    61,     3,     4,    18,     8,    66,
+      67,    68,    69,    70,    71,    72,    73,    74,    75,    76,
+     101,    90,    23,    82,    25,    33,     9,    52,    59,    10,
+      11,    12,    20,    64,    65,    77,    87,    13,    14,    15,
+      16,    80,    79,    81,    86,    17,    45,    46,    47,    48,
+      49,    49,    88,    18,    92,   108,    93,   105,    96,    61,
+     102,   106,   109,    20,   113,    56,   111,   112,   107,   117,
+     114,   116,   115,   110,    36,   119,    38,    39,    40,    41,
+      42,    95,   118,     0,   104,     0,    43,    44,    45,    46,
+      47,    48,    49,     0,     0,    38,    39,    40,    41,    42,
+       0,     0,     0,     0,    50,    43,    44,    45,    46,    47,
+      48,    49,     0,     9,     0,     0,    10,    11,    12,     0,
+       0,     0,     0,   103,    13,    14,    15,    16,     0,     0,
+       0,     0,    17,    38,    39,    40,    41,    42,     0,     0,
+      18,     0,     0,    43,    44,    45,    46,    47,    48,    49,
+      38,    39,    40,    41,    42,     0,     0,     0,    56,     0,
+      43,    44,    45,    46,    47,    48,    49,    38,    39,    40,
+      41,    42,     0,     0,     0,    60,     0,    43,    44,    45,
+      46,    47,    48,    49,    38,    39,    40,    41,    42,    63,
+       0,    38,    39,    40,    43,    44,    45,    46,    47,    48,
+      49,    43,    44,    45,    46,    47,    48,    49
   };
 
   const signed char
   parser::yycheck_[] =
   {
-      28,     5,     9,    10,    11,    12,    13,    12,    13,    14,
-      17,    18,    23,     0,     4,     7,     8,    22,    23,    24,
-      25,    26,    27,    28,     3,    18,    33,    33,    29,    18,
-      29,    38,    39,    40,    41,    42,    43,    44,    45,    46,
-      47,    48,    18,    54,    34,    34,     6,    51,    31,     9,
-      10,    11,    35,    26,    27,    28,    63,    17,    18,    19,
-      20,    36,    18,    35,    18,    25,    94,    31,    30,    29,
-      28,    30,    29,     5,    34,    79,   104,    18,    85,    24,
-      25,    26,    27,    28,   112,    32,    93,    18,    18,    33,
-     118,    98,    12,    13,    14,    15,    16,    31,   116,    32,
-      18,    30,    22,    23,    24,    25,    26,    27,    28,    12,
-      13,    14,    15,    16,    29,    31,    36,    18,    30,    22,
-      23,    24,    25,    26,    27,    28,     6,    31,    18,     9,
-      10,    11,   109,    36,    85,    -1,    -1,    17,    18,    19,
-      20,    -1,    -1,    -1,    -1,    25,    -1,    -1,    -1,    29,
-      12,    13,    14,    15,    16,    -1,    -1,    -1,    -1,    -1,
-      22,    23,    24,    25,    26,    27,    28,    -1,    -1,    -1,
-      -1,    33,    12,    13,    14,    15,    16,    -1,    -1,    -1,
-      -1,    -1,    22,    23,    24,    25,    26,    27,    28,    -1,
-      -1,    -1,    -1,    33,    12,    13,    14,    15,    16,    -1,
-      -1,    -1,    -1,    -1,    22,    23,    24,    25,    26,    27,
-      28,    -1,    30,    12,    13,    14,    15,    16,    -1,    -1,
-      -1,    -1,    -1,    22,    23,    24,    25,    26,    27,    28,
-      17,    18,    19,    20,    -1,    -1,    -1,    -1,    25,    -1,
-      -1,    -1,    29
+       9,    10,    11,    12,    13,    28,     5,     4,    17,    18,
+      23,    17,    18,    19,    20,    36,     7,     8,    39,    25,
+      18,    26,    27,    28,    33,     0,     3,    33,    18,    38,
+      39,    40,    41,    42,    43,    44,    45,    46,    47,    48,
+      38,    38,    37,    56,    33,    33,     6,    18,    40,     9,
+      10,    11,    51,    18,    39,    18,    65,    17,    18,    19,
+      20,    34,    36,    35,    34,    25,    24,    25,    26,    27,
+      28,    28,    33,    33,    18,    98,     5,    18,    38,    88,
+      35,    18,    36,    82,   107,    37,    34,    33,    97,    34,
+      18,   114,   112,   102,    36,   118,    12,    13,    14,    15,
+      16,    81,   117,    -1,    88,    -1,    22,    23,    24,    25,
+      26,    27,    28,    -1,    -1,    12,    13,    14,    15,    16,
+      -1,    -1,    -1,    -1,    40,    22,    23,    24,    25,    26,
+      27,    28,    -1,     6,    -1,    -1,     9,    10,    11,    -1,
+      -1,    -1,    -1,    40,    17,    18,    19,    20,    -1,    -1,
+      -1,    -1,    25,    12,    13,    14,    15,    16,    -1,    -1,
+      33,    -1,    -1,    22,    23,    24,    25,    26,    27,    28,
+      12,    13,    14,    15,    16,    -1,    -1,    -1,    37,    -1,
+      22,    23,    24,    25,    26,    27,    28,    12,    13,    14,
+      15,    16,    -1,    -1,    -1,    37,    -1,    22,    23,    24,
+      25,    26,    27,    28,    12,    13,    14,    15,    16,    34,
+      -1,    12,    13,    14,    22,    23,    24,    25,    26,    27,
+      28,    22,    23,    24,    25,    26,    27,    28
   };
 
   const unsigned char
   parser::yystos_[] =
   {
-       0,    38,    39,     0,     3,    40,    41,    42,    18,     6,
-       9,    10,    11,    17,    18,    19,    20,    25,    29,    51,
-      54,    55,    59,    33,    46,    29,    54,    55,    55,    55,
-      58,    55,    55,    29,    55,    55,    31,    49,    12,    13,
+       0,    42,    43,     0,     3,    44,    45,    46,    18,     6,
+       9,    10,    11,    17,    18,    19,    20,    25,    33,    56,
+      59,    60,    64,    37,    51,    33,    59,    60,    60,    60,
+      63,    60,    60,    33,    60,    60,    36,    54,    12,    13,
       14,    15,    16,    22,    23,    24,    25,    26,    27,    28,
-      36,    40,    18,    43,    33,    50,    50,    36,    33,    55,
-      56,    30,    18,    35,    55,    55,    55,    55,    55,    55,
-      55,    55,    55,    55,    55,    18,    47,    31,    30,    40,
-      52,    60,    57,    30,    55,    29,     4,    34,    48,    18,
-       5,    44,    34,     7,     8,    53,    18,    34,    32,    36,
-      56,    18,    45,    18,    55,    50,    31,    55,    30,    29,
-      32,    50,    18,    43,    18,    50,    30,    31,    49,    18,
-      50
+      40,    44,    18,    47,    48,    49,    37,    55,    55,    40,
+      37,    60,    61,    34,    18,    39,    60,    60,    60,    60,
+      60,    60,    60,    60,    60,    60,    60,    18,    52,    36,
+      34,    35,    44,    57,    65,    62,    34,    60,    33,     4,
+      38,    53,    18,     5,    50,    49,    38,     7,     8,    58,
+      18,    38,    35,    40,    61,    18,    18,    60,    55,    36,
+      60,    34,    33,    55,    18,    47,    55,    34,    54,    55
   };
 
   const unsigned char
   parser::yyr1_[] =
   {
-       0,    37,    38,    39,    39,    40,    40,    41,    42,    43,
-      43,    44,    44,    45,    45,    46,    47,    47,    48,    49,
-      49,    50,    51,    52,    52,    53,    53,    51,    51,    54,
-      54,    51,    55,    55,    55,    55,    55,    55,    55,    55,
-      55,    55,    55,    55,    55,    55,    55,    55,    55,    55,
-      56,    56,    57,    57,    55,    51,    58,    58,    51,    59,
-      60,    60
+       0,    41,    42,    43,    43,    44,    44,    45,    46,    47,
+      47,    48,    48,    49,    50,    50,    51,    52,    52,    53,
+      54,    54,    55,    56,    57,    57,    58,    58,    56,    56,
+      59,    59,    56,    60,    60,    60,    60,    60,    60,    60,
+      60,    60,    60,    60,    60,    60,    60,    60,    60,    60,
+      60,    61,    61,    62,    62,    60,    56,    63,    63,    56,
+      64,    65,    65
   };
 
   const unsigned char
   parser::yyr2_[] =
   {
-       0,     2,     2,     2,     0,     2,     0,     2,     6,     4,
-       0,     2,     0,     5,     0,     4,     2,     0,     7,     2,
-       0,     3,     5,     4,     0,     2,     0,     3,     5,     1,
-       3,     2,     1,     1,     1,     3,     3,     3,     3,     2,
-       3,     3,     3,     3,     3,     3,     3,     3,     2,     6,
-       2,     0,     3,     0,     4,     3,     1,     0,     1,     5,
-       5,     0
+       0,     2,     2,     2,     0,     2,     0,     2,     6,     1,
+       0,     1,     3,     3,     2,     0,     4,     2,     0,     7,
+       2,     0,     3,     5,     4,     0,     2,     0,     3,     5,
+       1,     3,     2,     1,     1,     1,     3,     3,     3,     3,
+       2,     3,     3,     3,     3,     3,     3,     3,     3,     2,
+       6,     2,     0,     3,     0,     4,     3,     1,     0,     1,
+       5,     5,     0
   };
 
 
@@ -1180,26 +1197,26 @@ namespace yy {
   "$end", "error", "$undefined", "CLASS", "DEF", "EXTENDS", "IF", "ELIF",
   "ELSE", "WHILE", "RETURN", "TYPECASE", "ATLEAST", "ATMOST", "EQUALS",
   "AND", "OR", "NOT", "IDENT", "INT_LIT", "STRING_LIT", "NEG", "'>'",
-  "'<'", "'+'", "'-'", "'*'", "'/'", "'.'", "'('", "')'", "':'", "','",
-  "'{'", "'}'", "'='", "';'", "$accept", "program", "classes",
-  "statements", "class", "class_signature", "formal_args", "opt_extends",
-  "more_idents", "class_body", "methods", "method", "opt_ident",
-  "statement_block", "statement", "more_elif", "opt_else", "l_expr",
-  "r_expr", "actual_args", "seq_r_expr", "opt_r_expr", "typecase",
-  "type_alt", YY_NULLPTR
+  "'<'", "'+'", "'-'", "'*'", "'/'", "'.'", "Abstract", "syntax", "tree",
+  "nodes", "'('", "')'", "','", "':'", "'{'", "'}'", "'='", "';'",
+  "$accept", "program", "classes", "statements", "class",
+  "class_signature", "formal_args", "args", "arg", "opt_extends",
+  "class_body", "methods", "method", "opt_ident", "statement_block",
+  "statement", "more_elif", "opt_else", "l_expr", "r_expr", "actual_args",
+  "seq_r_expr", "opt_r_expr", "typecase", "type_alt", YY_NULLPTR
   };
 
 
   const unsigned char
   parser::yyrline_[] =
   {
-       0,    88,    88,    91,    92,    95,    96,    99,   101,   103,
-     104,   106,   107,   109,   110,   112,   116,   117,   119,   121,
-     122,   126,   130,   132,   133,   135,   136,   140,   144,   148,
-     149,   153,   157,   159,   161,   165,   167,   169,   171,   175,
-     177,   181,   183,   185,   187,   189,   191,   193,   195,   199,
-     201,   202,   204,   205,   207,   211,   213,   214,   218,   220,
-     222,   223
+       0,    94,    94,    97,    98,   101,   102,   105,   107,   109,
+     110,   112,   113,   115,   117,   118,   123,   127,   128,   130,
+     132,   133,   137,   141,   143,   144,   146,   147,   151,   155,
+     159,   160,   164,   168,   170,   172,   176,   178,   180,   182,
+     186,   188,   192,   194,   196,   198,   200,   202,   204,   206,
+     210,   212,   213,   215,   216,   218,   222,   224,   225,   229,
+     231,   233,   234
   };
 
   // Print the state stack on the debug stream.
@@ -1243,15 +1260,15 @@ namespace yy {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      29,    30,    26,    24,    32,    25,    28,    27,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,    31,    36,
-      23,    35,    22,     2,     2,     2,     2,     2,     2,     2,
+      33,    34,    26,    24,    35,    25,    28,    27,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,    36,    40,
+      23,    39,    22,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,    33,     2,    34,     2,     2,     2,     2,
+       2,     2,     2,    37,     2,    38,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1266,9 +1283,10 @@ namespace yy {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21
+      15,    16,    17,    18,    19,    20,    21,    29,    30,    31,
+      32
     };
-    const unsigned user_token_number_max_ = 276;
+    const unsigned user_token_number_max_ = 280;
     const token_number_type undef_token_ = 2;
 
     if (static_cast<int> (t) <= yyeof_)
@@ -1281,8 +1299,8 @@ namespace yy {
 
 
 } // yy
-#line 1285 "quack.tab.cxx" // lalr1.cc:1181
-#line 225 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:1182
+#line 1303 "quack.tab.cxx" // lalr1.cc:1181
+#line 236 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:1182
 
 #include "Messages.h"
 
