@@ -30,7 +30,7 @@ namespace AST {
         private:
             std::vector<ASTNode *> stmts_;
         public:
-            void append(ASTNode *stmt) {stmts_.push_back(stmt)}
+            void append(ASTNode *stmt) { stmts_.push_back(stmt); }
             void json(std::ostream &out, unsigned int ident = 0);
     };
 
