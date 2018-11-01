@@ -23,7 +23,7 @@
 %define parse.trace
 
 %parse-param { yy::Lexer& lexer }  /* Construct parser object with lexer */
-%parse-param { AST::Block** root }
+%parse-param { AST::ASTNode** root }
 
 %code{
     #include "lex.yy.h"
@@ -72,11 +72,11 @@
 %left '.'
 
 Abstract syntax tree nodes
-%type <block> program classes statements 
+%type <block> program classes opt_classes
 %type <ident> opt_extends
 %type <arg> arg
 %type <clazz> class
-%type <stub> methods 
+%type <stub> methods opt_statements statements
 
 
 // Precedence.  We are using an ambiguous expression grammar
@@ -91,15 +91,30 @@ Abstract syntax tree nodes
 /* A program is a sequence of zero or more class definitions
 *  followed by zero or more statements
 */
-program: classes statements {}; 
+program: opt_classes opt_statements {
+       $$ = new AST::Block();
+       $$ -> append($1);
+       $$ -> append($2);
+       *root = $$;
+       }; 
 
 /* Zero or more class definitions */
-classes: classes class 
+opt_classes: classes { $$ = $1; }
        | %empty { };
 
+classes: classes class { 
+       $$ = $1;
+       $$ -> append($2); }
+       | class { 
+       $$ = new AST::Block();
+       $$ -> append($1);
+       };
+
 /* Zero or more statments */
-statements: statements statement
-          | %empty { };
+opt_statements: statements
+          | %empty { $$ = new AST::Stub("No Statements"); };
+statements: statements statement { $$ = new AST::Stub("Statements"); };
+          | statement { $$ = new AST::Stub("Statement"); };
 
 /* Classes */
 class: class_signature class_body { };
@@ -120,7 +135,7 @@ opt_extends: EXTENDS IDENT { }
 more_idents: more_idents ',' IDENT ':' IDENT
                 | %empty { };
 
-class_body: '{' statements methods '}' { };
+class_body: '{' opt_statements methods '}' { };
 
 /* Methods */
 
@@ -134,7 +149,7 @@ opt_ident: ':' IDENT
 
 /* Statements */
 
-statement_block: '{' statements '}' { };
+statement_block: '{' opt_statements '}' { };
 
 /* If-Elif-Else */
 

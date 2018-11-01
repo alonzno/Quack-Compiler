@@ -301,7 +301,7 @@ namespace yy {
 
 
     /// Build a parser object.
-    parser (yy::Lexer& lexer_yyarg, AST::Block** root_yyarg);
+    parser (yy::Lexer& lexer_yyarg, AST::ASTNode** root_yyarg);
     virtual ~parser ();
 
     /// Parse.
@@ -503,9 +503,9 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 227,     ///< Last index in yytable_.
-      yynnts_ = 25,  ///< Number of nonterminal symbols.
-      yyfinal_ = 3, ///< Termination state number.
+      yylast_ = 211,     ///< Last index in yytable_.
+      yynnts_ = 27,  ///< Number of nonterminal symbols.
+      yyfinal_ = 8, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
       yyntokens_ = 41  ///< Number of tokens.
@@ -514,7 +514,7 @@ namespace yy {
 
     // User arguments.
     yy::Lexer& lexer;
-    AST::Block** root;
+    AST::ASTNode** root;
   };
 
 
