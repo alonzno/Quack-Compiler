@@ -27,7 +27,7 @@ namespace AST {
     };
     
     class Block: public ASTNode {
-        private:
+        public:
             std::vector<ASTNode *> stmts_;
         public:
             Block() {}
@@ -36,7 +36,7 @@ namespace AST {
     };
 
     class Ident: public ASTNode {
-        private:
+        public:
             std::string text_;
         public:
             Ident(std::string name): text_(name) {}
@@ -44,7 +44,7 @@ namespace AST {
     };
 
     class Arg: public ASTNode {
-        private:
+        public:
             Ident *param_name_;
             Ident *param_type_;
         public:
@@ -54,7 +54,7 @@ namespace AST {
     };
 
     class Class: public ASTNode {
-        private:
+        public:
             Ident *class_name_;
             Ident *super_name_;
             Block *args_;

@@ -72,11 +72,11 @@
 %left '.'
 
 Abstract syntax tree nodes
-%type <block> program classes opt_classes
+%type <block> program classes opt_classes args formal_args opt_statements statements 
 %type <ident> opt_extends
 %type <arg> arg
 %type <clazz> class
-%type <stub> methods opt_statements statements
+%type <stub> methods 
 
 
 // Precedence.  We are using an ambiguous expression grammar
@@ -117,25 +117,24 @@ statements: statements statement { $$ = new AST::Stub("Statements"); };
           | statement { $$ = new AST::Stub("Statement"); };
 
 /* Classes */
-class: class_signature class_body { };
+class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements methods '}' { 
+        $$ = new AST::Class(new AST::Ident($2), $6);
+        $$ -> args_ = $4;
+        $$ -> stmts_ = $8;
+        $$ -> methods_ = $9;
+     };
 
-class_signature: CLASS IDENT '(' formal_args ')' opt_extends { };
+formal_args: args   { $$ = $1; }
+           | %empty { $$ = new AST::Block(); };
 
-formal_args: args   { }
-           | %empty { };
+args: arg         { $$ = new AST::Block(); $$ -> append($1); }
+    | args ',' arg { $$ = $1; $1 -> append($3); }
 
-args: arg         { }
-    | arg ',' arg { }
-
-arg: IDENT ':' IDENT { };
+arg: IDENT ':' IDENT { $$ = new AST::Arg(new AST::Ident($1), new AST::Ident($3)); };
 
 opt_extends: EXTENDS IDENT { }
                 | %empty { };
 
-more_idents: more_idents ',' IDENT ':' IDENT
-                | %empty { };
-
-class_body: '{' opt_statements methods '}' { };
 
 /* Methods */
 
