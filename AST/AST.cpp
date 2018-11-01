@@ -61,10 +61,19 @@ namespace AST {
 
     void Class::json(std::ostream &out, AST_print_context &ctx) {
         json_head("Class", out, ctx);
-        out << "\"class_name_\" : \"" << class_name_ << "\", ";
-        out << "\"super_name_\" : \"" << super_name_ << "\", ";
+        out << "\"class_name_\" : ";
+        class_name_ -> json(out,ctx); 
+        out << ", " << std::endl;
+        out << "\"super_name_\" : ";
+        super_name_ -> json(out, ctx);
+        out << ", " << std::endl;
+        out << "\"args_\" : ";
         args_->json(out,ctx);
+        out << ", " << std::endl;
+        out << "\"stmts_\" : ";
         stmts_->json(out,ctx);
+        out << ", " << std::endl;
+        out << "\"methods_\" : ";
         methods_->json(out,ctx);
         json_close(out, ctx);
     }

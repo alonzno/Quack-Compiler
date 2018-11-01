@@ -132,8 +132,8 @@ args: arg         { $$ = new AST::Block(); $$ -> append($1); }
 
 arg: IDENT ':' IDENT { $$ = new AST::Arg(new AST::Ident($1), new AST::Ident($3)); };
 
-opt_extends: EXTENDS IDENT { }
-                | %empty { };
+opt_extends: EXTENDS IDENT { $$ = new AST::Ident($2);}
+                | %empty { $$ = new AST::Ident(""); };
 
 
 /* Methods */

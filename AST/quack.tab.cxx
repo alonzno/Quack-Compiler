@@ -680,13 +680,13 @@ namespace yy {
 
   case 17:
 #line 135 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.ident) = new AST::Ident((yystack_[0].value.str));}
 #line 685 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 18:
 #line 136 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.ident) = new AST::Ident(""); }
 #line 691 "quack.tab.cxx" // lalr1.cc:870
     break;
 
