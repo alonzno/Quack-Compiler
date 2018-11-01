@@ -72,11 +72,11 @@
 %left '.'
 
 Abstract syntax tree nodes
-%type <block> program classes opt_classes args formal_args opt_statements statements 
+%type <block> program classes opt_classes args formal_args opt_statements statements opt_methods methods 
 %type <ident> opt_extends
 %type <arg> arg
 %type <clazz> class
-%type <stub> methods 
+%type <stub> statement method
 
 
 // Precedence.  We are using an ambiguous expression grammar
@@ -111,13 +111,13 @@ classes: classes class {
        };
 
 /* Zero or more statments */
-opt_statements: statements
-          | %empty { $$ = new AST::Stub("No Statements"); };
-statements: statements statement { $$ = new AST::Stub("Statements"); };
-          | statement { $$ = new AST::Stub("Statement"); };
+opt_statements: statements { $$ = $1; }
+          | %empty { $$ = new AST::Block(); };
+statements: statements statement { $$ = $1; $1 -> append($2); };
+          | statement { $$ = new AST::Block(); $$ -> append($1); };
 
 /* Classes */
-class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements methods '}' { 
+class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements opt_methods '}' { 
         $$ = new AST::Class(new AST::Ident($2), $6);
         $$ -> args_ = $4;
         $$ -> stmts_ = $8;
@@ -138,10 +138,13 @@ opt_extends: EXTENDS IDENT { }
 
 /* Methods */
 
-methods: methods method
-       | %empty { };
+opt_methods: methods { $$ = $1; }
+           | %empty { $$ = new AST::Block(); };
 
-method: DEF IDENT '(' formal_args ')' opt_ident statement_block { };
+methods: methods method { $$ = $1; $$ -> append($2); }
+       | method {$$ = new AST::Block(); $$ -> append($1); };
+
+method: DEF IDENT '(' formal_args ')' opt_ident statement_block { $$ = new AST::Stub("NI: Method"); };
 
 opt_ident: ':' IDENT
          | %empty { };
@@ -162,11 +165,11 @@ opt_else: ELSE statement_block
 
 /* While */
 
-statement: WHILE r_expr statement_block { };
+statement: WHILE r_expr statement_block { $$ = new AST::Stub("NI: While"); };
 
 /* Assignments */
 
-statement: l_expr opt_ident '=' r_expr ';' { };
+statement: l_expr opt_ident '=' r_expr ';' { $$ = new AST::Stub("NI: Assign"); };
 
 /* L_Expression */
 
@@ -175,7 +178,7 @@ l_expr: IDENT
 
 /* Bare Expressions */
 
-statement: r_expr ';' { };
+statement: r_expr ';' { $$ = new AST::Stub("NI: Bare expr"); };
 
 /* Constants */
 
@@ -233,16 +236,14 @@ r_expr: IDENT '(' actual_args ')' { };
 
 /* Return */
 
-statement: RETURN opt_r_expr ';' { };
+statement: RETURN opt_r_expr ';' { $$ = new AST::Stub("NI: Return"); };
 
 opt_r_expr: r_expr
           | %empty { };
 
 /* Typecase */
 
-statement: typecase { };
-
-typecase: TYPECASE r_expr '{' type_alt '}' { };
+statement: TYPECASE r_expr '{' type_alt '}' { $$ = new AST::Stub("NI: typecase"); };
 
 type_alt: type_alt IDENT ':' IDENT statement_block
         | %empty { };
