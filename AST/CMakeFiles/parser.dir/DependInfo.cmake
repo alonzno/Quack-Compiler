@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/ASTNode.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/CMakeFiles/parser.dir/ASTNode.cpp.o"
+  "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/AST.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/CMakeFiles/parser.dir/AST.cpp.o"
   "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/Messages.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/CMakeFiles/parser.dir/Messages.cpp.o"
   "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/lex.yy.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/CMakeFiles/parser.dir/lex.yy.cpp.o"
   "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/parser.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/CMakeFiles/parser.dir/parser.cpp.o"

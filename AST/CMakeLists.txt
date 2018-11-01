@@ -32,7 +32,7 @@ include_directories(
 
 add_executable(parser
         quack.tab.cxx lex.yy.cpp lex.yy.h
-        parser.cpp ASTNode.cpp ASTNode.h Messages.h Messages.cpp )
+        parser.cpp AST.cpp AST.h Messages.h Messages.cpp )
 if(FALSE)
 add_executable(lexer
         lex_driver.cpp

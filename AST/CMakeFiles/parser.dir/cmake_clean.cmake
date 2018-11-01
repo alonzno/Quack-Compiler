@@ -9,7 +9,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/parser.dir/quack.tab.cxx.o"
   "CMakeFiles/parser.dir/lex.yy.cpp.o"
   "CMakeFiles/parser.dir/parser.cpp.o"
-  "CMakeFiles/parser.dir/ASTNode.cpp.o"
+  "CMakeFiles/parser.dir/AST.cpp.o"
   "CMakeFiles/parser.dir/Messages.cpp.o"
   "parser.pdb"
   "parser"

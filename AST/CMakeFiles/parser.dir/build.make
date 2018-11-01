@@ -120,18 +120,18 @@ CMakeFiles/parser.dir/parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/parser.dir/parser.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alonzoaltamirano/Repos/Quack-Compiler/AST/parser.cpp -o CMakeFiles/parser.dir/parser.cpp.s
 
-CMakeFiles/parser.dir/ASTNode.cpp.o: CMakeFiles/parser.dir/flags.make
-CMakeFiles/parser.dir/ASTNode.cpp.o: ASTNode.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/parser.dir/ASTNode.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/parser.dir/ASTNode.cpp.o -c /Users/alonzoaltamirano/Repos/Quack-Compiler/AST/ASTNode.cpp
+CMakeFiles/parser.dir/AST.cpp.o: CMakeFiles/parser.dir/flags.make
+CMakeFiles/parser.dir/AST.cpp.o: AST.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/parser.dir/AST.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/parser.dir/AST.cpp.o -c /Users/alonzoaltamirano/Repos/Quack-Compiler/AST/AST.cpp
 
-CMakeFiles/parser.dir/ASTNode.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/parser.dir/ASTNode.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alonzoaltamirano/Repos/Quack-Compiler/AST/ASTNode.cpp > CMakeFiles/parser.dir/ASTNode.cpp.i
+CMakeFiles/parser.dir/AST.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/parser.dir/AST.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alonzoaltamirano/Repos/Quack-Compiler/AST/AST.cpp > CMakeFiles/parser.dir/AST.cpp.i
 
-CMakeFiles/parser.dir/ASTNode.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/parser.dir/ASTNode.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alonzoaltamirano/Repos/Quack-Compiler/AST/ASTNode.cpp -o CMakeFiles/parser.dir/ASTNode.cpp.s
+CMakeFiles/parser.dir/AST.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/parser.dir/AST.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alonzoaltamirano/Repos/Quack-Compiler/AST/AST.cpp -o CMakeFiles/parser.dir/AST.cpp.s
 
 CMakeFiles/parser.dir/Messages.cpp.o: CMakeFiles/parser.dir/flags.make
 CMakeFiles/parser.dir/Messages.cpp.o: Messages.cpp
@@ -151,7 +151,7 @@ parser_OBJECTS = \
 "CMakeFiles/parser.dir/quack.tab.cxx.o" \
 "CMakeFiles/parser.dir/lex.yy.cpp.o" \
 "CMakeFiles/parser.dir/parser.cpp.o" \
-"CMakeFiles/parser.dir/ASTNode.cpp.o" \
+"CMakeFiles/parser.dir/AST.cpp.o" \
 "CMakeFiles/parser.dir/Messages.cpp.o"
 
 # External object files for target parser
@@ -160,7 +160,7 @@ parser_EXTERNAL_OBJECTS =
 parser: CMakeFiles/parser.dir/quack.tab.cxx.o
 parser: CMakeFiles/parser.dir/lex.yy.cpp.o
 parser: CMakeFiles/parser.dir/parser.cpp.o
-parser: CMakeFiles/parser.dir/ASTNode.cpp.o
+parser: CMakeFiles/parser.dir/AST.cpp.o
 parser: CMakeFiles/parser.dir/Messages.cpp.o
 parser: CMakeFiles/parser.dir/build.make
 parser: /usr/local/lib/libreflex.a

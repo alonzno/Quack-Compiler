@@ -16,7 +16,7 @@ class Driver {
         explicit Driver(std::ifstream &in) {
             lexer = new yy::Lexer(in);
             parser = new yy::parser(*lexer, &root);
-            root = NULL; 
+            root = new AST::Block(); 
         }
 
         ~Driver() { delete lexer; delete parser; }
@@ -33,7 +33,7 @@ class Driver {
     private:
         yy::Lexer *lexer;
         yy::parser *parser;
-        AST::ASTNode *root;
+        AST::Block *root;
 };
 
 int main(int argc, char **argv)

@@ -123,32 +123,32 @@ parser/fast:
 	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/build
 .PHONY : parser/fast
 
-ASTNode.o: ASTNode.cpp.o
+AST.o: AST.cpp.o
 
-.PHONY : ASTNode.o
+.PHONY : AST.o
 
 # target to build an object file
-ASTNode.cpp.o:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/ASTNode.cpp.o
-.PHONY : ASTNode.cpp.o
+AST.cpp.o:
+	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/AST.cpp.o
+.PHONY : AST.cpp.o
 
-ASTNode.i: ASTNode.cpp.i
+AST.i: AST.cpp.i
 
-.PHONY : ASTNode.i
+.PHONY : AST.i
 
 # target to preprocess a source file
-ASTNode.cpp.i:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/ASTNode.cpp.i
-.PHONY : ASTNode.cpp.i
+AST.cpp.i:
+	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/AST.cpp.i
+.PHONY : AST.cpp.i
 
-ASTNode.s: ASTNode.cpp.s
+AST.s: AST.cpp.s
 
-.PHONY : ASTNode.s
+.PHONY : AST.s
 
 # target to generate assembly for a file
-ASTNode.cpp.s:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/ASTNode.cpp.s
-.PHONY : ASTNode.cpp.s
+AST.cpp.s:
+	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/AST.cpp.s
+.PHONY : AST.cpp.s
 
 Messages.o: Messages.cpp.o
 
@@ -267,9 +267,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... parser"
-	@echo "... ASTNode.o"
-	@echo "... ASTNode.i"
-	@echo "... ASTNode.s"
+	@echo "... AST.o"
+	@echo "... AST.i"
+	@echo "... AST.s"
 	@echo "... Messages.o"
 	@echo "... Messages.i"
 	@echo "... Messages.s"

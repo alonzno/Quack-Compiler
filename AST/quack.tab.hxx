@@ -294,7 +294,7 @@ namespace yy {
 
 
     /// Build a parser object.
-    parser (yy::Lexer& lexer_yyarg, AST::ASTNode** root_yyarg);
+    parser (yy::Lexer& lexer_yyarg, AST::Block** root_yyarg);
     virtual ~parser ();
 
     /// Parse.
@@ -507,7 +507,7 @@ namespace yy {
 
     // User arguments.
     yy::Lexer& lexer;
-    AST::ASTNode** root;
+    AST::Block** root;
   };
 
 

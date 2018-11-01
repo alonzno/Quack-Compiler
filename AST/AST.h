@@ -30,8 +30,9 @@ namespace AST {
         private:
             std::vector<ASTNode *> stmts_;
         public:
+            Block() {}
             void append(ASTNode *stmt) { stmts_.push_back(stmt); }
-            void json(std::ostream &out, unsigned int ident = 0);
+            void json(std::ostream &out, AST_print_context &ctx);
     };
 
     class Ident: public ASTNode {
@@ -39,8 +40,38 @@ namespace AST {
             std::string text_;
         public:
             Ident(std::string name): text_(name) {}
+            void json(std::ostream &out, AST_print_context &ctx);
     };
 
+    class Arg: public ASTNode {
+        private:
+            Ident *param_name_;
+            Ident *param_type_;
+        public:
+            Arg(Ident *name, Ident *type): param_name_(name), param_type_(type) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+
+    };
+
+    class Class: public ASTNode {
+        private:
+            Ident *class_name_;
+            Ident *super_name_;
+            Block *args_;
+            Block *stmts_;
+            Block *methods_;
+        public:
+            Class(Ident *name, Ident *super): class_name_(name), super_name_(super) {};
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class Stub: public ASTNode {
+        private:
+            std::string text_;
+        public:
+            Stub(std::string text): text_(text) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
 }
 
 #endif //AST_H

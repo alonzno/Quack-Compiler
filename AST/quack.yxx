@@ -23,7 +23,7 @@
 %define parse.trace
 
 %parse-param { yy::Lexer& lexer }  /* Construct parser object with lexer */
-%parse-param { AST::ASTNode** root }
+%parse-param { AST::Block** root }
 
 %code{
     #include "lex.yy.h"

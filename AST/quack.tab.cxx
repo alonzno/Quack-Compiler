@@ -155,7 +155,7 @@ namespace yy {
 #line 156 "quack.tab.cxx" // lalr1.cc:491
 
   /// Build a parser object.
-  parser::parser (yy::Lexer& lexer_yyarg, AST::ASTNode** root_yyarg)
+  parser::parser (yy::Lexer& lexer_yyarg, AST::Block** root_yyarg)
     :
 #if YYDEBUG
       yydebug_ (false),
