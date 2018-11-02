@@ -201,7 +201,7 @@ r_expr: r_expr '-' r_expr { $$ = new AST::Call( $1, new AST::Ident("MINUS"), $3)
 
 r_expr: r_expr '*' r_expr { $$ = new AST::Call( $1, new AST::Ident("TIMES"), $3); };
 
-r_expr: r_expr '/' r_expr { $$ = new AST::Call( $1, new AST::Ident("DIV"), $3); };
+r_expr: r_expr '/' r_expr { $$ = new AST::Call( $1, new AST::Ident("DIVIDE"), $3); };
 
 /* Unary Operators */
 
@@ -211,15 +211,15 @@ r_expr: '(' r_expr ')' { $$ = $2; };
 
 /* Logical Expressions */
 
-r_expr: r_expr EQUALS r_expr { $$ = new AST::Stub("NI: EQUALS"); };
+r_expr: r_expr EQUALS r_expr { $$ = new AST::Call( $1, new AST::Ident("EQUALS"), $3); };
 
-r_expr: r_expr ATLEAST r_expr { $$ = new AST::Stub("NI: ATLEAST"); };
+r_expr: r_expr ATLEAST r_expr { $$ = new AST::Call( $1, new AST::Ident("ATLEAST"), $3); };
 
-r_expr: r_expr ATMOST r_expr { $$ = new AST::Stub("NI: ATMOST"); };
+r_expr: r_expr ATMOST r_expr { $$ = new AST::Call( $1, new AST::Ident("ATMOST"), $3); };
 
-r_expr: r_expr '<' r_expr { $$ = new AST::Stub("NI: LESSTHAN"); };
+r_expr: r_expr '<' r_expr { $$ = new AST::Call( $1, new AST::Ident("LESS"), $3); };
 
-r_expr: r_expr '>' r_expr { $$ = new AST::Stub("NI: GREATERTHAN"); };
+r_expr: r_expr '>' r_expr { $$ = new AST::Call( $1, new AST::Ident("MORE"), $3); };
 
 r_expr: r_expr AND r_expr { $$ = new AST::Stub("NI: AND"); };
 

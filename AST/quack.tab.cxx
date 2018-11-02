@@ -848,7 +848,7 @@ namespace yy {
 
   case 45:
 #line 204 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("DIV"), (yystack_[0].value.node)); }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("DIVIDE"), (yystack_[0].value.node)); }
 #line 853 "quack.tab.cxx" // lalr1.cc:870
     break;
 
@@ -866,31 +866,31 @@ namespace yy {
 
   case 48:
 #line 214 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Stub("NI: EQUALS"); }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("EQUALS"), (yystack_[0].value.node)); }
 #line 871 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 49:
 #line 216 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Stub("NI: ATLEAST"); }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("ATLEAST"), (yystack_[0].value.node)); }
 #line 877 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 50:
 #line 218 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Stub("NI: ATMOST"); }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("ATMOST"), (yystack_[0].value.node)); }
 #line 883 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 51:
 #line 220 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Stub("NI: LESSTHAN"); }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("LESS"), (yystack_[0].value.node)); }
 #line 889 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 52:
 #line 222 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Stub("NI: GREATERTHAN"); }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("MORE"), (yystack_[0].value.node)); }
 #line 895 "quack.tab.cxx" // lalr1.cc:870
     break;
 
