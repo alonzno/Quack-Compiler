@@ -135,4 +135,24 @@ namespace AST {
         json_close(out, ctx);
     }
 
+    void Constructor::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Constructor", out, ctx);
+        json_child("type_", *type_, out, ctx);
+        json_child("args_", *args_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+
+    void Member::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Member", out, ctx);
+        json_child("obj_", *obj_, out, ctx);
+        json_child("field_", *field_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+
+    void Return::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Return", out, ctx);
+        json_child("ret_val_", *ret_val_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+
 }

@@ -149,6 +149,32 @@ namespace AST {
             Call(ASTNode *obj, Ident *method, ASTNode *args): obj_(obj), method_(method), args_(args) {}
             void json(std::ostream &out, AST_print_context &ctx);
     };
+
+    class Constructor: public ASTNode {
+        public:
+            Ident *type_;
+            Block *args_;
+        public:
+            Constructor(Ident *type, Block *args): type_(type), args_(args) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class Member: public ASTNode {
+        public:
+            ASTNode *obj_;
+            Ident *field_;
+        public:
+            Member(ASTNode *obj, Ident *field): obj_(obj), field_(field) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class Return: public ASTNode {
+        public:
+            ASTNode *ret_val_;
+        public:
+            Return(ASTNode *ret_val): ret_val_(ret_val) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
 }
 
 #endif //AST_H
