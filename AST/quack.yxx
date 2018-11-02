@@ -73,11 +73,11 @@
 %left '.'
 
 Abstract syntax tree nodes
-%type <block> program classes opt_classes args formal_args opt_statements statements opt_methods methods statement_block
+%type <block> program classes opt_classes args formal_args opt_statements statements opt_methods methods statement_block opt_else opt_elif more_elif
 %type <ident> opt_extends opt_ident
 %type <arg> arg
 %type <clazz> class
-%type <node> statement method
+%type <node> statement method r_expr
 
 
 // Precedence.  We are using an ambiguous expression grammar
@@ -156,13 +156,17 @@ statement_block: '{' opt_statements '}' { $$ = $2; };
 
 /* If-Elif-Else */
 
-statement: IF r_expr statement_block more_elif opt_else { $$ = new AST::Stub("NI: If-statement"); };
+statement: IF r_expr statement_block opt_elif opt_else { $$ = new AST::If_Else(new AST::Stub("NI: If cond"), $3, $4, $5); };
 
-more_elif: more_elif ELIF r_expr statement_block
-         | %empty { };
+opt_elif: more_elif { $$ = $1; }
+         | %empty { $$ = new AST::Block(); };
 
-opt_else: ELSE statement_block
-        | %empty
+more_elif: more_elif ELIF r_expr statement_block { $$ = $1; $$ -> append(new AST::Elif(new AST::Stub("NI: Elif cond"), $4)); }
+         | ELIF r_expr statement_block { $$ = new AST::Block(); $$ -> append(new AST::Elif(new AST::Stub("NI: Elif cond"), $3)); }
+
+
+opt_else: ELSE statement_block {$$ = $2; }
+        | %empty {$$ = new AST::Block(); }
 
 /* While */
 
@@ -170,7 +174,7 @@ statement: WHILE r_expr statement_block { $$ = new AST::While(new AST::Stub("NI:
 
 /* Assignments */
 
-statement: l_expr opt_ident '=' r_expr ';' { $$ = new AST::Assign(new AST::Stub("NI: L_assign"), new AST::Stub("NI: R_assign")); };
+statement: l_expr opt_ident '=' r_expr ';' { $$ = new AST::Assign(new AST::Stub("NI: L_assign"), $2, new AST::Stub("NI: R_assign")); };
 
 /* L_Expression */
 

@@ -78,6 +78,7 @@ namespace AST {
     void Assign::json(std::ostream &out, AST_print_context &ctx) {
         json_head("Assign", out, ctx);
         json_child("l_expr_", *l_expr_, out, ctx);
+        json_child("type_", *type_, out, ctx);
         json_child("r_expr_", *r_expr_, out, ctx, ' ');
         json_close(out, ctx);
     }
@@ -95,6 +96,22 @@ namespace AST {
         json_child("return_type_", *return_type_, out, ctx);
         json_child("args_", *args_, out, ctx);
         json_child("stmts_", *stmts_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+
+    void If_Else::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("If_Else", out, ctx);
+        json_child("cond_", *cond_, out, ctx);
+        json_child("if_stmts_", *if_stmts_, out, ctx);
+        json_child("elifs_", *elifs_, out, ctx);
+        json_child("else_stmts_", *else_stmts_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+
+    void Elif::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Elif", out, ctx);
+        json_child("cond_", *cond_, out, ctx);
+        json_child("stmts", *stmts_, out, ctx, ' ');
         json_close(out, ctx);
     }
 

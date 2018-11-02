@@ -76,9 +76,10 @@ namespace AST {
     class Assign: public ASTNode {
         public:
             ASTNode *l_expr_;
+            Ident *type_;
             ASTNode *r_expr_;
         public:
-            Assign(ASTNode *l_expr, ASTNode *r_expr): l_expr_(l_expr), r_expr_(r_expr) {}
+            Assign(ASTNode *l_expr, Ident *type, ASTNode *r_expr): l_expr_(l_expr), type_(type), r_expr_(r_expr) {}
             void json(std::ostream &out, AST_print_context &ctx);
     };
 
@@ -99,6 +100,26 @@ namespace AST {
             Block *stmts_;
         public:
             Method(Ident *name, Ident *return_type, Block *args, Block *stmts): name_(name), return_type_(return_type), args_(args), stmts_(stmts) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class If_Else: public ASTNode {
+        public:
+            ASTNode *cond_;
+            Block *if_stmts_;
+            Block *elifs_;
+            Block *else_stmts_;
+        public:
+            If_Else(ASTNode *cond, Block *if_stmts, Block *elifs, Block *else_stmts): cond_(cond), if_stmts_(if_stmts), elifs_(elifs), else_stmts_(else_stmts) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+    
+    class Elif: public ASTNode {
+        public:
+            ASTNode *cond_;
+            Block *stmts_;
+        public:
+            Elif(ASTNode *cond, Block *stmts): cond_(cond), stmts_(stmts) {}
             void json(std::ostream &out, AST_print_context &ctx);
     };
 }
