@@ -375,7 +375,7 @@ namespace yy {
   static const unsigned char yydefact_[];
 
   // YYPGOTO[NTERM-NUM].
-  static const signed char yypgoto_[];
+  static const short yypgoto_[];
 
   // YYDEFGOTO[NTERM-NUM].
   static const signed char yydefgoto_[];
@@ -383,9 +383,9 @@ namespace yy {
   // YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
   // positive, shift that token.  If negative, reduce the rule whose
   // number is the opposite.  If YYTABLE_NINF, syntax error.
-  static const signed char yytable_[];
+  static const short yytable_[];
 
-  static const signed char yycheck_[];
+  static const short yycheck_[];
 
   // YYSTOS[STATE-NUM] -- The (internal number of the) accessing
   // symbol of state STATE-NUM.
@@ -403,7 +403,7 @@ namespace yy {
     static const char* const yytname_[];
 
   // YYRLINE[YYN] -- Source line where rule number YYN was defined.
-  static const unsigned char yyrline_[];
+  static const unsigned short yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
     virtual void yy_reduce_print_ (int r);
     /// Print the state stack on the debug stream.
@@ -504,8 +504,8 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 205,     ///< Last index in yytable_.
-      yynnts_ = 26,  ///< Number of nonterminal symbols.
+      yylast_ = 204,     ///< Last index in yytable_.
+      yynnts_ = 27,  ///< Number of nonterminal symbols.
       yyfinal_ = 7, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,

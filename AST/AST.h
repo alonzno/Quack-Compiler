@@ -175,6 +175,51 @@ namespace AST {
             Return(ASTNode *ret_val): ret_val_(ret_val) {}
             void json(std::ostream &out, AST_print_context &ctx);
     };
+
+    class And: public ASTNode {
+        public:
+            ASTNode *l_child_;
+            ASTNode *r_child_;
+        public:
+            And(ASTNode *l_child, ASTNode *r_child): l_child_(l_child), r_child_(r_child) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+    
+    class Or: public ASTNode {
+        public:
+            ASTNode *l_child_;
+            ASTNode *r_child_;
+        public:
+            Or(ASTNode *l_child, ASTNode *r_child): l_child_(l_child), r_child_(r_child) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class Neg: public ASTNode {
+        public:
+            ASTNode *operand_;
+        public:
+            Neg(ASTNode *operand): operand_(operand) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class Typecase: public ASTNode {
+        public:
+            ASTNode *r_expr_;
+            Block *type_alts_;
+        public:
+            Typecase(ASTNode *r_expr, Block *type_alts): r_expr_(r_expr), type_alts_(type_alts) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+    
+    class TypeAlt: public ASTNode {
+        public:
+            Ident *name_;
+            Ident *type_;
+            Block *stmts_;
+        public:
+            TypeAlt(Ident *name, Ident *type, Block *stmts): name_(name), type_(type), stmts_(stmts) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
 }
 
 #endif //AST_H

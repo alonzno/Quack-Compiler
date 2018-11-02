@@ -155,4 +155,39 @@ namespace AST {
         json_close(out, ctx);
     }
 
+    void And::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("And", out, ctx);
+        json_child("l_child_", *l_child_, out, ctx);
+        json_child("r_child_", *r_child_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+    
+    void Or::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Or", out, ctx);
+        json_child("l_child_", *l_child_, out, ctx);
+        json_child("r_child_", *r_child_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+    
+    void Neg::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Neg", out, ctx);
+        json_child("operand_", *operand_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+    
+    void Typecase::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Typecase", out, ctx);
+        json_child("r_expr_", *r_expr_, out, ctx);
+        json_child("type_alts_", *type_alts_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+    
+    void TypeAlt::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("And", out, ctx);
+        json_child("name_", *name_, out, ctx);
+        json_child("type_", *type_, out, ctx);
+        json_child("stmts_", *stmts_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+
 }

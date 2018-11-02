@@ -102,10 +102,13 @@ Grammar
    62 opt_r_expr: r_expr
    63           | %empty
 
-   64 statement: TYPECASE r_expr '{' type_alt '}'
+   64 statement: TYPECASE r_expr '{' opt_type_alt '}'
 
-   65 type_alt: type_alt IDENT ':' IDENT statement_block
-   66         | %empty
+   65 opt_type_alt: more_type_alt
+   66             | %empty
+
+   67 more_type_alt: more_type_alt IDENT ':' IDENT statement_block
+   68              | IDENT ':' IDENT statement_block
 
 
 Terminals, with rules where they appear
@@ -119,7 +122,7 @@ $end (0) 0
 '-' (45) 42 45
 '.' (46) 36 55
 '/' (47) 44
-':' (58) 15 23 65
+':' (58) 15 23 67 68
 ';' (59) 34 37 61
 '<' (60) 50
 '=' (61) 34
@@ -142,7 +145,7 @@ EQUALS (269) 47
 AND (270) 52
 OR (271) 53
 NOT (272) 54
-IDENT <str> (273) 10 15 16 22 23 35 36 55 60 65
+IDENT <str> (273) 10 15 16 22 23 35 36 55 60 67 68
 INT_LIT <num> (274) 39
 STRING_LIT <str> (275) 38
 NEG (276)
@@ -185,7 +188,7 @@ method <node> (54)
 opt_ident <ident> (55)
     on left: 23 24, on right: 22 34
 statement_block <block> (56)
-    on left: 25, on right: 22 26 29 30 31 33 65
+    on left: 25, on right: 22 26 29 30 31 33 67 68
 statement <node> (57)
     on left: 26 33 34 37 61 64, on right: 8 9
 opt_elif <block> (58)
@@ -206,8 +209,10 @@ seq_r_expr <block> (64)
     on left: 58 59, on right: 56 58
 opt_r_expr <node> (65)
     on left: 62 63, on right: 61
-type_alt (66)
-    on left: 65 66, on right: 64 65
+opt_type_alt <block> (66)
+    on left: 65 66, on right: 64
+more_type_alt <block> (67)
+    on left: 67 68, on right: 65 67
 
 
 State 0
@@ -277,7 +282,7 @@ State 3
    55       | . r_expr '.' IDENT '(' actual_args ')'
    60       | . IDENT '(' actual_args ')'
    61 statement: . RETURN opt_r_expr ';'
-   64          | . TYPECASE r_expr '{' type_alt '}'
+   64          | . TYPECASE r_expr '{' opt_type_alt '}'
 
     IF          shift, and go to state 8
     WHILE       shift, and go to state 9
@@ -469,7 +474,7 @@ State 11
    54       | . NOT r_expr
    55       | . r_expr '.' IDENT '(' actual_args ')'
    60       | . IDENT '(' actual_args ')'
-   64 statement: TYPECASE . r_expr '{' type_alt '}'
+   64 statement: TYPECASE . r_expr '{' opt_type_alt '}'
 
     NOT         shift, and go to state 12
     IDENT       shift, and go to state 13
@@ -651,7 +656,7 @@ State 19
    55       | . r_expr '.' IDENT '(' actual_args ')'
    60       | . IDENT '(' actual_args ')'
    61 statement: . RETURN opt_r_expr ';'
-   64          | . TYPECASE r_expr '{' type_alt '}'
+   64          | . TYPECASE r_expr '{' opt_type_alt '}'
 
     IF          shift, and go to state 8
     WHILE       shift, and go to state 9
@@ -882,7 +887,7 @@ State 30
    52       | r_expr . AND r_expr
    53       | r_expr . OR r_expr
    55       | r_expr . '.' IDENT '(' actual_args ')'
-   64 statement: TYPECASE r_expr . '{' type_alt '}'
+   64 statement: TYPECASE r_expr . '{' opt_type_alt '}'
 
     ATLEAST  shift, and go to state 38
     ATMOST   shift, and go to state 39
@@ -1552,7 +1557,7 @@ State 55
    55       | . r_expr '.' IDENT '(' actual_args ')'
    60       | . IDENT '(' actual_args ')'
    61 statement: . RETURN opt_r_expr ';'
-   64          | . TYPECASE r_expr '{' type_alt '}'
+   64          | . TYPECASE r_expr '{' opt_type_alt '}'
 
     IF          shift, and go to state 8
     WHILE       shift, and go to state 9
@@ -1606,13 +1611,18 @@ State 58
 
 State 59
 
-   64 statement: TYPECASE r_expr '{' . type_alt '}'
-   65 type_alt: . type_alt IDENT ':' IDENT statement_block
-   66         | . %empty
+   64 statement: TYPECASE r_expr '{' . opt_type_alt '}'
+   65 opt_type_alt: . more_type_alt
+   66             | . %empty  ['}']
+   67 more_type_alt: . more_type_alt IDENT ':' IDENT statement_block
+   68              | . IDENT ':' IDENT statement_block
 
-    $default  reduce using rule 66 (type_alt)
+    IDENT  shift, and go to state 85
 
-    type_alt  go to state 85
+    $default  reduce using rule 66 (opt_type_alt)
+
+    opt_type_alt   go to state 86
+    more_type_alt  go to state 87
 
 
 State 60
@@ -1652,7 +1662,7 @@ State 61
 
    60 r_expr: IDENT '(' actual_args . ')'
 
-    ')'  shift, and go to state 86
+    ')'  shift, and go to state 88
 
 
 State 62
@@ -1660,7 +1670,7 @@ State 62
    56 actual_args: seq_r_expr .  [')']
    58 seq_r_expr: seq_r_expr . ',' r_expr
 
-    ','  shift, and go to state 87
+    ','  shift, and go to state 89
 
     $default  reduce using rule 56 (actual_args)
 
@@ -1712,7 +1722,7 @@ State 65
     '('         shift, and go to state 17
 
     l_expr  go to state 25
-    r_expr  go to state 88
+    r_expr  go to state 90
 
 
 State 66
@@ -2147,7 +2157,7 @@ State 77
    36 l_expr: r_expr '.' IDENT .  [ATLEAST, ATMOST, EQUALS, AND, OR, '>', '<', '+', '-', '*', '/', '.', ')', '{', ',', ':', '=', ';']
    55 r_expr: r_expr '.' IDENT . '(' actual_args ')'
 
-    '('  shift, and go to state 89
+    '('  shift, and go to state 91
 
     $default  reduce using rule 36 (l_expr)
 
@@ -2156,7 +2166,7 @@ State 78
 
    15 arg: IDENT ':' . IDENT
 
-    IDENT  shift, and go to state 90
+    IDENT  shift, and go to state 92
 
 
 State 79
@@ -2165,11 +2175,11 @@ State 79
    16 opt_extends: . EXTENDS IDENT
    17            | . %empty  ['{']
 
-    EXTENDS  shift, and go to state 91
+    EXTENDS  shift, and go to state 93
 
     $default  reduce using rule 17 (opt_extends)
 
-    opt_extends  go to state 92
+    opt_extends  go to state 94
 
 
 State 80
@@ -2179,14 +2189,14 @@ State 80
 
     IDENT  shift, and go to state 51
 
-    arg  go to state 93
+    arg  go to state 95
 
 
 State 81
 
    25 statement_block: '{' opt_statements . '}'
 
-    '}'  shift, and go to state 94
+    '}'  shift, and go to state 96
 
 
 State 82
@@ -2222,7 +2232,7 @@ State 82
     '('         shift, and go to state 17
 
     l_expr  go to state 25
-    r_expr  go to state 95
+    r_expr  go to state 97
 
 
 State 83
@@ -2231,11 +2241,11 @@ State 83
    31 opt_else: . ELSE statement_block
    32         | . %empty  [$end, DEF, IF, WHILE, RETURN, TYPECASE, NOT, IDENT, INT_LIT, STRING_LIT, '-', '(', '}']
 
-    ELSE  shift, and go to state 96
+    ELSE  shift, and go to state 98
 
     $default  reduce using rule 32 (opt_else)
 
-    opt_else  go to state 97
+    opt_else  go to state 99
 
 
 State 84
@@ -2243,28 +2253,43 @@ State 84
    27 opt_elif: more_elif .  [$end, DEF, IF, ELSE, WHILE, RETURN, TYPECASE, NOT, IDENT, INT_LIT, STRING_LIT, '-', '(', '}']
    29 more_elif: more_elif . ELIF r_expr statement_block
 
-    ELIF  shift, and go to state 98
+    ELIF  shift, and go to state 100
 
     $default  reduce using rule 27 (opt_elif)
 
 
 State 85
 
-   64 statement: TYPECASE r_expr '{' type_alt . '}'
-   65 type_alt: type_alt . IDENT ':' IDENT statement_block
+   68 more_type_alt: IDENT . ':' IDENT statement_block
 
-    IDENT  shift, and go to state 99
-    '}'    shift, and go to state 100
+    ':'  shift, and go to state 101
 
 
 State 86
+
+   64 statement: TYPECASE r_expr '{' opt_type_alt . '}'
+
+    '}'  shift, and go to state 102
+
+
+State 87
+
+   65 opt_type_alt: more_type_alt .  ['}']
+   67 more_type_alt: more_type_alt . IDENT ':' IDENT statement_block
+
+    IDENT  shift, and go to state 103
+
+    $default  reduce using rule 65 (opt_type_alt)
+
+
+State 88
 
    60 r_expr: IDENT '(' actual_args ')' .
 
     $default  reduce using rule 60 (r_expr)
 
 
-State 87
+State 89
 
    35 l_expr: . IDENT
    36       | . r_expr '.' IDENT
@@ -2297,10 +2322,10 @@ State 87
     '('         shift, and go to state 17
 
     l_expr  go to state 25
-    r_expr  go to state 101
+    r_expr  go to state 104
 
 
-State 88
+State 90
 
    34 statement: l_expr opt_ident '=' r_expr . ';'
    36 l_expr: r_expr . '.' IDENT
@@ -2329,10 +2354,10 @@ State 88
     '*'      shift, and go to state 47
     '/'      shift, and go to state 48
     '.'      shift, and go to state 49
-    ';'      shift, and go to state 102
+    ';'      shift, and go to state 105
 
 
-State 89
+State 91
 
    35 l_expr: . IDENT
    36       | . r_expr '.' IDENT
@@ -2372,46 +2397,46 @@ State 89
 
     l_expr       go to state 25
     r_expr       go to state 60
-    actual_args  go to state 103
+    actual_args  go to state 106
     seq_r_expr   go to state 62
 
 
-State 90
+State 92
 
    15 arg: IDENT ':' IDENT .
 
     $default  reduce using rule 15 (arg)
 
 
-State 91
+State 93
 
    16 opt_extends: EXTENDS . IDENT
 
-    IDENT  shift, and go to state 104
+    IDENT  shift, and go to state 107
 
 
-State 92
+State 94
 
    10 class: CLASS IDENT '(' formal_args ')' opt_extends . '{' opt_statements opt_methods '}'
 
-    '{'  shift, and go to state 105
+    '{'  shift, and go to state 108
 
 
-State 93
+State 95
 
    14 args: args ',' arg .
 
     $default  reduce using rule 14 (args)
 
 
-State 94
+State 96
 
    25 statement_block: '{' opt_statements '}' .
 
     $default  reduce using rule 25 (statement_block)
 
 
-State 95
+State 97
 
    25 statement_block: . '{' opt_statements '}'
    30 more_elif: ELIF r_expr . statement_block
@@ -2443,27 +2468,27 @@ State 95
     '.'      shift, and go to state 49
     '{'      shift, and go to state 55
 
-    statement_block  go to state 106
+    statement_block  go to state 109
 
 
-State 96
+State 98
 
    25 statement_block: . '{' opt_statements '}'
    31 opt_else: ELSE . statement_block
 
     '{'  shift, and go to state 55
 
-    statement_block  go to state 107
+    statement_block  go to state 110
 
 
-State 97
+State 99
 
    26 statement: IF r_expr statement_block opt_elif opt_else .
 
     $default  reduce using rule 26 (statement)
 
 
-State 98
+State 100
 
    29 more_elif: more_elif ELIF . r_expr statement_block
    35 l_expr: . IDENT
@@ -2496,24 +2521,31 @@ State 98
     '('         shift, and go to state 17
 
     l_expr  go to state 25
-    r_expr  go to state 108
+    r_expr  go to state 111
 
 
-State 99
+State 101
 
-   65 type_alt: type_alt IDENT . ':' IDENT statement_block
+   68 more_type_alt: IDENT ':' . IDENT statement_block
 
-    ':'  shift, and go to state 109
+    IDENT  shift, and go to state 112
 
 
-State 100
+State 102
 
-   64 statement: TYPECASE r_expr '{' type_alt '}' .
+   64 statement: TYPECASE r_expr '{' opt_type_alt '}' .
 
     $default  reduce using rule 64 (statement)
 
 
-State 101
+State 103
+
+   67 more_type_alt: more_type_alt IDENT . ':' IDENT statement_block
+
+    ':'  shift, and go to state 113
+
+
+State 104
 
    36 l_expr: r_expr . '.' IDENT
    41 r_expr: r_expr . '+' r_expr
@@ -2546,28 +2578,28 @@ State 101
     $default  reduce using rule 58 (seq_r_expr)
 
 
-State 102
+State 105
 
    34 statement: l_expr opt_ident '=' r_expr ';' .
 
     $default  reduce using rule 34 (statement)
 
 
-State 103
+State 106
 
    55 r_expr: r_expr '.' IDENT '(' actual_args . ')'
 
-    ')'  shift, and go to state 110
+    ')'  shift, and go to state 114
 
 
-State 104
+State 107
 
    16 opt_extends: EXTENDS IDENT .
 
     $default  reduce using rule 16 (opt_extends)
 
 
-State 105
+State 108
 
     6 opt_statements: . statements
     7               | . %empty  [DEF, '}']
@@ -2600,7 +2632,7 @@ State 105
    55       | . r_expr '.' IDENT '(' actual_args ')'
    60       | . IDENT '(' actual_args ')'
    61 statement: . RETURN opt_r_expr ';'
-   64          | . TYPECASE r_expr '{' type_alt '}'
+   64          | . TYPECASE r_expr '{' opt_type_alt '}'
 
     IF          shift, and go to state 8
     WHILE       shift, and go to state 9
@@ -2615,28 +2647,28 @@ State 105
 
     $default  reduce using rule 7 (opt_statements)
 
-    opt_statements  go to state 111
+    opt_statements  go to state 115
     statements      go to state 19
     statement       go to state 20
     l_expr          go to state 21
     r_expr          go to state 22
 
 
-State 106
+State 109
 
    30 more_elif: ELIF r_expr statement_block .
 
     $default  reduce using rule 30 (more_elif)
 
 
-State 107
+State 110
 
    31 opt_else: ELSE statement_block .
 
     $default  reduce using rule 31 (opt_else)
 
 
-State 108
+State 111
 
    25 statement_block: . '{' opt_statements '}'
    29 more_elif: more_elif ELIF r_expr . statement_block
@@ -2668,24 +2700,34 @@ State 108
     '.'      shift, and go to state 49
     '{'      shift, and go to state 55
 
-    statement_block  go to state 112
+    statement_block  go to state 116
 
 
-State 109
+State 112
 
-   65 type_alt: type_alt IDENT ':' . IDENT statement_block
+   25 statement_block: . '{' opt_statements '}'
+   68 more_type_alt: IDENT ':' IDENT . statement_block
 
-    IDENT  shift, and go to state 113
+    '{'  shift, and go to state 55
+
+    statement_block  go to state 117
 
 
-State 110
+State 113
+
+   67 more_type_alt: more_type_alt IDENT ':' . IDENT statement_block
+
+    IDENT  shift, and go to state 118
+
+
+State 114
 
    55 r_expr: r_expr '.' IDENT '(' actual_args ')' .
 
     $default  reduce using rule 55 (r_expr)
 
 
-State 111
+State 115
 
    10 class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements . opt_methods '}'
    18 opt_methods: . methods
@@ -2694,95 +2736,102 @@ State 111
    21        | . method
    22 method: . DEF IDENT '(' formal_args ')' opt_ident statement_block
 
-    DEF  shift, and go to state 114
+    DEF  shift, and go to state 119
 
     $default  reduce using rule 19 (opt_methods)
 
-    opt_methods  go to state 115
-    methods      go to state 116
-    method       go to state 117
+    opt_methods  go to state 120
+    methods      go to state 121
+    method       go to state 122
 
 
-State 112
+State 116
 
    29 more_elif: more_elif ELIF r_expr statement_block .
 
     $default  reduce using rule 29 (more_elif)
 
 
-State 113
+State 117
+
+   68 more_type_alt: IDENT ':' IDENT statement_block .
+
+    $default  reduce using rule 68 (more_type_alt)
+
+
+State 118
 
    25 statement_block: . '{' opt_statements '}'
-   65 type_alt: type_alt IDENT ':' IDENT . statement_block
+   67 more_type_alt: more_type_alt IDENT ':' IDENT . statement_block
 
     '{'  shift, and go to state 55
 
-    statement_block  go to state 118
+    statement_block  go to state 123
 
 
-State 114
+State 119
 
    22 method: DEF . IDENT '(' formal_args ')' opt_ident statement_block
 
-    IDENT  shift, and go to state 119
+    IDENT  shift, and go to state 124
 
 
-State 115
+State 120
 
    10 class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements opt_methods . '}'
 
-    '}'  shift, and go to state 120
+    '}'  shift, and go to state 125
 
 
-State 116
+State 121
 
    18 opt_methods: methods .  ['}']
    20 methods: methods . method
    22 method: . DEF IDENT '(' formal_args ')' opt_ident statement_block
 
-    DEF  shift, and go to state 114
+    DEF  shift, and go to state 119
 
     $default  reduce using rule 18 (opt_methods)
 
-    method  go to state 121
+    method  go to state 126
 
 
-State 117
+State 122
 
    21 methods: method .
 
     $default  reduce using rule 21 (methods)
 
 
-State 118
+State 123
 
-   65 type_alt: type_alt IDENT ':' IDENT statement_block .
+   67 more_type_alt: more_type_alt IDENT ':' IDENT statement_block .
 
-    $default  reduce using rule 65 (type_alt)
+    $default  reduce using rule 67 (more_type_alt)
 
 
-State 119
+State 124
 
    22 method: DEF IDENT . '(' formal_args ')' opt_ident statement_block
 
-    '('  shift, and go to state 122
+    '('  shift, and go to state 127
 
 
-State 120
+State 125
 
    10 class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements opt_methods '}' .
 
     $default  reduce using rule 10 (class)
 
 
-State 121
+State 126
 
    20 methods: methods method .
 
     $default  reduce using rule 20 (methods)
 
 
-State 122
+State 127
 
    11 formal_args: . args
    12            | . %empty  [')']
@@ -2795,19 +2844,19 @@ State 122
 
     $default  reduce using rule 12 (formal_args)
 
-    formal_args  go to state 123
+    formal_args  go to state 128
     args         go to state 53
     arg          go to state 54
 
 
-State 123
+State 128
 
    22 method: DEF IDENT '(' formal_args . ')' opt_ident statement_block
 
-    ')'  shift, and go to state 124
+    ')'  shift, and go to state 129
 
 
-State 124
+State 129
 
    22 method: DEF IDENT '(' formal_args ')' . opt_ident statement_block
    23 opt_ident: . ':' IDENT
@@ -2817,20 +2866,20 @@ State 124
 
     $default  reduce using rule 24 (opt_ident)
 
-    opt_ident  go to state 125
+    opt_ident  go to state 130
 
 
-State 125
+State 130
 
    22 method: DEF IDENT '(' formal_args ')' opt_ident . statement_block
    25 statement_block: . '{' opt_statements '}'
 
     '{'  shift, and go to state 55
 
-    statement_block  go to state 126
+    statement_block  go to state 131
 
 
-State 126
+State 131
 
    22 method: DEF IDENT '(' formal_args ')' opt_ident statement_block .
 
