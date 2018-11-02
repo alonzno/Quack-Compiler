@@ -88,4 +88,14 @@ namespace AST {
         json_child("body_", *body_, out, ctx, ' ');
         json_close(out, ctx);
     }
+    
+    void Method::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Method", out, ctx);
+        json_child("name_", *name_, out, ctx);
+        json_child("return_type_", *return_type_, out, ctx);
+        json_child("args_", *args_, out, ctx);
+        json_child("stmts_", *stmts_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+
 }

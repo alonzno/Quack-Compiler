@@ -90,6 +90,17 @@ namespace AST {
             While(ASTNode *cond, Block *body): cond_(cond), body_(body) {}
             void json(std::ostream &out, AST_print_context &ctx);
     };
+    
+    class Method: public ASTNode {
+        public:
+            Ident *name_;
+            Ident *return_type_;
+            Block *args_;
+            Block *stmts_;
+        public:
+            Method(Ident *name, Ident *return_type, Block *args, Block *stmts): name_(name), return_type_(return_type), args_(args), stmts_(stmts) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
 }
 
 #endif //AST_H

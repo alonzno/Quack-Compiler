@@ -177,9 +177,9 @@ opt_methods <block> (52)
     on left: 18 19, on right: 10
 methods <block> (53)
     on left: 20 21, on right: 18 20
-method <stub> (54)
+method <node> (54)
     on left: 22, on right: 20 21
-opt_ident (55)
+opt_ident <ident> (55)
     on left: 23 24, on right: 22 32
 statement_block <block> (56)
     on left: 25, on right: 22 26 27 29 31 63
