@@ -115,4 +115,24 @@ namespace AST {
         json_close(out, ctx);
     }
 
+    void IntConst::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("IntConst", out, ctx);
+        out << "\"value_\" : \"" << value_ << "\"";
+        json_close(out, ctx);
+    }
+
+    void StrConst::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("StrConst", out, ctx);
+        out << "\"value_\" : \"" << value_ << "\"";
+        json_close(out, ctx);
+    }
+
+    void Call::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Call", out, ctx);
+        json_child("obj_", *obj_, out, ctx);
+        json_child("method_", *method_, out, ctx);
+        json_child("args_", *args_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
+
 }

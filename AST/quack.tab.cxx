@@ -806,156 +806,168 @@ namespace yy {
 
   case 39:
 #line 190 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    {  (yylhs.value.node) = new AST::StrConst((yystack_[0].value.str)); }
 #line 811 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 40:
 #line 192 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::IntConst((yystack_[0].value.num)); }
 #line 817 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 41:
 #line 194 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    {  (yylhs.value.node) = new AST::Stub("NI: l_expr"); }
 #line 823 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 42:
 #line 198 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("PLUS"), (yystack_[0].value.node)); }
 #line 829 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 43:
 #line 200 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("MINUS"), (yystack_[0].value.node)); }
 #line 835 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 44:
 #line 202 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("TIMES"), (yystack_[0].value.node)); }
 #line 841 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 45:
 #line 204 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("DIV"), (yystack_[0].value.node)); }
 #line 847 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 46:
 #line 208 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Call(new AST::IntConst(0), new AST::Ident("MINUS"), (yystack_[0].value.node)); }
 #line 853 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 47:
 #line 210 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = (yystack_[1].value.node); }
 #line 859 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 48:
 #line 214 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Stub("NI: EQUALS"); }
 #line 865 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 49:
 #line 216 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Stub("NI: ATLEAST"); }
 #line 871 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 50:
 #line 218 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Stub("NI: ATMOST"); }
 #line 877 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 51:
 #line 220 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Stub("NI: LESSTHAN"); }
 #line 883 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 52:
 #line 222 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Stub("NI: GREATERTHAN"); }
 #line 889 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 53:
 #line 224 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Stub("NI: AND"); }
 #line 895 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 54:
 #line 226 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Stub("NI: OR"); }
 #line 901 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 55:
 #line 228 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Stub("NI: NOT"); }
 #line 907 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 56:
 #line 232 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
+    { (yylhs.value.node) = new AST::Call((yystack_[5].value.node), new AST::Ident((yystack_[3].value.str)), (yystack_[1].value.block)); }
 #line 913 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 57:
+#line 234 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = (yystack_[0].value.block); }
+#line 919 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 58:
 #line 235 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
-#line 919 "quack.tab.cxx" // lalr1.cc:870
+    { (yylhs.value.block) = new AST::Block(); }
+#line 925 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 59:
+#line 237 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = (yystack_[2].value.block); (yylhs.value.block) -> append((yystack_[0].value.node)); }
+#line 931 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 60:
 #line 238 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
-    { }
-#line 925 "quack.tab.cxx" // lalr1.cc:870
+    { (yylhs.value.block) = new AST::Block(); (yylhs.value.block) -> append((yystack_[0].value.node)); }
+#line 937 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 61:
 #line 240 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
-#line 931 "quack.tab.cxx" // lalr1.cc:870
+#line 943 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 62:
 #line 244 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Stub("NI: Return"); }
-#line 937 "quack.tab.cxx" // lalr1.cc:870
+#line 949 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 64:
 #line 247 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
-#line 943 "quack.tab.cxx" // lalr1.cc:870
+#line 955 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 65:
 #line 251 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Stub("NI: typecase"); }
-#line 949 "quack.tab.cxx" // lalr1.cc:870
+#line 961 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 67:
 #line 254 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:870
     { }
-#line 955 "quack.tab.cxx" // lalr1.cc:870
+#line 967 "quack.tab.cxx" // lalr1.cc:870
     break;
 
 
-#line 959 "quack.tab.cxx" // lalr1.cc:870
+#line 971 "quack.tab.cxx" // lalr1.cc:870
             default:
               break;
             }
@@ -1130,19 +1142,19 @@ namespace yy {
   const short
   parser::yypact_[] =
   {
-       5,     1,    21,    53,     5,   -49,    -8,   -49,    -5,    -5,
-      -5,    -5,    -5,    -2,   -49,   -49,    -5,    -5,   -49,    53,
-     -49,   -21,    90,   -49,    11,   -49,   128,   128,   179,   -10,
-     145,   186,    -5,    -4,   162,   -49,    30,    10,    -5,    -5,
+       5,     1,    21,    55,     5,   -49,    -8,   -49,    -5,    -5,
+      -5,    -5,    -5,    -2,   -49,   -49,    -5,    -5,   -49,    55,
+     -49,   -21,    81,   -49,    11,   -49,   119,   119,   170,   -10,
+     136,   177,    -5,    -4,   153,   -49,    30,    10,    -5,    -5,
       -5,    -5,    -5,    -5,    -5,    -5,    -5,    -5,    -5,    32,
-     -49,    13,    20,    16,   -49,    53,    48,   -49,   -49,   -49,
-     179,    23,   -49,   -49,    -5,    19,    19,    19,   186,   186,
-      19,    19,    -4,    -4,    33,    33,    27,    47,    61,    11,
-      31,    -5,    66,    69,    -9,    40,   -49,   109,    -5,   -49,
-      62,    44,   -49,   -49,   128,    49,   -49,    -5,    45,   -49,
-      -5,   -49,    51,   -49,    53,   -49,   -49,   128,    70,   179,
-     -49,    85,   -49,    49,    72,    56,    85,   -49,   -49,    60,
-     -49,   -49,    11,    63,    57,    49,   -49
+     -49,    13,    20,    16,   -49,    55,    48,   -49,   -49,   -49,
+     170,    22,    23,   -49,   -49,    -5,    19,    19,    19,   177,
+     177,    19,    19,    -4,    -4,    34,    34,    25,    45,    62,
+      11,    35,    -5,    60,    70,    -9,   -49,    -5,   100,    -5,
+     -49,    61,    43,   -49,   -49,   119,    49,   -49,    -5,    47,
+     -49,   170,   -49,    52,   -49,    55,   -49,   -49,   119,    71,
+     -49,    86,   -49,    49,    73,    64,    86,   -49,   -49,    65,
+     -49,   -49,    11,    67,    72,    49,   -49
   };
 
   const unsigned char
@@ -1154,11 +1166,11 @@ namespace yy {
        0,    55,    58,    46,     0,     9,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
       38,     0,     0,    12,    14,     8,    29,    34,    62,    67,
-      60,     0,    47,    24,     0,    49,    50,    48,    53,    54,
-      52,    51,    42,    43,    44,    45,    37,     0,    18,     0,
-       0,     0,    33,    28,     0,    57,    61,     0,    58,    16,
-       0,     0,    15,    26,     0,     0,    27,     0,     0,    65,
-       0,    35,     0,    17,     8,    31,    32,     0,     0,    59,
+      60,     0,    57,    47,    24,     0,    49,    50,    48,    53,
+      54,    52,    51,    42,    43,    44,    45,    37,     0,    18,
+       0,     0,     0,    33,    28,     0,    61,     0,     0,    58,
+      16,     0,     0,    15,    26,     0,     0,    27,     0,     0,
+      65,    59,    35,     0,    17,     8,    31,    32,     0,     0,
       56,    20,    30,     0,     0,     0,    19,    22,    66,     0,
       11,    21,    13,     0,    25,     0,    23
   };
@@ -1166,44 +1178,43 @@ namespace yy {
   const signed char
   parser::yypgoto_[] =
   {
-     -49,   -49,   -49,   -49,   -48,   -49,    92,   -24,   -49,    28,
-     -49,   -49,   -49,   -16,   -15,   -26,    89,   -49,   -49,   -49,
-      -3,    -6,    22,   -49,   -49,   -49
+     -49,   -49,   -49,   -49,   -48,   -49,   107,     7,   -49,    37,
+     -49,   -49,   -49,     2,     6,   -26,   101,   -49,   -49,   -49,
+      -3,    -6,    50,   -49,   -49,   -49
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
       -1,     2,     3,     4,    18,    19,     5,    52,    53,    54,
-      91,   115,   116,   117,    37,    56,    20,    82,    83,    96,
-      25,    22,    61,    85,    29,    84
+      92,   115,   116,   117,    37,    56,    20,    83,    84,    97,
+      25,    22,    61,    62,    29,    85
   };
 
   const signed char
   parser::yytable_[] =
   {
-      21,    57,    26,    27,    28,    30,    31,    80,     1,    98,
+      21,    57,    26,    27,    28,    30,    31,    81,     1,    99,
       33,    34,    12,    13,    14,    15,    21,    36,   -25,     6,
-      16,     7,    47,    48,    49,    24,    60,    99,    17,    51,
-      58,    32,    65,    66,    67,    68,    69,    70,    71,    72,
-      73,    74,    75,    45,    46,    47,    48,    49,    63,    64,
-      76,    77,    21,    79,    78,    81,   111,    86,    87,     8,
-      88,    49,     9,    10,    11,    89,    90,    93,   105,   106,
-      12,    13,    14,    15,    95,    94,    97,   100,    16,   104,
-     103,   112,    60,   108,    55,   110,    17,   118,   113,   114,
-     119,   107,   120,   122,   109,    36,    23,   124,   123,   126,
-     121,    21,    38,    39,    40,    41,    42,    92,    35,   125,
-     102,     0,    43,    44,    45,    46,    47,    48,    49,     0,
-       0,    38,    39,    40,    41,    42,     0,     0,     0,     0,
-      50,    43,    44,    45,    46,    47,    48,    49,     0,     0,
-      38,    39,    40,    41,    42,     0,     0,     0,     0,   101,
-      43,    44,    45,    46,    47,    48,    49,    38,    39,    40,
-      41,    42,     0,    55,     0,     0,     0,    43,    44,    45,
-      46,    47,    48,    49,    38,    39,    40,    41,    42,     0,
-      59,     0,     0,     0,    43,    44,    45,    46,    47,    48,
-      49,    38,    39,    40,    41,    42,    62,     0,    38,    39,
-      40,    43,    44,    45,    46,    47,    48,    49,    43,    44,
-      45,    46,    47,    48,    49
+      16,     7,    47,    48,    49,    24,    60,   100,    17,    51,
+      58,    32,    66,    67,    68,    69,    70,    71,    72,    73,
+      74,    75,    76,    45,    46,    47,    48,    49,    64,    65,
+      77,    78,    21,    80,    79,    82,    86,   111,    89,    88,
+      87,     8,    49,    90,     9,    10,    11,    91,    96,   106,
+     107,    94,    12,    13,    14,    15,    95,    98,   105,   104,
+      16,   101,   112,    60,    55,   109,   110,   118,    17,   113,
+     114,   119,   108,    38,    39,    40,    41,    42,   122,   126,
+     120,   124,    21,    43,    44,    45,    46,    47,    48,    49,
+      36,    23,    38,    39,    40,    41,    42,    93,   121,     0,
+      35,    50,    43,    44,    45,    46,    47,    48,    49,   123,
+     125,    38,    39,    40,    41,    42,     0,     0,     0,   103,
+     102,    43,    44,    45,    46,    47,    48,    49,    38,    39,
+      40,    41,    42,     0,    55,     0,     0,     0,    43,    44,
+      45,    46,    47,    48,    49,    38,    39,    40,    41,    42,
+       0,    59,     0,     0,     0,    43,    44,    45,    46,    47,
+      48,    49,    38,    39,    40,    41,    42,    63,     0,    38,
+      39,    40,    43,    44,    45,    46,    47,    48,    49,    43,
+      44,    45,    46,    47,    48,    49
   };
 
   const signed char
@@ -1214,23 +1225,22 @@ namespace yy {
       25,     0,    26,    27,    28,    33,    32,    36,    33,    18,
       40,    33,    38,    39,    40,    41,    42,    43,    44,    45,
       46,    47,    48,    24,    25,    26,    27,    28,    18,    39,
-      18,    38,    55,    37,    34,     7,   104,    34,    64,     6,
-      33,    28,     9,    10,    11,    18,     5,    36,    94,    95,
-      17,    18,    19,    20,     8,    81,     7,    37,    25,    35,
-      18,   107,    88,    38,    35,    34,    33,   113,    18,     4,
-      18,    97,    36,    33,   100,    38,     4,    34,   122,   125,
-     116,   104,    12,    13,    14,    15,    16,    79,    19,   124,
-      88,    -1,    22,    23,    24,    25,    26,    27,    28,    -1,
-      -1,    12,    13,    14,    15,    16,    -1,    -1,    -1,    -1,
-      40,    22,    23,    24,    25,    26,    27,    28,    -1,    -1,
-      12,    13,    14,    15,    16,    -1,    -1,    -1,    -1,    40,
-      22,    23,    24,    25,    26,    27,    28,    12,    13,    14,
-      15,    16,    -1,    35,    -1,    -1,    -1,    22,    23,    24,
-      25,    26,    27,    28,    12,    13,    14,    15,    16,    -1,
-      35,    -1,    -1,    -1,    22,    23,    24,    25,    26,    27,
-      28,    12,    13,    14,    15,    16,    34,    -1,    12,    13,
-      14,    22,    23,    24,    25,    26,    27,    28,    22,    23,
-      24,    25,    26,    27,    28
+      18,    38,    55,    37,    34,     7,    34,   105,    33,    65,
+      37,     6,    28,    18,     9,    10,    11,     5,     8,    95,
+      96,    36,    17,    18,    19,    20,    82,     7,    35,    18,
+      25,    87,   108,    89,    35,    38,    34,   113,    33,    18,
+       4,    18,    98,    12,    13,    14,    15,    16,    33,   125,
+      36,    34,   105,    22,    23,    24,    25,    26,    27,    28,
+      38,     4,    12,    13,    14,    15,    16,    80,   116,    -1,
+      19,    40,    22,    23,    24,    25,    26,    27,    28,   122,
+     124,    12,    13,    14,    15,    16,    -1,    -1,    -1,    89,
+      40,    22,    23,    24,    25,    26,    27,    28,    12,    13,
+      14,    15,    16,    -1,    35,    -1,    -1,    -1,    22,    23,
+      24,    25,    26,    27,    28,    12,    13,    14,    15,    16,
+      -1,    35,    -1,    -1,    -1,    22,    23,    24,    25,    26,
+      27,    28,    12,    13,    14,    15,    16,    34,    -1,    12,
+      13,    14,    22,    23,    24,    25,    26,    27,    28,    22,
+      23,    24,    25,    26,    27,    28
   };
 
   const unsigned char
@@ -1242,11 +1252,11 @@ namespace yy {
       62,    62,    33,    62,    62,    57,    38,    55,    12,    13,
       14,    15,    16,    22,    23,    24,    25,    26,    27,    28,
       40,    18,    48,    49,    50,    35,    56,    56,    40,    35,
-      62,    63,    34,    18,    39,    62,    62,    62,    62,    62,
-      62,    62,    62,    62,    62,    62,    18,    38,    34,    37,
-      45,     7,    58,    59,    66,    64,    34,    62,    33,    18,
-       5,    51,    50,    36,    62,     8,    60,     7,    18,    36,
-      37,    40,    63,    18,    35,    56,    56,    62,    38,    62,
+      62,    63,    64,    34,    18,    39,    62,    62,    62,    62,
+      62,    62,    62,    62,    62,    62,    62,    18,    38,    34,
+      37,    45,     7,    58,    59,    66,    34,    37,    62,    33,
+      18,     5,    51,    50,    36,    62,     8,    60,     7,    18,
+      36,    62,    40,    63,    18,    35,    56,    56,    62,    38,
       34,    45,    56,    18,     4,    52,    53,    54,    56,    18,
       36,    54,    33,    48,    34,    55,    56
   };
@@ -1271,8 +1281,8 @@ namespace yy {
        0,     2,     1,     7,     2,     0,     3,     5,     1,     0,
        4,     3,     2,     0,     3,     5,     1,     3,     2,     1,
        1,     1,     3,     3,     3,     3,     2,     3,     3,     3,
-       3,     3,     3,     3,     3,     2,     6,     2,     0,     3,
-       0,     4,     3,     1,     0,     5,     5,     0
+       3,     3,     3,     3,     3,     2,     6,     1,     0,     3,
+       1,     4,     3,     1,     0,     5,     5,     0
   };
 
 
@@ -1387,7 +1397,7 @@ namespace yy {
 
 
 } // yy
-#line 1391 "quack.tab.cxx" // lalr1.cc:1181
+#line 1401 "quack.tab.cxx" // lalr1.cc:1181
 #line 256 "/Users/alonzoaltamirano/Repos/Quack-Compiler/AST/quack.yxx" // lalr1.cc:1182
 
 #include "Messages.h"

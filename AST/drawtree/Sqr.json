@@ -1,0 +1,207 @@
+{ "kind" : "Block","stmts_" : [
+    { "kind" : "Block","stmts_" : [
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "Pt"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : ""},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "x"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }, 
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "y"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }, 
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Method",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "STR"},
+                    "return_type_" : 
+                    { "kind" : "Ident","text_" : "String"},
+                    "args_" : 
+                    { "kind" : "Block","stmts_" : []},
+                    "stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Stub","text_" : "NI: Return"}]} }, 
+                { "kind" : "Method",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "PLUS"},
+                    "return_type_" : 
+                    { "kind" : "Ident","text_" : "Pt"},
+                    "args_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Arg",
+                            "param_name_" : 
+                            { "kind" : "Ident","text_" : "other"},
+                            "param_type_" : 
+                            { "kind" : "Ident","text_" : "Pt"} }]},
+                    "stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Stub","text_" : "NI: Return"}]} }, 
+                { "kind" : "Method",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "_x"},
+                    "return_type_" : 
+                    { "kind" : "Ident","text_" : "Int"},
+                    "args_" : 
+                    { "kind" : "Block","stmts_" : []},
+                    "stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Stub","text_" : "NI: Return"}]} }, 
+                { "kind" : "Method",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "_y"},
+                    "return_type_" : 
+                    { "kind" : "Ident","text_" : "Int"},
+                    "args_" : 
+                    { "kind" : "Block","stmts_" : []},
+                    "stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Stub","text_" : "NI: Return"}]} }]} }, 
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "Rect"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : "Obj"},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "ll"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Pt"} }, 
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "ur"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Pt"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }, 
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Method",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "translate"},
+                    "return_type_" : 
+                    { "kind" : "Ident","text_" : "Pt"},
+                    "args_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Arg",
+                            "param_name_" : 
+                            { "kind" : "Ident","text_" : "delta"},
+                            "param_type_" : 
+                            { "kind" : "Ident","text_" : "Pt"} }]},
+                    "stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Stub","text_" : "NI: Return"}]} }, 
+                { "kind" : "Method",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "STR"},
+                    "return_type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "args_" : 
+                    { "kind" : "Block","stmts_" : []},
+                    "stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Assign",
+                            "l_expr_" : 
+                            { "kind" : "Stub","text_" : "NI: L_assign"},
+                            "type_" : 
+                            { "kind" : "Ident","text_" : ""},
+                            "r_expr_" : 
+                            { "kind" : "Stub","text_" : "NI: R_assign"} }, 
+                        { "kind" : "Assign",
+                            "l_expr_" : 
+                            { "kind" : "Stub","text_" : "NI: L_assign"},
+                            "type_" : 
+                            { "kind" : "Ident","text_" : ""},
+                            "r_expr_" : 
+                            { "kind" : "Stub","text_" : "NI: R_assign"} }, 
+                        { "kind" : "Stub","text_" : "NI: Return"}]} }]} }, 
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "Square"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : "Rect"},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "ll"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Pt"} }, 
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "side"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }, 
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : []} }]}, 
+    { "kind" : "Block","stmts_" : [
+        { "kind" : "Assign",
+            "l_expr_" : 
+            { "kind" : "Stub","text_" : "NI: L_assign"},
+            "type_" : 
+            { "kind" : "Ident","text_" : ""},
+            "r_expr_" : 
+            { "kind" : "Stub","text_" : "NI: R_assign"} }, 
+        { "kind" : "Assign",
+            "l_expr_" : 
+            { "kind" : "Stub","text_" : "NI: L_assign"},
+            "type_" : 
+            { "kind" : "Ident","text_" : ""},
+            "r_expr_" : 
+            { "kind" : "Stub","text_" : "NI: R_assign"} }, 
+        { "kind" : "Stub","text_" : "NI: Bare expr"}]}]}

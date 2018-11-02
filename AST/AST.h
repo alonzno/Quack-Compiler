@@ -103,6 +103,7 @@ namespace AST {
             void json(std::ostream &out, AST_print_context &ctx);
     };
 
+    // REVISE THIS SO THAT THE elif's are nested in the else
     class If_Else: public ASTNode {
         public:
             ASTNode *cond_;
@@ -120,6 +121,32 @@ namespace AST {
             Block *stmts_;
         public:
             Elif(ASTNode *cond, Block *stmts): cond_(cond), stmts_(stmts) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class IntConst: public ASTNode {
+        public:
+            int value_;
+        public:
+            IntConst(int value): value_(value) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class StrConst: public ASTNode {
+        public:
+            std::string value_;
+        public:
+            StrConst(std::string value): value_(value) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class Call: public ASTNode {
+        public:
+            ASTNode *obj_;
+            Ident *method_;
+            ASTNode *args_;
+        public:
+            Call(ASTNode *obj, Ident *method, ASTNode *args): obj_(obj), method_(method), args_(args) {}
             void json(std::ostream &out, AST_print_context &ctx);
     };
 }
