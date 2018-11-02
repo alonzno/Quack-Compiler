@@ -181,9 +181,9 @@ method <stub> (54)
     on left: 22, on right: 20 21
 opt_ident (55)
     on left: 23 24, on right: 22 32
-statement_block (56)
+statement_block <block> (56)
     on left: 25, on right: 22 26 27 29 31 63
-statement <stub> (57)
+statement <node> (57)
     on left: 26 31 32 35 59 62, on right: 8 9
 more_elif (58)
     on left: 27 28, on right: 26 27

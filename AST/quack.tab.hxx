@@ -153,8 +153,9 @@ namespace yy {
     AST::Arg *arg;
     AST::Class *clazz;
     AST::Stub *stub;
+    AST::Assign *assign;
 
-#line 158 "quack.tab.hxx" // lalr1.cc:395
+#line 159 "quack.tab.hxx" // lalr1.cc:395
     };
 #else
     typedef YYSTYPE semantic_type;
@@ -520,7 +521,7 @@ namespace yy {
 
 
 } // yy
-#line 524 "quack.tab.hxx" // lalr1.cc:395
+#line 525 "quack.tab.hxx" // lalr1.cc:395
 
 
 

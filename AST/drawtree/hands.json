@@ -1,0 +1,80 @@
+{ "kind" : "Block","stmts_" : [
+    { "kind" : "Block","stmts_" : [
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "Hand"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : ""},
+            "args_" : 
+            { "kind" : "Block","stmts_" : []},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : []},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : []} }, 
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "LeftHand"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : "Hand"},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "x"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Stub","text_" : "NI: Method"}]} }, 
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "RightHand"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : "Hand"},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "x"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Stub","text_" : "NI: Method"}]} }, 
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "Bot"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : ""},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "x"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Stub","text_" : "NI: If-statement"}, 
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: L_assign"},
+                    "r_expr_" : 
+                    { "kind" : "Stub","text_" : "NI: R_assign"} }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : []} }]}, 
+    { "kind" : "Block","stmts_" : []}]}

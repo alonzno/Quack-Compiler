@@ -54,27 +54,18 @@ namespace AST {
     
     void Arg::json(std::ostream &out, AST_print_context &ctx) {
         json_head("Arg", out, ctx);
-        out << "\"param_name_\" : \"" << param_name_ << "\", ";
-        out << "\"param_type_\" : \"" << param_type_ << "\"";
+        json_child("param_name_", *param_name_, out, ctx);
+        json_child("param_type_", *param_type_, out, ctx, ' ');
         json_close(out, ctx);
     }
 
     void Class::json(std::ostream &out, AST_print_context &ctx) {
         json_head("Class", out, ctx);
-        out << "\"class_name_\" : ";
-        class_name_ -> json(out,ctx); 
-        out << ", " << std::endl;
-        out << "\"super_name_\" : ";
-        super_name_ -> json(out, ctx);
-        out << ", " << std::endl;
-        out << "\"args_\" : ";
-        args_->json(out,ctx);
-        out << ", " << std::endl;
-        out << "\"stmts_\" : ";
-        stmts_->json(out,ctx);
-        out << ", " << std::endl;
-        out << "\"methods_\" : ";
-        methods_->json(out,ctx);
+        json_child("class_name_", *class_name_, out, ctx);
+        json_child("super_name_", *super_name_, out, ctx);
+        json_child("args_", *args_, out, ctx);
+        json_child("stmts_", *stmts_, out, ctx);
+        json_child("methods_", *methods_, out, ctx, ' ');
         json_close(out, ctx);
     }
     
@@ -83,5 +74,18 @@ namespace AST {
         out << "\"text_\" : \"" << text_ << "\"";
         json_close(out, ctx);
     }
+    
+    void Assign::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("Assign", out, ctx);
+        json_child("l_expr_", *l_expr_, out, ctx);
+        json_child("r_expr_", *r_expr_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
 
+    void While::json(std::ostream &out, AST_print_context &ctx) {
+        json_head("While", out, ctx);
+        json_child("cond_", *cond_, out, ctx);
+        json_child("body_", *body_, out, ctx, ' ');
+        json_close(out, ctx);
+    }
 }

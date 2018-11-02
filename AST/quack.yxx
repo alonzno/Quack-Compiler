@@ -42,6 +42,7 @@
     AST::Arg *arg;
     AST::Class *clazz;
     AST::Stub *stub;
+    AST::Assign *assign;
 }
 
 /* Start tokens */
@@ -72,11 +73,12 @@
 %left '.'
 
 Abstract syntax tree nodes
-%type <block> program classes opt_classes args formal_args opt_statements statements opt_methods methods 
+%type <block> program classes opt_classes args formal_args opt_statements statements opt_methods methods statement_block
 %type <ident> opt_extends
 %type <arg> arg
 %type <clazz> class
-%type <stub> statement method
+%type <stub> method
+%type <node> statement
 
 
 // Precedence.  We are using an ambiguous expression grammar
@@ -151,11 +153,11 @@ opt_ident: ':' IDENT
 
 /* Statements */
 
-statement_block: '{' opt_statements '}' { };
+statement_block: '{' opt_statements '}' { $$ = $2; };
 
 /* If-Elif-Else */
 
-statement: IF r_expr statement_block more_elif opt_else { };
+statement: IF r_expr statement_block more_elif opt_else { $$ = new AST::Stub("NI: If-statement"); };
 
 more_elif: more_elif ELIF r_expr statement_block
          | %empty { };
@@ -165,11 +167,11 @@ opt_else: ELSE statement_block
 
 /* While */
 
-statement: WHILE r_expr statement_block { $$ = new AST::Stub("NI: While"); };
+statement: WHILE r_expr statement_block { $$ = new AST::While(new AST::Stub("NI: r_expr of while"), $3); };
 
 /* Assignments */
 
-statement: l_expr opt_ident '=' r_expr ';' { $$ = new AST::Stub("NI: Assign"); };
+statement: l_expr opt_ident '=' r_expr ';' { $$ = new AST::Assign(new AST::Stub("NI: L_assign"), new AST::Stub("NI: R_assign")); };
 
 /* L_Expression */
 

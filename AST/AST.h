@@ -72,6 +72,24 @@ namespace AST {
             Stub(std::string text): text_(text) {}
             void json(std::ostream &out, AST_print_context &ctx);
     };
+    
+    class Assign: public ASTNode {
+        public:
+            ASTNode *l_expr_;
+            ASTNode *r_expr_;
+        public:
+            Assign(ASTNode *l_expr, ASTNode *r_expr): l_expr_(l_expr), r_expr_(r_expr) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+
+    class While: public ASTNode {
+        public:
+            ASTNode *cond_;
+            Block *body_;
+        public:
+            While(ASTNode *cond, Block *body): cond_(cond), body_(body) {}
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
 }
 
 #endif //AST_H
