@@ -1,0 +1,49 @@
+{ "kind" : "Block","stmts_" : [
+    { "kind" : "Block","stmts_" : [
+        { "kind" : "Class","class_name_" : 
+            { "kind" : "Ident","text_" : "C1"}, 
+"super_name_" : 
+            { "kind" : "Ident","text_" : "Obj"}, 
+"args_" : 
+            { "kind" : "Block","stmts_" : []}, 
+"stmts_" : 
+            { "kind" : "Block","stmts_" : []}, 
+"methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Stub","text_" : "NI: Method"}]}}, 
+        { "kind" : "Class","class_name_" : 
+            { "kind" : "Ident","text_" : "C2"}, 
+"super_name_" : 
+            { "kind" : "Ident","text_" : "C1"}, 
+"args_" : 
+            { "kind" : "Block","stmts_" : []}, 
+"stmts_" : 
+            { "kind" : "Block","stmts_" : []}, 
+"methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Stub","text_" : "NI: Method"}]}}, 
+        { "kind" : "Class","class_name_" : 
+            { "kind" : "Ident","text_" : "C3"}, 
+"super_name_" : 
+            { "kind" : "Ident","text_" : "C2"}, 
+"args_" : 
+            { "kind" : "Block","stmts_" : []}, 
+"stmts_" : 
+            { "kind" : "Block","stmts_" : []}, 
+"methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Stub","text_" : "NI: Method"}]}}, 
+        { "kind" : "Class","class_name_" : 
+            { "kind" : "Ident","text_" : "C4"}, 
+"super_name_" : 
+            { "kind" : "Ident","text_" : "C3"}, 
+"args_" : 
+            { "kind" : "Block","stmts_" : []}, 
+"stmts_" : 
+            { "kind" : "Block","stmts_" : []}, 
+"methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Stub","text_" : "NI: Method"}]}}]}, 
+    { "kind" : "Block","stmts_" : [
+        { "kind" : "Stub","text_" : "NI: Assign"}, 
+        { "kind" : "Stub","text_" : "NI: While"}]}]}
