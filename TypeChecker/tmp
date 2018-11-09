@@ -1,0 +1,171 @@
+Finished parse with no errors
+{ "kind" : "Block","stmts_" : [
+    { "kind" : "Block","stmts_" : [
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "Hand"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : ""},
+            "args_" : 
+            { "kind" : "Block","stmts_" : []},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : []},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : []} }, 
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "LeftHand"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : "Hand"},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "x"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Member",
+                        "obj_" : 
+                        { "kind" : "Ident","text_" : "this"},
+                        "field_" : 
+                        { "kind" : "Ident","text_" : "x"} },
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Ident","text_" : "x"} }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Method",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "foo"},
+                    "return_type_" : 
+                    { "kind" : "Ident","text_" : "Int"},
+                    "args_" : 
+                    { "kind" : "Block","stmts_" : []},
+                    "stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Return",
+                            "ret_val_" : 
+                            { "kind" : "IntConst","value_" : "42"} }]} }]} }, 
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "RightHand"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : "Hand"},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "x"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Member",
+                        "obj_" : 
+                        { "kind" : "Ident","text_" : "this"},
+                        "field_" : 
+                        { "kind" : "Ident","text_" : "x"} },
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Ident","text_" : "x"} }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Method",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "foo"},
+                    "return_type_" : 
+                    { "kind" : "Ident","text_" : "Int"},
+                    "args_" : 
+                    { "kind" : "Block","stmts_" : []},
+                    "stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Return",
+                            "ret_val_" : 
+                            { "kind" : "IntConst","value_" : "42"} }]} }]} }, 
+        { "kind" : "Class",
+            "class_name_" : 
+            { "kind" : "Ident","text_" : "Bot"},
+            "super_name_" : 
+            { "kind" : "Ident","text_" : ""},
+            "args_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "x"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "If_Else",
+                    "cond_" : 
+                    { "kind" : "Stub","text_" : "NI: If cond"},
+                    "if_stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Assign",
+                            "l_expr_" : 
+                            { "kind" : "Member",
+                                "obj_" : 
+                                { "kind" : "Ident","text_" : "this"},
+                                "field_" : 
+                                { "kind" : "Ident","text_" : "hand"} },
+                            "type_" : 
+                            { "kind" : "Ident","text_" : ""},
+                            "r_expr_" : 
+                            { "kind" : "Constructor",
+                                "type_" : 
+                                { "kind" : "Ident","text_" : "LeftHand"},
+                                "args_" : 
+                                { "kind" : "Block","stmts_" : [
+                                    { "kind" : "IntConst","value_" : "3"}]} } }]},
+                    "elifs_" : 
+                    { "kind" : "Block","stmts_" : []},
+                    "else_stmts_" : 
+                    { "kind" : "Block","stmts_" : [
+                        { "kind" : "Assign",
+                            "l_expr_" : 
+                            { "kind" : "Member",
+                                "obj_" : 
+                                { "kind" : "Ident","text_" : "this"},
+                                "field_" : 
+                                { "kind" : "Ident","text_" : "hand"} },
+                            "type_" : 
+                            { "kind" : "Ident","text_" : ""},
+                            "r_expr_" : 
+                            { "kind" : "Constructor",
+                                "type_" : 
+                                { "kind" : "Ident","text_" : "RightHand"},
+                                "args_" : 
+                                { "kind" : "Block","stmts_" : [
+                                    { "kind" : "IntConst","value_" : "7"}]} } }]} }, 
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "Member",
+                        "obj_" : 
+                        { "kind" : "Ident","text_" : "this"},
+                        "field_" : 
+                        { "kind" : "Ident","text_" : "answer"} },
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Call",
+                        "obj_" : 
+                        { "kind" : "Member",
+                            "obj_" : 
+                            { "kind" : "Ident","text_" : "this"},
+                            "field_" : 
+                            { "kind" : "Ident","text_" : "hand"} },
+                        "method_" : 
+                        { "kind" : "Ident","text_" : "foo"},
+                        "args_" : 
+                        { "kind" : "Block","stmts_" : []} } }]},
+            "methods_" : 
+            { "kind" : "Block","stmts_" : []} }]}, 
+    { "kind" : "Block","stmts_" : []}]}
