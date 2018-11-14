@@ -6,11 +6,16 @@
 
 bool TypeChecker::checkClasses() {
     AST::Block *classes_ = (AST::Block *)((AST::Block *) (*root_)) -> stmts_[0];
-    AST::AST_print_context ctx;   
+    //AST::AST_print_context ctx;   
+    std::vector<std::string *> ptr = classes_ -> types_;
+    std::cout << ptr.size() << std::endl << std::endl;
+
     int num_classes = classes_ -> stmts_.size();
+
     std::string class_name, super_name;
     AST::Class *clazz_;
-    Table::iterator it;
+    ClassTable::iterator it;
+
     for (int i = 0; i < num_classes; i++) {
         clazz_ = (AST::Class *) classes_ -> stmts_[i];
         class_name = ((AST::Ident *) clazz_ -> class_name_) -> text_;
@@ -61,5 +66,9 @@ bool TypeChecker::checkClasses() {
     }
     std::cerr << "TRUE" << std::endl; //DEBUGGING
     return true;
+}
 
+bool TypeChecker::checkInit() {
+    AST::Block *classes_ = (AST::Block *)((AST::Block *) (*root_)) -> stmts_[0];
+    return false;
 }

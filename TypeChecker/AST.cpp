@@ -32,7 +32,7 @@ namespace AST {
         child.json(out, ctx);
         out << sep;
     }
-
+    
     void Block::json(std::ostream &out, AST_print_context &ctx) {
         json_head("Block", out, ctx);
         out << "\"stmts_\" : [";
@@ -189,5 +189,5 @@ namespace AST {
         json_child("stmts_", *stmts_, out, ctx, ' ');
         json_close(out, ctx);
     }
-
+    
 }

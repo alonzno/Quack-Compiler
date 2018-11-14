@@ -96,6 +96,9 @@ program: opt_classes opt_statements {
        $$ = new AST::Block();
        $$ -> append($1);
        $$ -> append($2);
+
+       $$ -> apptype(new std::string($1 -> block_type_));
+       $$ -> apptype(new std::string($2 -> block_type_));
        *root = $$;
        }; 
 
@@ -105,17 +108,28 @@ opt_classes: classes { $$ = $1; }
 
 classes: classes class { 
        $$ = $1;
-       $$ -> append($2); }
+       $$ -> append($2);
+       $$ -> apptype(new std::string($2 -> block_type_));
+       }
        | class { 
        $$ = new AST::Block();
        $$ -> append($1);
+       $$ -> apptype(new std::string($1 -> block_type_));
        };
 
 /* Zero or more statments */
 opt_statements: statements { $$ = $1; }
           | %empty { $$ = new AST::Block(); };
-statements: statements statement { $$ = $1; $1 -> append($2); };
-          | statement { $$ = new AST::Block(); $$ -> append($1); };
+statements: statements statement { 
+          $$ = $1; 
+          $$ -> append($2); 
+          $$ -> apptype(new std::string($2 -> block_type_));
+          };
+          | statement { 
+          $$ = new AST::Block(); 
+          $$ -> append($1); 
+          $$ -> apptype(new std::string($1 -> block_type_));
+          };
 
 /* Classes */
 class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements opt_methods '}' { 
@@ -128,8 +142,16 @@ class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements opt_method
 formal_args: args   { $$ = $1; }
            | %empty { $$ = new AST::Block(); };
 
-args: arg         { $$ = new AST::Block(); $$ -> append($1); }
-    | args ',' arg { $$ = $1; $1 -> append($3); }
+args: arg         { 
+    $$ = new AST::Block(); 
+    $$ -> append($1); 
+    $$ -> apptype(new std::string($1 -> block_type_));
+    }
+    | args ',' arg { 
+    $$ = $1; 
+    $$ -> append($3); 
+    $$ -> apptype(new std::string($3 -> block_type_));
+    }
 
 arg: IDENT ':' IDENT { $$ = new AST::Arg(new AST::Ident($1), new AST::Ident($3)); };
 
@@ -142,8 +164,16 @@ opt_extends: EXTENDS IDENT { $$ = new AST::Ident($2);}
 opt_methods: methods { $$ = $1; }
            | %empty { $$ = new AST::Block(); };
 
-methods: methods method { $$ = $1; $$ -> append($2); }
-       | method {$$ = new AST::Block(); $$ -> append($1); };
+methods: methods method { 
+       $$ = $1; 
+       $$ -> append($2); 
+       $$ -> apptype(new std::string($2 -> block_type_));
+       }
+       | method {
+       $$ = new AST::Block(); 
+       $$ -> append($1); 
+       $$ -> apptype(new std::string($1 -> block_type_));
+       };
 
 method: DEF IDENT '(' formal_args ')' opt_ident statement_block { $$ = new AST::Method(new AST::Ident($2), $6, $4, $7); };
 
@@ -161,16 +191,24 @@ statement: IF r_expr statement_block opt_elif opt_else { $$ = new AST::If_Else(n
 opt_elif: more_elif { $$ = $1; }
          | %empty { $$ = new AST::Block(); };
 
-more_elif: more_elif ELIF r_expr statement_block { $$ = $1; $$ -> append(new AST::Elif(new AST::Stub("NI: Elif cond"), $4)); }
-         | ELIF r_expr statement_block { $$ = new AST::Block(); $$ -> append(new AST::Elif(new AST::Stub("NI: Elif cond"), $3)); }
+more_elif: more_elif ELIF r_expr statement_block { 
+         $$ = $1; 
+         $$ -> append(new AST::Elif($3, $4));
+         $$ -> apptype(new std::string("Elif"));
+         }
+         | ELIF r_expr statement_block { 
+         $$ = new AST::Block(); 
+         $$ -> append(new AST::Elif($2, $3)); 
+         $$ -> apptype(new std::string("Elif"));
+         }
 
 
-opt_else: ELSE statement_block {$$ = $2; }
-        | %empty {$$ = new AST::Block(); }
+opt_else: ELSE statement_block { $$ = $2; }
+        | %empty { $$ = new AST::Block(); }
 
 /* While */
 
-statement: WHILE r_expr statement_block { $$ = new AST::While(new AST::Stub("NI: r_expr of while"), $3); };
+statement: WHILE r_expr statement_block { $$ = new AST::While($2, $3); };
 
 /* Assignments */
 
@@ -234,8 +272,16 @@ r_expr: r_expr '.' IDENT '(' actual_args ')' { $$ = new AST::Call($1, new AST::I
 actual_args: seq_r_expr { $$ = $1; }
            | %empty { $$ = new AST::Block(); };
 
-seq_r_expr: seq_r_expr ',' r_expr { $$ = $1; $$ -> append($3); }
-        | r_expr { $$ = new AST::Block(); $$ -> append($1); };
+seq_r_expr: seq_r_expr ',' r_expr { 
+          $$ = $1; 
+          $$ -> append($3); 
+          $$ -> apptype(new std::string($3 -> block_type_));
+          }
+        | r_expr { 
+        $$ = new AST::Block(); 
+        $$ -> append($1); 
+        $$ -> apptype(new std::string($1 -> block_type_));
+        };
 
 r_expr: IDENT '(' actual_args ')' { $$ = new AST::Constructor(new AST::Ident($1), $3); };
 
@@ -252,8 +298,16 @@ statement: TYPECASE r_expr '{' opt_type_alt '}' { $$ = new AST::Typecase($2, $4)
 
 opt_type_alt: more_type_alt { $$ = $1; }
             | %empty { $$ = new AST::Block(); };
-more_type_alt: more_type_alt IDENT ':' IDENT statement_block { $$ = $1; $$ -> append(new AST::TypeAlt(new AST::Ident($2), new AST::Ident($4), $5)); }
-        | IDENT ':' IDENT statement_block { $$ = new AST::Block(); $$ -> append(new AST::TypeAlt(new AST::Ident($1), new AST::Ident($3), $4)); };
+more_type_alt: more_type_alt IDENT ':' IDENT statement_block { 
+             $$ = $1; 
+             $$ -> append(new AST::TypeAlt(new AST::Ident($2), new AST::Ident($4), $5)); 
+             $$ -> apptype(new std::string("TypeAlt"));
+             }
+        | IDENT ':' IDENT statement_block { 
+        $$ = new AST::Block(); 
+        $$ -> append(new AST::TypeAlt(new AST::Ident($1), new AST::Ident($3), $4)); 
+        $$ -> apptype(new std::string("TypeAlt"));
+        };
 
 %%
 #include "Messages.h"

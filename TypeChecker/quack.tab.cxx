@@ -579,425 +579,479 @@ namespace yy {
        (yylhs.value.block) = new AST::Block();
        (yylhs.value.block) -> append((yystack_[1].value.block));
        (yylhs.value.block) -> append((yystack_[0].value.block));
+
+       (yylhs.value.block) -> apptype(new std::string((yystack_[1].value.block) -> block_type_));
+       (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.block) -> block_type_));
        *root = (yylhs.value.block);
        }
-#line 585 "quack.tab.cxx" // lalr1.cc:870
+#line 588 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 3:
-#line 103 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 106 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = (yystack_[0].value.block); }
-#line 591 "quack.tab.cxx" // lalr1.cc:870
+#line 594 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 4:
-#line 104 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 107 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = new AST::Block(); }
-#line 597 "quack.tab.cxx" // lalr1.cc:870
+#line 600 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 5:
-#line 106 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 109 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { 
        (yylhs.value.block) = (yystack_[1].value.block);
-       (yylhs.value.block) -> append((yystack_[0].value.clazz)); }
-#line 605 "quack.tab.cxx" // lalr1.cc:870
+       (yylhs.value.block) -> append((yystack_[0].value.clazz));
+       (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.clazz) -> block_type_));
+       }
+#line 610 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 6:
-#line 109 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 114 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { 
        (yylhs.value.block) = new AST::Block();
        (yylhs.value.block) -> append((yystack_[0].value.clazz));
+       (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.clazz) -> block_type_));
        }
-#line 614 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 7:
-#line 115 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[0].value.block); }
 #line 620 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 8:
-#line 116 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = new AST::Block(); }
+  case 7:
+#line 121 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = (yystack_[0].value.block); }
 #line 626 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 9:
-#line 117 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[1].value.block); (yystack_[1].value.block) -> append((yystack_[0].value.node)); }
+  case 8:
+#line 122 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = new AST::Block(); }
 #line 632 "quack.tab.cxx" // lalr1.cc:870
     break;
 
+  case 9:
+#line 123 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+          (yylhs.value.block) = (yystack_[1].value.block); 
+          (yylhs.value.block) -> append((yystack_[0].value.node)); 
+          (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.node) -> block_type_));
+          }
+#line 642 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
   case 10:
-#line 118 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = new AST::Block(); (yylhs.value.block) -> append((yystack_[0].value.node)); }
-#line 638 "quack.tab.cxx" // lalr1.cc:870
+#line 128 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+          (yylhs.value.block) = new AST::Block(); 
+          (yylhs.value.block) -> append((yystack_[0].value.node)); 
+          (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.node) -> block_type_));
+          }
+#line 652 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 11:
-#line 121 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 135 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { 
         (yylhs.value.clazz) = new AST::Class(new AST::Ident((yystack_[8].value.str)), (yystack_[4].value.ident));
         (yylhs.value.clazz) -> args_ = (yystack_[6].value.block);
         (yylhs.value.clazz) -> stmts_ = (yystack_[2].value.block);
         (yylhs.value.clazz) -> methods_ = (yystack_[1].value.block);
      }
-#line 649 "quack.tab.cxx" // lalr1.cc:870
+#line 663 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 12:
-#line 128 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 142 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = (yystack_[0].value.block); }
-#line 655 "quack.tab.cxx" // lalr1.cc:870
+#line 669 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 13:
-#line 129 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 143 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = new AST::Block(); }
-#line 661 "quack.tab.cxx" // lalr1.cc:870
+#line 675 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 14:
-#line 131 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = new AST::Block(); (yylhs.value.block) -> append((yystack_[0].value.arg)); }
-#line 667 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 15:
-#line 132 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[2].value.block); (yystack_[2].value.block) -> append((yystack_[0].value.arg)); }
-#line 673 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 16:
-#line 134 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.arg) = new AST::Arg(new AST::Ident((yystack_[2].value.str)), new AST::Ident((yystack_[0].value.str))); }
-#line 679 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 17:
-#line 136 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.ident) = new AST::Ident((yystack_[0].value.str));}
+#line 145 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+    (yylhs.value.block) = new AST::Block(); 
+    (yylhs.value.block) -> append((yystack_[0].value.arg)); 
+    (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.arg) -> block_type_));
+    }
 #line 685 "quack.tab.cxx" // lalr1.cc:870
     break;
 
+  case 15:
+#line 150 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+    (yylhs.value.block) = (yystack_[2].value.block); 
+    (yylhs.value.block) -> append((yystack_[0].value.arg)); 
+    (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.arg) -> block_type_));
+    }
+#line 695 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 16:
+#line 156 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.arg) = new AST::Arg(new AST::Ident((yystack_[2].value.str)), new AST::Ident((yystack_[0].value.str))); }
+#line 701 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 17:
+#line 158 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.ident) = new AST::Ident((yystack_[0].value.str));}
+#line 707 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
   case 18:
-#line 137 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 159 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.ident) = new AST::Ident(""); }
-#line 691 "quack.tab.cxx" // lalr1.cc:870
+#line 713 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 19:
-#line 142 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 164 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = (yystack_[0].value.block); }
-#line 697 "quack.tab.cxx" // lalr1.cc:870
+#line 719 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 20:
-#line 143 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 165 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = new AST::Block(); }
-#line 703 "quack.tab.cxx" // lalr1.cc:870
+#line 725 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 21:
-#line 145 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[1].value.block); (yylhs.value.block) -> append((yystack_[0].value.node)); }
-#line 709 "quack.tab.cxx" // lalr1.cc:870
+#line 167 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+       (yylhs.value.block) = (yystack_[1].value.block); 
+       (yylhs.value.block) -> append((yystack_[0].value.node)); 
+       (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.node) -> block_type_));
+       }
+#line 735 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 22:
-#line 146 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    {(yylhs.value.block) = new AST::Block(); (yylhs.value.block) -> append((yystack_[0].value.node)); }
-#line 715 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 23:
-#line 148 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Method(new AST::Ident((yystack_[5].value.str)), (yystack_[1].value.ident), (yystack_[3].value.block), (yystack_[0].value.block)); }
-#line 721 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 24:
-#line 150 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.ident) = new AST::Ident((yystack_[0].value.str)); }
-#line 727 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 25:
-#line 151 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.ident) = new AST::Ident(""); }
-#line 733 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 26:
-#line 155 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[1].value.block); }
-#line 739 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 27:
-#line 159 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::If_Else(new AST::Stub("NI: If cond"), (yystack_[2].value.block), (yystack_[1].value.block), (yystack_[0].value.block)); }
+#line 172 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    {
+       (yylhs.value.block) = new AST::Block(); 
+       (yylhs.value.block) -> append((yystack_[0].value.node)); 
+       (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.node) -> block_type_));
+       }
 #line 745 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 28:
-#line 161 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[0].value.block); }
+  case 23:
+#line 178 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.node) = new AST::Method(new AST::Ident((yystack_[5].value.str)), (yystack_[1].value.ident), (yystack_[3].value.block), (yystack_[0].value.block)); }
 #line 751 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 29:
-#line 162 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = new AST::Block(); }
+  case 24:
+#line 180 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.ident) = new AST::Ident((yystack_[0].value.str)); }
 #line 757 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 30:
-#line 164 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[3].value.block); (yylhs.value.block) -> append(new AST::Elif(new AST::Stub("NI: Elif cond"), (yystack_[0].value.block))); }
+  case 25:
+#line 181 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.ident) = new AST::Ident(""); }
 #line 763 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 31:
-#line 165 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = new AST::Block(); (yylhs.value.block) -> append(new AST::Elif(new AST::Stub("NI: Elif cond"), (yystack_[0].value.block))); }
+  case 26:
+#line 185 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = (yystack_[1].value.block); }
 #line 769 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 32:
-#line 168 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    {(yylhs.value.block) = (yystack_[0].value.block); }
+  case 27:
+#line 189 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.node) = new AST::If_Else(new AST::Stub("NI: If cond"), (yystack_[2].value.block), (yystack_[1].value.block), (yystack_[0].value.block)); }
 #line 775 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 33:
-#line 169 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    {(yylhs.value.block) = new AST::Block(); }
+  case 28:
+#line 191 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = (yystack_[0].value.block); }
 #line 781 "quack.tab.cxx" // lalr1.cc:870
     break;
 
-  case 34:
-#line 173 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::While(new AST::Stub("NI: r_expr of while"), (yystack_[0].value.block)); }
+  case 29:
+#line 192 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = new AST::Block(); }
 #line 787 "quack.tab.cxx" // lalr1.cc:870
     break;
 
+  case 30:
+#line 194 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+         (yylhs.value.block) = (yystack_[3].value.block); 
+         (yylhs.value.block) -> append(new AST::Elif((yystack_[1].value.node), (yystack_[0].value.block)));
+         (yylhs.value.block) -> apptype(new std::string("Elif"));
+         }
+#line 797 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 31:
+#line 199 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+         (yylhs.value.block) = new AST::Block(); 
+         (yylhs.value.block) -> append(new AST::Elif((yystack_[1].value.node), (yystack_[0].value.block))); 
+         (yylhs.value.block) -> apptype(new std::string("Elif"));
+         }
+#line 807 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 32:
+#line 206 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = (yystack_[0].value.block); }
+#line 813 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 33:
+#line 207 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = new AST::Block(); }
+#line 819 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 34:
+#line 211 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.node) = new AST::While((yystack_[1].value.node), (yystack_[0].value.block)); }
+#line 825 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
   case 35:
-#line 177 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 215 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Assign((yystack_[4].value.node), (yystack_[3].value.ident), (yystack_[1].value.node)); }
-#line 793 "quack.tab.cxx" // lalr1.cc:870
+#line 831 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 36:
-#line 181 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 219 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Ident((yystack_[0].value.str)); }
-#line 799 "quack.tab.cxx" // lalr1.cc:870
+#line 837 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 37:
-#line 182 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 220 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Member((yystack_[2].value.node), new AST::Ident((yystack_[0].value.str))); }
-#line 805 "quack.tab.cxx" // lalr1.cc:870
+#line 843 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 38:
-#line 186 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 224 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = (yystack_[1].value.node); }
-#line 811 "quack.tab.cxx" // lalr1.cc:870
+#line 849 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 39:
-#line 190 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 228 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     {  (yylhs.value.node) = new AST::StrConst((yystack_[0].value.str)); }
-#line 817 "quack.tab.cxx" // lalr1.cc:870
+#line 855 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 40:
-#line 192 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 230 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::IntConst((yystack_[0].value.num)); }
-#line 823 "quack.tab.cxx" // lalr1.cc:870
+#line 861 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 41:
-#line 194 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 232 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     {  (yylhs.value.node) = (yystack_[0].value.node); }
-#line 829 "quack.tab.cxx" // lalr1.cc:870
+#line 867 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 42:
-#line 198 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 236 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("PLUS"), (yystack_[0].value.node)); }
-#line 835 "quack.tab.cxx" // lalr1.cc:870
+#line 873 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 43:
-#line 200 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 238 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("MINUS"), (yystack_[0].value.node)); }
-#line 841 "quack.tab.cxx" // lalr1.cc:870
+#line 879 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 44:
-#line 202 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 240 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("TIMES"), (yystack_[0].value.node)); }
-#line 847 "quack.tab.cxx" // lalr1.cc:870
+#line 885 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 45:
-#line 204 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 242 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("DIVIDE"), (yystack_[0].value.node)); }
-#line 853 "quack.tab.cxx" // lalr1.cc:870
+#line 891 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 46:
-#line 208 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 246 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call(new AST::IntConst(0), new AST::Ident("MINUS"), (yystack_[0].value.node)); }
-#line 859 "quack.tab.cxx" // lalr1.cc:870
+#line 897 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 47:
-#line 210 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 248 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = (yystack_[1].value.node); }
-#line 865 "quack.tab.cxx" // lalr1.cc:870
+#line 903 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 48:
-#line 214 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 252 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("EQUALS"), (yystack_[0].value.node)); }
-#line 871 "quack.tab.cxx" // lalr1.cc:870
+#line 909 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 49:
-#line 216 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 254 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("ATLEAST"), (yystack_[0].value.node)); }
-#line 877 "quack.tab.cxx" // lalr1.cc:870
+#line 915 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 50:
-#line 218 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 256 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("ATMOST"), (yystack_[0].value.node)); }
-#line 883 "quack.tab.cxx" // lalr1.cc:870
+#line 921 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 51:
-#line 220 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 258 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("LESS"), (yystack_[0].value.node)); }
-#line 889 "quack.tab.cxx" // lalr1.cc:870
+#line 927 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 52:
-#line 222 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 260 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call( (yystack_[2].value.node), new AST::Ident("MORE"), (yystack_[0].value.node)); }
-#line 895 "quack.tab.cxx" // lalr1.cc:870
+#line 933 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 53:
-#line 224 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 262 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::And((yystack_[2].value.node), (yystack_[0].value.node)); }
-#line 901 "quack.tab.cxx" // lalr1.cc:870
+#line 939 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 54:
-#line 226 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 264 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Or((yystack_[2].value.node), (yystack_[0].value.node)); }
-#line 907 "quack.tab.cxx" // lalr1.cc:870
+#line 945 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 55:
-#line 228 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 266 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Neg((yystack_[0].value.node)); }
-#line 913 "quack.tab.cxx" // lalr1.cc:870
+#line 951 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 56:
-#line 232 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 270 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.node) = new AST::Call((yystack_[5].value.node), new AST::Ident((yystack_[3].value.str)), (yystack_[1].value.block)); }
-#line 919 "quack.tab.cxx" // lalr1.cc:870
+#line 957 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 57:
-#line 234 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 272 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = (yystack_[0].value.block); }
-#line 925 "quack.tab.cxx" // lalr1.cc:870
+#line 963 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 58:
-#line 235 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 273 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = new AST::Block(); }
-#line 931 "quack.tab.cxx" // lalr1.cc:870
+#line 969 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 59:
-#line 237 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[2].value.block); (yylhs.value.block) -> append((yystack_[0].value.node)); }
-#line 937 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 60:
-#line 238 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = new AST::Block(); (yylhs.value.block) -> append((yystack_[0].value.node)); }
-#line 943 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 61:
-#line 240 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Constructor(new AST::Ident((yystack_[3].value.str)), (yystack_[1].value.block)); }
-#line 949 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 62:
-#line 244 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Return((yystack_[1].value.node)); }
-#line 955 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 63:
-#line 246 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = (yystack_[0].value.node); }
-#line 961 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 64:
-#line 247 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Stub("No Return"); }
-#line 967 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 65:
-#line 251 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.node) = new AST::Typecase((yystack_[3].value.node), (yystack_[1].value.block)); }
-#line 973 "quack.tab.cxx" // lalr1.cc:870
-    break;
-
-  case 66:
-#line 253 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[0].value.block); }
+#line 275 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+          (yylhs.value.block) = (yystack_[2].value.block); 
+          (yylhs.value.block) -> append((yystack_[0].value.node)); 
+          (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.node) -> block_type_));
+          }
 #line 979 "quack.tab.cxx" // lalr1.cc:870
     break;
 
+  case 60:
+#line 280 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+        (yylhs.value.block) = new AST::Block(); 
+        (yylhs.value.block) -> append((yystack_[0].value.node)); 
+        (yylhs.value.block) -> apptype(new std::string((yystack_[0].value.node) -> block_type_));
+        }
+#line 989 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 61:
+#line 286 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.node) = new AST::Constructor(new AST::Ident((yystack_[3].value.str)), (yystack_[1].value.block)); }
+#line 995 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 62:
+#line 290 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.node) = new AST::Return((yystack_[1].value.node)); }
+#line 1001 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 63:
+#line 292 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.node) = (yystack_[0].value.node); }
+#line 1007 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 64:
+#line 293 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.node) = new AST::Stub("No Return"); }
+#line 1013 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 65:
+#line 297 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.node) = new AST::Typecase((yystack_[3].value.node), (yystack_[1].value.block)); }
+#line 1019 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
+  case 66:
+#line 299 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { (yylhs.value.block) = (yystack_[0].value.block); }
+#line 1025 "quack.tab.cxx" // lalr1.cc:870
+    break;
+
   case 67:
-#line 254 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+#line 300 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
     { (yylhs.value.block) = new AST::Block(); }
-#line 985 "quack.tab.cxx" // lalr1.cc:870
+#line 1031 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 68:
-#line 255 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = (yystack_[4].value.block); (yylhs.value.block) -> append(new AST::TypeAlt(new AST::Ident((yystack_[3].value.str)), new AST::Ident((yystack_[1].value.str)), (yystack_[0].value.block))); }
-#line 991 "quack.tab.cxx" // lalr1.cc:870
+#line 301 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+             (yylhs.value.block) = (yystack_[4].value.block); 
+             (yylhs.value.block) -> append(new AST::TypeAlt(new AST::Ident((yystack_[3].value.str)), new AST::Ident((yystack_[1].value.str)), (yystack_[0].value.block))); 
+             (yylhs.value.block) -> apptype(new std::string("TypeAlt"));
+             }
+#line 1041 "quack.tab.cxx" // lalr1.cc:870
     break;
 
   case 69:
-#line 256 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
-    { (yylhs.value.block) = new AST::Block(); (yylhs.value.block) -> append(new AST::TypeAlt(new AST::Ident((yystack_[3].value.str)), new AST::Ident((yystack_[1].value.str)), (yystack_[0].value.block))); }
-#line 997 "quack.tab.cxx" // lalr1.cc:870
+#line 306 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:870
+    { 
+        (yylhs.value.block) = new AST::Block(); 
+        (yylhs.value.block) -> append(new AST::TypeAlt(new AST::Ident((yystack_[3].value.str)), new AST::Ident((yystack_[1].value.str)), (yystack_[0].value.block))); 
+        (yylhs.value.block) -> apptype(new std::string("TypeAlt"));
+        }
+#line 1051 "quack.tab.cxx" // lalr1.cc:870
     break;
 
 
-#line 1001 "quack.tab.cxx" // lalr1.cc:870
+#line 1055 "quack.tab.cxx" // lalr1.cc:870
             default:
               break;
             }
@@ -1342,13 +1396,13 @@ namespace yy {
   const unsigned short
   parser::yyrline_[] =
   {
-       0,    95,    95,   103,   104,   106,   109,   115,   116,   117,
-     118,   121,   128,   129,   131,   132,   134,   136,   137,   142,
-     143,   145,   146,   148,   150,   151,   155,   159,   161,   162,
-     164,   165,   168,   169,   173,   177,   181,   182,   186,   190,
-     192,   194,   198,   200,   202,   204,   208,   210,   214,   216,
-     218,   220,   222,   224,   226,   228,   232,   234,   235,   237,
-     238,   240,   244,   246,   247,   251,   253,   254,   255,   256
+       0,    95,    95,   106,   107,   109,   114,   121,   122,   123,
+     128,   135,   142,   143,   145,   150,   156,   158,   159,   164,
+     165,   167,   172,   178,   180,   181,   185,   189,   191,   192,
+     194,   199,   206,   207,   211,   215,   219,   220,   224,   228,
+     230,   232,   236,   238,   240,   242,   246,   248,   252,   254,
+     256,   258,   260,   262,   264,   266,   270,   272,   273,   275,
+     280,   286,   290,   292,   293,   297,   299,   300,   301,   306
   };
 
   // Print the state stack on the debug stream.
@@ -1431,8 +1485,8 @@ namespace yy {
 
 
 } // yy
-#line 1435 "quack.tab.cxx" // lalr1.cc:1181
-#line 258 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:1182
+#line 1489 "quack.tab.cxx" // lalr1.cc:1181
+#line 312 "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.yxx" // lalr1.cc:1182
 
 #include "Messages.h"
 
