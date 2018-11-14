@@ -20,6 +20,8 @@ namespace AST {
     class ASTNode {
         public:
             std::string block_type_ = "Node";
+            int line_ = 0;
+            int column_ = 0;
 
         public:
             virtual void json(std::ostream &out, AST_print_context &ctx) = 0;
@@ -27,6 +29,7 @@ namespace AST {
         void json_head(std::string node_kind, std::ostream& out, AST_print_context& ctx);
         void json_close(std::ostream& out, AST_print_context& ctx);
         void json_child(std::string field, ASTNode& child, std::ostream& out, AST_print_context& ctx, char sep=',');
+        void setLine(int l, int c) { line_ = l; column_ = c; }
     };
     
     class Block: public ASTNode {

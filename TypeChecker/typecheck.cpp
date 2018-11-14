@@ -70,5 +70,15 @@ bool TypeChecker::checkClasses() {
 
 bool TypeChecker::checkInit() {
     AST::Block *classes_ = (AST::Block *)((AST::Block *) (*root_)) -> stmts_[0];
+    AST::Block *stmts_ = (AST::Block *)((AST::Block *) (*root_)) -> stmts_[1];
+
+    int num_classes = classes_ -> stmts_.size();
+    int num_stmts = stmts_ -> stmts_.size();
+
+    for (int i = 0; i < num_classes; i++) {
+         
+    }
+
     return false;
 }
+
