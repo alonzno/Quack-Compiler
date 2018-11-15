@@ -3,6 +3,7 @@
 
 #include <AST.h>
 #include <map>
+#include <stack>
 
 typedef std::pair<std::string, std::vector<std::string>> Entry;
 typedef std::map<std::string, std::vector<std::string>> ClassTable;
@@ -20,6 +21,9 @@ class TypeChecker
         TypeChecker(AST::ASTNode **root): root_(root) {};
         bool checkClasses();
         bool checkInit();
+        bool checkInitClass(std::stack<std::string> &pre, AST::Class *clazz);
+        bool checkInitMethod(std::stack<std::string> &pre, AST::Method *method);
+        bool checkInitStmt(std::stack<std::string> &pre, AST::ASTNode *stmt, std::string type);
         std::string makePrefix(std::stack<std::string> s);
 };
 
