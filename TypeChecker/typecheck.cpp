@@ -8,7 +8,6 @@ bool TypeChecker::checkClasses() {
     AST::Block *classes_ = (AST::Block *)((AST::Block *) (*root_)) -> stmts_[0];
     //AST::AST_print_context ctx;   
     std::vector<std::string *> ptr = classes_ -> types_;
-    std::cout << ptr.size() << std::endl << std::endl;
 
     int num_classes = classes_ -> stmts_.size();
 
@@ -70,15 +69,42 @@ bool TypeChecker::checkClasses() {
 
 bool TypeChecker::checkInit() {
     AST::Block *classes_ = (AST::Block *)((AST::Block *) (*root_)) -> stmts_[0];
-    AST::Block *stmts_ = (AST::Block *)((AST::Block *) (*root_)) -> stmts_[1];
+    AST::Block *pgm_stmts_ = (AST::Block *)((AST::Block *) (*root_)) -> stmts_[1];
 
     int num_classes = classes_ -> stmts_.size();
-    int num_stmts = stmts_ -> stmts_.size();
-
+    int num_stmts = pgm_stmts_ -> stmts_.size();
+    
+    std::stack<std::string> prefix;
     for (int i = 0; i < num_classes; i++) {
-         
+        AST::Class *clazz = (AST::Class *)classes_ -> stmts_[i];
+        prefix.push(clazz -> class_name_ -> text_);
+        
+        AST::Method *cons = clazz -> constructor_;
+        for (AST::ASTNode *a: cons -> args_ -> stmts_) {
+            AST::Arg *arg = (AST::Arg *)a;
+            init_table_.push_back(makePrefix(prefix) + (arg -> param_name_ -> text_));
+
+
+
+        }
+
+        prefix.pop();
+    }
+
+    //Debugging
+    for (std::string s: init_table_) {
+        std::cerr << s << std::endl;
     }
 
     return false;
+}
+
+std::string TypeChecker::makePrefix(std::stack<std::string> s) {
+    std::string ret_str = "";
+    while (!s.empty()) {
+        ret_str = s.top() + ret_str;
+        s.pop();
+    }
+    return ret_str;
 }
 

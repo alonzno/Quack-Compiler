@@ -63,8 +63,7 @@ namespace AST {
         json_head("Class", out, ctx);
         json_child("class_name_", *class_name_, out, ctx);
         json_child("super_name_", *super_name_, out, ctx);
-        json_child("args_", *args_, out, ctx);
-        json_child("stmts_", *stmts_, out, ctx);
+        json_child("constructor_", *constructor_, out, ctx);
         json_child("methods_", *methods_, out, ctx, ' ');
         json_close(out, ctx);
     }

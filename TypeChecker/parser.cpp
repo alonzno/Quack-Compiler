@@ -35,6 +35,7 @@ class Driver {
         void checkTypes() {
             type_checker = new TypeChecker(&root);
             type_checker -> checkClasses();
+            type_checker -> checkInit();
         }
     private:
         yy::Lexer *lexer;

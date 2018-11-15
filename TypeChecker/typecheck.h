@@ -20,6 +20,7 @@ class TypeChecker
         TypeChecker(AST::ASTNode **root): root_(root) {};
         bool checkClasses();
         bool checkInit();
+        std::string makePrefix(std::stack<std::string> s);
 };
 
 #endif

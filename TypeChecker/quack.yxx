@@ -145,8 +145,9 @@ statements: statements statement {
 class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements opt_methods '}' { 
         $$ = new AST::Class(new AST::Ident($2), $6);
         $$ -> setLine(@$.begin.line, @$.begin.column);
-        $$ -> args_ = $4;
-        $$ -> stmts_ = $8;
+        $$ -> constructor_ = new AST::Method(new AST::Ident($2), new AST::Ident($2), $4, $8);
+        //$$ -> args_ = $4;
+        //$$ -> stmts_ = $8;
         $$ -> methods_ = $9;
      };
 
@@ -298,25 +299,25 @@ r_expr: l_expr {  $$ = $1; };
 
 /* Binary Operators */
 
-r_expr: r_expr '+' r_expr { $$ = new AST::Call( $1, new AST::Ident("PLUS"), $3); 
+r_expr: r_expr '+' r_expr { $$ = new AST::Call( $1, new AST::Ident("PLUS"), new AST::Block($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr '-' r_expr { $$ = new AST::Call( $1, new AST::Ident("MINUS"), $3); 
+r_expr: r_expr '-' r_expr { $$ = new AST::Call( $1, new AST::Ident("MINUS"), new AST::Block($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column); 
       };
 
-r_expr: r_expr '*' r_expr { $$ = new AST::Call( $1, new AST::Ident("TIMES"), $3); 
+r_expr: r_expr '*' r_expr { $$ = new AST::Call( $1, new AST::Ident("TIMES"), new AST::Block($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr '/' r_expr { $$ = new AST::Call( $1, new AST::Ident("DIVIDE"), $3); 
+r_expr: r_expr '/' r_expr { $$ = new AST::Call( $1, new AST::Ident("DIVIDE"), new AST::Block($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
 /* Unary Operators */
 
-r_expr: '-' r_expr { $$ = new AST::Call(new AST::IntConst(0), new AST::Ident("MINUS"), $2); 
+r_expr: '-' r_expr { $$ = new AST::Call(new AST::IntConst(0), new AST::Ident("MINUS"), new AST::Block($2)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
@@ -324,23 +325,23 @@ r_expr: '(' r_expr ')' { $$ = $2; };
 
 /* Logical Expressions */
 
-r_expr: r_expr EQUALS r_expr { $$ = new AST::Call( $1, new AST::Ident("EQUALS"), $3); 
+r_expr: r_expr EQUALS r_expr { $$ = new AST::Call( $1, new AST::Ident("EQUALS"), new AST::Block($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr ATLEAST r_expr { $$ = new AST::Call( $1, new AST::Ident("ATLEAST"), $3); 
+r_expr: r_expr ATLEAST r_expr { $$ = new AST::Call( $1, new AST::Ident("ATLEAST"), new AST::Block($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr ATMOST r_expr { $$ = new AST::Call( $1, new AST::Ident("ATMOST"), $3); 
+r_expr: r_expr ATMOST r_expr { $$ = new AST::Call( $1, new AST::Ident("ATMOST"), new AST::Block($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr '<' r_expr { $$ = new AST::Call( $1, new AST::Ident("LESS"), $3); 
+r_expr: r_expr '<' r_expr { $$ = new AST::Call( $1, new AST::Ident("LESS"), new AST::Block($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr '>' r_expr { $$ = new AST::Call( $1, new AST::Ident("MORE"), $3); 
+r_expr: r_expr '>' r_expr { $$ = new AST::Call( $1, new AST::Ident("MORE"), new AST::Block($3));
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 

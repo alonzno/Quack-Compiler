@@ -39,6 +39,7 @@ namespace AST {
             std::vector<std::string *> types_;
         public:
             Block() { block_type_ = "Block"; }
+            Block(ASTNode *n) { block_type_ = "Block"; stmts_.push_back(n); types_.push_back(&(n -> block_type_));}
             void append(ASTNode *stmt) { stmts_.push_back(stmt); }
             void apptype(std::string *s) { types_.push_back(s); }
             void json(std::ostream &out, AST_print_context &ctx);
@@ -65,19 +66,6 @@ namespace AST {
 
     };
 
-    class Class: public ASTNode {
-        public:
-            
-            Ident *class_name_;
-            Ident *super_name_;
-            Block *args_;
-            Block *stmts_;
-            Block *methods_;
-        public:
-            Class(Ident *name, Ident *super): class_name_(name), super_name_(super) 
-        { block_type_ = "Class"; };
-            void json(std::ostream &out, AST_print_context &ctx);
-    };
 
     class Stub: public ASTNode {
         private:
@@ -121,6 +109,19 @@ namespace AST {
         public:
             Method(Ident *name, Ident *return_type, Block *args, Block *stmts): name_(name), return_type_(return_type), args_(args), stmts_(stmts) 
             { block_type_ = "Method"; }
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+    
+    class Class: public ASTNode {
+        public:
+            
+            Ident *class_name_;
+            Ident *super_name_;
+            Method *constructor_;
+            Block *methods_;
+        public:
+            Class(Ident *name, Ident *super): class_name_(name), super_name_(super) 
+        { block_type_ = "Class"; };
             void json(std::ostream &out, AST_print_context &ctx);
     };
 
@@ -172,9 +173,9 @@ namespace AST {
             
             ASTNode *obj_;
             Ident *method_;
-            ASTNode *args_;
+            Block *args_;
         public:
-            Call(ASTNode *obj, Ident *method, ASTNode *args): obj_(obj), method_(method), args_(args) 
+            Call(ASTNode *obj, Ident *method, Block *args): obj_(obj), method_(method), args_(args) 
             { block_type_ = "Call"; }
             void json(std::ostream &out, AST_print_context &ctx);
     };
