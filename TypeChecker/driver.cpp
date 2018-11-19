@@ -110,7 +110,7 @@ int main(int argc, char **argv)
     Driver driver(file);
 
     if (driver.parse_result()) {
-        std::cout << "Finished parse with no errors" << std::endl;
+        //std::cout << "Finished parse with no errors" << std::endl;
         //driver.json(std::cout);
         driver.checkTypes();
 

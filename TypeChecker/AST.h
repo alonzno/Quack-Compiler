@@ -209,15 +209,18 @@ namespace AST {
             FormalArgs *args_;
             Block *stmts_;
             std::vector<Method *> *methods_;
+            ClassRow *class_row_;
         public:
             Class(Ident *name, Ident *super): class_name_(name), super_name_(super) {}
             Class(Ident *name, Ident *super, FormalArgs *args, Block *stmts, std::vector<Method *> *methods):
-                class_name_(name), super_name_(super), args_(args), stmts_(stmts), methods_(methods) {}
+                class_name_(name), super_name_(super), args_(args), stmts_(stmts), methods_(methods) {
+                   class_row_ = new ClassRow(name -> getText());
+                }
             std::string getClassName() { return class_name_ -> getText(); }
             std::string getSuperName() { return super_name_ -> getText(); }
             
             ClassRow *getClassRow() {
-                return NULL;
+                return class_row_;
             }
 
             void json(std::ostream &out, AST_print_context &ctx);

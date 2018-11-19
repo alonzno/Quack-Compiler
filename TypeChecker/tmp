@@ -33,47 +33,29 @@
     def ATLEAST(other: Int): Boolean { }    // >=
     def MORE(other: Int): Boolean { }       // >
  }
-/*
- * A point has an x component and a y component
+/**
+ * How should one perform type inference 
+ * for variable x in this program? 
+ *
+ * Iterate to a fixed point (abstract interpretation)? 
+ * Somehow short-circuit the walk up the type system? 
+ * Impose some restriction that prevents this problem? 
  */
- class Pt(x: Int, y: Int) {
-     this.x = x;
-     this.y = y;
 
-     /* Note type of this.x and this.y is
-      * fixed in the object --- methods cannot
-      * change it.  Essentially, the flow relation is
-      * from every method to every other method.
-      */  
-
-     def _get_x(): Int {
-       return this.x; 
-     }   
-
-     def _get_y(): Int {
-     return this.y;
-     }   
-
-     /* Mutator: Evaluate for effect */
-     def translate(dx: Int, dy: Int): Nothing {
-     this.x = this.x + dx; 
-this.y = this.y + dy; 
-     }   
-
-     /* More functional style: Evaluate for value */
-     def PLUS(other: Pt): Pt {
-     return Pt(this.x + other.x, this.y + other.y); 
-     }   
-     
-     def EQUAL(other: Obj): Boolean {
-        typecase other {
-            pt: Pt { return this.x == pt.x and this.y == pt.y; }
-            thing: Obj { return false; }
-        }
-     }
+class C1()  extends Obj {
+   def foo() : Obj {
+       return Obj();
+   }
 }
 
-p1 = Pt(1,2);
-p3 = not p1 == p1 or p1 == p1;
-Pt(13,42).PRINT(); 
+class C2() extends C3 {
+   def foo() : C1 {
+        return C1();   /* Conforms to C1.foo() */
+   }
+}
+class C3() extends C2 {
+   def foo() : C2 {
+        return C2();   /* Conforms to C2.foo() */
+   }
+}
 
