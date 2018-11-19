@@ -11,6 +11,7 @@ class TypeChecker
 {
     AST::Program **root_;
     AdjMatrix class_heir_;
+    LCA_Table LCA;
     
     public:
         TypeChecker(AST::Program **root): root_(root) {};

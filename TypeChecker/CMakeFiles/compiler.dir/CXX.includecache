@@ -123,6 +123,8 @@ vector
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.cpp
 stack
 -
+deque
+-
 iostream
 -
 algorithm
