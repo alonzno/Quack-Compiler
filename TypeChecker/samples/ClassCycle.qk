@@ -13,7 +13,7 @@ class C1()  extends Obj {
    }
 }
 
-class C2() extends C1 {
+class C2() extends C3 {
    def foo() : C1 {
         return C1();   /* Conforms to C1.foo() */
    }
@@ -24,8 +24,3 @@ class C3() extends C2 {
    }
 }
 
-class Obj() extends C3 {
-    def foo() : C3 {
-         return C3();  /* Conforms to C3.foo() */
-    }
-}

@@ -11,7 +11,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/parser.dir/parser.cpp.o"
   "CMakeFiles/parser.dir/AST.cpp.o"
   "CMakeFiles/parser.dir/Messages.cpp.o"
-  "CMakeFiles/parser.dir/typecheck.cpp.o"
   "parser.pdb"
   "parser"
 )

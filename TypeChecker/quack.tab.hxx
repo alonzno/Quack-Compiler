@@ -152,10 +152,22 @@ namespace yy {
     AST::Ident *ident;
     AST::Arg *arg;
     AST::Class *clazz;
-    AST::Stub *stub;
     AST::Assign *assign;
+    AST::FormalArgs *formal_args;
+    AST::ActualArgs *actual_args;
+    AST::R_Expr *r_expr;
+    AST::L_Expr *l_expr;
+    AST::Method *method;
+    AST::Statement *stmt;
+    AST::If_Else *if_else;
+    AST::Typecase *typecase;
+    AST::TypeAlt *typealt;
+    std::vector<AST::If_Else *> *elif_block;
+    std::vector<AST::Method *> *methods;
+    std::vector<AST::Class *> *classes;
+    std::vector<AST::TypeAlt *> *typealts;
 
-#line 159 "quack.tab.hxx" // lalr1.cc:395
+#line 171 "quack.tab.hxx" // lalr1.cc:395
     };
 #else
     typedef YYSTYPE semantic_type;
@@ -193,11 +205,7 @@ namespace yy {
         IDENT = 273,
         INT_LIT = 274,
         STRING_LIT = 275,
-        NEG = 276,
-        Abstract = 277,
-        syntax = 278,
-        tree = 279,
-        nodes = 280
+        NEG = 276
       };
     };
 
@@ -302,7 +310,7 @@ namespace yy {
 
 
     /// Build a parser object.
-    parser (yy::Lexer& lexer_yyarg, AST::ASTNode** root_yyarg);
+    parser (yy::Lexer& lexer_yyarg, AST::Program** root_yyarg);
     virtual ~parser ();
 
     /// Parse.
@@ -375,7 +383,7 @@ namespace yy {
   static const unsigned char yydefact_[];
 
   // YYPGOTO[NTERM-NUM].
-  static const short yypgoto_[];
+  static const signed char yypgoto_[];
 
   // YYDEFGOTO[NTERM-NUM].
   static const signed char yydefgoto_[];
@@ -504,24 +512,24 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 204,     ///< Last index in yytable_.
-      yynnts_ = 27,  ///< Number of nonterminal symbols.
+      yylast_ = 217,     ///< Last index in yytable_.
+      yynnts_ = 29,  ///< Number of nonterminal symbols.
       yyfinal_ = 7, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 41  ///< Number of tokens.
+      yyntokens_ = 37  ///< Number of tokens.
     };
 
 
     // User arguments.
     yy::Lexer& lexer;
-    AST::ASTNode** root;
+    AST::Program** root;
   };
 
 
 
 } // yy
-#line 525 "quack.tab.hxx" // lalr1.cc:395
+#line 533 "quack.tab.hxx" // lalr1.cc:395
 
 
 

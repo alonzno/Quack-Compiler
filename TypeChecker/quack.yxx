@@ -23,7 +23,7 @@
 %define parse.trace
 
 %parse-param { yy::Lexer& lexer }  /* Construct parser object with lexer */
-%parse-param { AST::ASTNode** root }
+%parse-param { AST::Program** root }
 
 %code{
     #include "lex.yy.h"
@@ -41,8 +41,20 @@
     AST::Ident *ident;
     AST::Arg *arg;
     AST::Class *clazz;
-    AST::Stub *stub;
     AST::Assign *assign;
+    AST::FormalArgs *formal_args;
+    AST::ActualArgs *actual_args;
+    AST::R_Expr *r_expr;
+    AST::L_Expr *l_expr;
+    AST::Method *method;
+    AST::Statement *stmt;
+    AST::If_Else *if_else;
+    AST::Typecase *typecase;
+    AST::TypeAlt *typealt;
+    std::vector<AST::If_Else *> *elif_block;
+    std::vector<AST::Method *> *methods;
+    std::vector<AST::Class *> *classes;
+    std::vector<AST::TypeAlt *> *typealts;
 }
 
 /* Start tokens */
@@ -66,26 +78,29 @@
 %token <str> STRING_LIT
 %token NEG
 
-%left AND NOT OR
+%left AND OR NOT
 %left EQUALS ATMOST ATLEAST '>' '<'
 %left '+' '-'
 %left '*' '/'
 %left '.'
 
-Abstract syntax tree nodes
-%type <block> program classes opt_classes args formal_args opt_statements statements opt_methods methods statement_block opt_else opt_elif more_elif seq_r_expr actual_args opt_type_alt more_type_alt
+// Abstract syntax tree nodes
+%type <block> opt_statements statements statement_block opt_else 
+%type <typealts> opt_type_alt more_type_alt
+%type <classes> classes opt_classes
+%type <methods> opt_methods methods
 %type <ident> opt_extends opt_ident
 %type <arg> arg
+%type <formal_args> formal_args opt_formal_args
+%type <actual_args> actual_args seq_r_expr 
 %type <clazz> class
-%type <node> statement method r_expr l_expr opt_r_expr
-
-
-// Precedence.  We are using an ambiguous expression grammar
-// for compactness.  We declare operator precedence from lowest
-// to highest, with associativity, e.g., MINUS is left_ associative
-// so a-b-c is (a-b)-c and not a-(b-c).
-// %left MINUS PLUS
-// %left TIMES DIV
+%type <method> method
+%type <r_expr> r_expr opt_r_expr
+%type <l_expr> l_expr
+%type <stmt> statement
+%type <if_else> if_statement
+%type <typealt> type_alt
+%type <elif_block> more_elif opt_elif
 
 %%
 
@@ -93,34 +108,22 @@ Abstract syntax tree nodes
 *  followed by zero or more statements
 */
 program: opt_classes opt_statements {
-       $$ = new AST::Block();
-       $$ -> setLine(@$.begin.line, @$.begin.column);
-
-       $$ -> append($1);
-       $$ -> append($2);
-
-       $$ -> apptype(new std::string($1 -> block_type_));
-       $$ -> apptype(new std::string($2 -> block_type_));
-       *root = $$;
+       *root = new AST::Program($1, $2);
        }; 
 
 /* Zero or more class definitions */
 opt_classes: classes { $$ = $1; }
        | %empty { 
-       $$ = new AST::Block(); 
-       $$ -> setLine(@$.begin.line, @$.begin.column);
+       $$ = new std::vector<AST::Class *>(); 
        };
 
 classes: classes class { 
        $$ = $1;
-       $$ -> append($2);
-       $$ -> apptype(new std::string($2 -> block_type_));
+       $$ -> push_back($2);
        }
        | class { 
-       $$ = new AST::Block();
-       $$ -> setLine(@$.begin.line, @$.begin.column);
-       $$ -> append($1);
-       $$ -> apptype(new std::string($1 -> block_type_));
+       $$ = new std::vector<AST::Class *>();
+       $$ -> push_back($1);
        };
 
 /* Zero or more statments */
@@ -132,41 +135,33 @@ opt_statements: statements { $$ = $1; }
 statements: statements statement { 
           $$ = $1; 
           $$ -> append($2); 
-          $$ -> apptype(new std::string($2 -> block_type_));
           };
           | statement { 
           $$ = new AST::Block(); 
           $$ -> setLine(@$.begin.line, @$.begin.column);
           $$ -> append($1); 
-          $$ -> apptype(new std::string($1 -> block_type_));
           };
 
 /* Classes */
-class: CLASS IDENT '(' formal_args ')' opt_extends '{' opt_statements opt_methods '}' { 
-        $$ = new AST::Class(new AST::Ident($2), $6);
+class: CLASS IDENT '(' opt_formal_args ')' opt_extends '{' opt_statements opt_methods '}' { 
+        $$ = new AST::Class(new AST::Ident($2), $6, $4, $8, $9);
         $$ -> setLine(@$.begin.line, @$.begin.column);
-        $$ -> constructor_ = new AST::Method(new AST::Ident($2), new AST::Ident($2), $4, $8);
-        //$$ -> args_ = $4;
-        //$$ -> stmts_ = $8;
-        $$ -> methods_ = $9;
      };
 
-formal_args: args   { $$ = $1; }
+opt_formal_args: formal_args   { $$ = $1; }
            | %empty { 
-           $$ = new AST::Block(); 
+           $$ = new AST::FormalArgs(); 
            $$ -> setLine(@$.begin.line, @$.begin.column);
            };
 
-args: arg         { 
-    $$ = new AST::Block(); 
+formal_args: arg         { 
+    $$ = new AST::FormalArgs(); 
     $$ -> setLine(@$.begin.line, @$.begin.column);
     $$ -> append($1); 
-    $$ -> apptype(new std::string($1 -> block_type_));
     }
-    | args ',' arg { 
+    | formal_args ',' arg { 
     $$ = $1; 
     $$ -> append($3); 
-    $$ -> apptype(new std::string($3 -> block_type_));
     }
 
 arg: IDENT ':' IDENT { 
@@ -188,24 +183,22 @@ opt_extends: EXTENDS IDENT {
 
 opt_methods: methods { $$ = $1; }
            | %empty { 
-           $$ = new AST::Block(); 
-           $$ -> setLine(@$.begin.line, @$.begin.column);
+           $$ = new std::vector<AST::Method *>(); 
            };
 
 methods: methods method { 
        $$ = $1; 
-       $$ -> append($2); 
-       $$ -> apptype(new std::string($2 -> block_type_));
+       $$ -> push_back($2); 
        }
        | method {
-       $$ = new AST::Block(); 
-       $$ -> setLine(@$.begin.line, @$.begin.column);
-       $$ -> append($1); 
-       $$ -> apptype(new std::string($1 -> block_type_));
+       $$ = new std::vector<AST::Method *>(); 
+       $$ -> push_back($1); 
        };
 
-method: DEF IDENT '(' formal_args ')' opt_ident statement_block { 
-      $$ = new AST::Method(new AST::Ident($2), $6, $4, $7); 
+method: DEF IDENT '(' opt_formal_args ')' opt_ident statement_block { 
+      AST::Ident *method_name = new AST::Ident($2);
+      method_name -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Method(method_name, $6, $4, $7); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
@@ -223,28 +216,49 @@ opt_ident: ':' IDENT {
 statement_block: '{' opt_statements '}' { $$ = $2; };
 
 /* If-Elif-Else */
+statement: if_statement { $$ = $1; }
 
-statement: IF r_expr statement_block opt_elif opt_else { 
-         $$ = new AST::If_Else($2, $3, $4, $5); 
+if_statement: IF r_expr statement_block opt_elif opt_else { 
+         $$ = new AST::If_Else($2, $3, NULL); 
+         std::vector<AST::If_Else *> *elif_block = $4;
+         AST::Block *final_else = $5;
+         
+         AST::If_Else *current_if = $$;
+         AST::Block *block_wrapper;
+
+         int num_if = elif_block -> size();
+         for (int i = 0; i < num_if; i++) {
+            if (i == num_if - 1) {
+                current_if -> setElseBlock(final_else);
+                break;
+            }
+            block_wrapper = new AST::Block();
+            block_wrapper -> append((*elif_block)[i]);
+            current_if -> setElseBlock(block_wrapper);
+            current_if = (*elif_block)[i];
+         }
+         
+         delete elif_block;
+
          $$ -> setLine(@$.begin.line, @$.begin.column);
          };
 
 opt_elif: more_elif { $$ = $1; }
          | %empty { 
-         $$ = new AST::Block(); 
-         $$ -> setLine(@$.begin.line, @$.begin.column);
+         $$ = new std::vector<AST::If_Else *>();
          };
 
 more_elif: more_elif ELIF r_expr statement_block { 
          $$ = $1; 
-         $$ -> append(new AST::Elif($3, $4));
-         $$ -> apptype(new std::string("Elif"));
+         AST::If_Else *if_else = new AST::If_Else($3, $4, NULL); 
+         if_else -> setLine(@$.begin.line, @$.begin.column);
+         $$ -> push_back(if_else); 
          }
          | ELIF r_expr statement_block { 
-         $$ = new AST::Block(); 
-         $$ -> setLine(@$.begin.line, @$.begin.column);
-         $$ -> append(new AST::Elif($2, $3)); 
-         $$ -> apptype(new std::string("Elif"));
+         $$ = new std::vector<AST::If_Else *>();
+         AST::If_Else *if_else = new AST::If_Else($2, $3, NULL); 
+         if_else -> setLine(@$.begin.line, @$.begin.column);
+         $$ -> push_back(if_else); 
          }
 
 
@@ -271,11 +285,11 @@ statement: l_expr opt_ident '=' r_expr ';' {
 /* L_Expression */
 
 l_expr: IDENT { 
-      $$ = new AST::Ident($1); 
+      $$ = new AST::L_Expr(new AST::Ident($1)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       }
       | r_expr '.' IDENT { 
-      $$ = new AST::Member($1, new AST::Ident($3)); 
+      $$ = new AST::L_Expr($1, new AST::Ident($3)); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
@@ -299,25 +313,45 @@ r_expr: l_expr {  $$ = $1; };
 
 /* Binary Operators */
 
-r_expr: r_expr '+' r_expr { $$ = new AST::Call( $1, new AST::Ident("PLUS"), new AST::Block($3)); 
+r_expr: r_expr '+' r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("PLUS"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr '-' r_expr { $$ = new AST::Call( $1, new AST::Ident("MINUS"), new AST::Block($3)); 
+r_expr: r_expr '-' r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("MINUS"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column); 
       };
 
-r_expr: r_expr '*' r_expr { $$ = new AST::Call( $1, new AST::Ident("TIMES"), new AST::Block($3)); 
+r_expr: r_expr '*' r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("TIMES"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr '/' r_expr { $$ = new AST::Call( $1, new AST::Ident("DIVIDE"), new AST::Block($3)); 
+r_expr: r_expr '/' r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("DIVIDE"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
 /* Unary Operators */
 
-r_expr: '-' r_expr { $$ = new AST::Call(new AST::IntConst(0), new AST::Ident("MINUS"), new AST::Block($2)); 
+r_expr: '-' r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($2);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call(new AST::IntConst(0), new AST::Ident("MINUS"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
@@ -325,23 +359,43 @@ r_expr: '(' r_expr ')' { $$ = $2; };
 
 /* Logical Expressions */
 
-r_expr: r_expr EQUALS r_expr { $$ = new AST::Call( $1, new AST::Ident("EQUALS"), new AST::Block($3)); 
+r_expr: r_expr EQUALS r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("EQUALS"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr ATLEAST r_expr { $$ = new AST::Call( $1, new AST::Ident("ATLEAST"), new AST::Block($3)); 
+r_expr: r_expr ATLEAST r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("ATLEAST"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr ATMOST r_expr { $$ = new AST::Call( $1, new AST::Ident("ATMOST"), new AST::Block($3)); 
+r_expr: r_expr ATMOST r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("ATMOST"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr '<' r_expr { $$ = new AST::Call( $1, new AST::Ident("LESS"), new AST::Block($3)); 
+r_expr: r_expr '<' r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("LESS"), args); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
-r_expr: r_expr '>' r_expr { $$ = new AST::Call( $1, new AST::Ident("MORE"), new AST::Block($3));
+r_expr: r_expr '>' r_expr { 
+      AST::ActualArgs *args = new AST::ActualArgs();
+      args -> append($3);
+      args -> setLine(@$.begin.line, @$.begin.column);
+      $$ = new AST::Call( $1, new AST::Ident("MORE"), args);
       $$ -> setLine(@$.begin.line, @$.begin.column);
       };
 
@@ -361,21 +415,19 @@ r_expr: r_expr '.' IDENT '(' actual_args ')' { $$ = new AST::Call($1, new AST::I
 
 actual_args: seq_r_expr { $$ = $1; }
            | %empty { 
-           $$ = new AST::Block(); 
+           $$ = new AST::ActualArgs(); 
            $$ -> setLine(@$.begin.line, @$.begin.column);
            };
 
 seq_r_expr: seq_r_expr ',' r_expr { 
           $$ = $1; 
           $$ -> append($3); 
-          $$ -> apptype(new std::string($3 -> block_type_));
           }
-        | r_expr { 
-        $$ = new AST::Block(); 
-        $$ -> setLine(@$.begin.line, @$.begin.column);
-        $$ -> append($1); 
-        $$ -> apptype(new std::string($1 -> block_type_));
-        };
+          | r_expr { 
+          $$ = new AST::ActualArgs(); 
+          $$ -> setLine(@$.begin.line, @$.begin.column);
+          $$ -> append($1); 
+          };
 
 r_expr: IDENT '(' actual_args ')' { $$ = new AST::Constructor(new AST::Ident($1), $3); 
       $$ -> setLine(@$.begin.line, @$.begin.column);
@@ -390,8 +442,7 @@ statement: RETURN opt_r_expr ';' {
 
 opt_r_expr: r_expr { $$ = $1; }
           | %empty { 
-          $$ = new AST::Stub("No Return"); 
-          $$ -> setLine(@$.begin.line, @$.begin.column);
+          $$ = NULL; 
           };
 
 /* Typecase */
@@ -403,20 +454,21 @@ statement: TYPECASE r_expr '{' opt_type_alt '}' {
 
 opt_type_alt: more_type_alt { $$ = $1; }
             | %empty { 
-            $$ = new AST::Block(); 
-            $$ -> setLine(@$.begin.line, @$.begin.column);
+            $$ = new std::vector<AST::TypeAlt *>(); 
             };
-more_type_alt: more_type_alt IDENT ':' IDENT statement_block { 
+more_type_alt: more_type_alt type_alt { 
              $$ = $1; 
-             $$ -> append(new AST::TypeAlt(new AST::Ident($2), new AST::Ident($4), $5)); 
-             $$ -> apptype(new std::string("TypeAlt"));
+             $$ -> push_back($2);
              }
-        | IDENT ':' IDENT statement_block { 
-        $$ = new AST::Block(); 
-        $$ -> setLine(@$.begin.line, @$.begin.column);
-        $$ -> append(new AST::TypeAlt(new AST::Ident($1), new AST::Ident($3), $4)); 
-        $$ -> apptype(new std::string("TypeAlt"));
+        | type_alt {
+        $$ = new std::vector<AST::TypeAlt *>(); 
+        $$ -> push_back($1);
         };
+type_alt: IDENT ':' IDENT statement_block {
+            AST::Arg *arg = new AST::Arg(new AST::Ident($1), new AST::Ident($3));
+            $$ = new AST::TypeAlt(arg, $4);
+            $$ -> setLine(@$.begin.line, @$.begin.column);
+        }
 
 %%
 #include "Messages.h"

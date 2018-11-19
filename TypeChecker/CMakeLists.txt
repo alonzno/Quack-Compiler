@@ -30,18 +30,26 @@ include_directories(
         "/home/faculty/michal/classes/cis461/RE-flex/include/"
 )
 
-add_executable(parser
-        quack.tab.cxx lex.yy.cpp lex.yy.h
-        parser.cpp AST.cpp AST.h Messages.h Messages.cpp typecheck.cpp )
+add_executable(compiler
+        quack.tab.cxx 
+        lex.yy.cpp 
+        lex.yy.h 
+        SymTable.h
+        driver.cpp 
+        AST.cpp 
+        AST.h 
+        typecheck.cpp
+        Messages.h 
+        Messages.cpp )
 if(FALSE)
 add_executable(lexer
         lex_driver.cpp
         lex.yy.cpp lex.yy.h
         location.hh position.hh
-        quack.tab.hxx
+        quack.tab.hxx 
         ASTNode.cpp ASTNode.h Messages.h Messages.cpp
         names.h)
 endif()
 
-target_link_libraries(parser ${REFLEX_LIB})
+target_link_libraries(compiler ${REFLEX_LIB})
 #target_link_libraries(lexer ${REFLEX_LIB})

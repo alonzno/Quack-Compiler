@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named parser
+# Target rules for targets named compiler
 
 # Build rule for target.
-parser: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 parser
-.PHONY : parser
+compiler: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 compiler
+.PHONY : compiler
 
 # fast build rule for target.
-parser/fast:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/build
-.PHONY : parser/fast
+compiler/fast:
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/build
+.PHONY : compiler/fast
 
 AST.o: AST.cpp.o
 
@@ -129,7 +129,7 @@ AST.o: AST.cpp.o
 
 # target to build an object file
 AST.cpp.o:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/AST.cpp.o
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/AST.cpp.o
 .PHONY : AST.cpp.o
 
 AST.i: AST.cpp.i
@@ -138,7 +138,7 @@ AST.i: AST.cpp.i
 
 # target to preprocess a source file
 AST.cpp.i:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/AST.cpp.i
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/AST.cpp.i
 .PHONY : AST.cpp.i
 
 AST.s: AST.cpp.s
@@ -147,7 +147,7 @@ AST.s: AST.cpp.s
 
 # target to generate assembly for a file
 AST.cpp.s:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/AST.cpp.s
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/AST.cpp.s
 .PHONY : AST.cpp.s
 
 Messages.o: Messages.cpp.o
@@ -156,7 +156,7 @@ Messages.o: Messages.cpp.o
 
 # target to build an object file
 Messages.cpp.o:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Messages.cpp.o
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/Messages.cpp.o
 .PHONY : Messages.cpp.o
 
 Messages.i: Messages.cpp.i
@@ -165,7 +165,7 @@ Messages.i: Messages.cpp.i
 
 # target to preprocess a source file
 Messages.cpp.i:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Messages.cpp.i
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/Messages.cpp.i
 .PHONY : Messages.cpp.i
 
 Messages.s: Messages.cpp.s
@@ -174,8 +174,35 @@ Messages.s: Messages.cpp.s
 
 # target to generate assembly for a file
 Messages.cpp.s:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/Messages.cpp.s
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/Messages.cpp.s
 .PHONY : Messages.cpp.s
+
+driver.o: driver.cpp.o
+
+.PHONY : driver.o
+
+# target to build an object file
+driver.cpp.o:
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/driver.cpp.o
+.PHONY : driver.cpp.o
+
+driver.i: driver.cpp.i
+
+.PHONY : driver.i
+
+# target to preprocess a source file
+driver.cpp.i:
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/driver.cpp.i
+.PHONY : driver.cpp.i
+
+driver.s: driver.cpp.s
+
+.PHONY : driver.s
+
+# target to generate assembly for a file
+driver.cpp.s:
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/driver.cpp.s
+.PHONY : driver.cpp.s
 
 lex.yy.o: lex.yy.cpp.o
 
@@ -183,7 +210,7 @@ lex.yy.o: lex.yy.cpp.o
 
 # target to build an object file
 lex.yy.cpp.o:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/lex.yy.cpp.o
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/lex.yy.cpp.o
 .PHONY : lex.yy.cpp.o
 
 lex.yy.i: lex.yy.cpp.i
@@ -192,7 +219,7 @@ lex.yy.i: lex.yy.cpp.i
 
 # target to preprocess a source file
 lex.yy.cpp.i:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/lex.yy.cpp.i
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/lex.yy.cpp.i
 .PHONY : lex.yy.cpp.i
 
 lex.yy.s: lex.yy.cpp.s
@@ -201,35 +228,8 @@ lex.yy.s: lex.yy.cpp.s
 
 # target to generate assembly for a file
 lex.yy.cpp.s:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/lex.yy.cpp.s
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/lex.yy.cpp.s
 .PHONY : lex.yy.cpp.s
-
-parser.o: parser.cpp.o
-
-.PHONY : parser.o
-
-# target to build an object file
-parser.cpp.o:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/parser.cpp.o
-.PHONY : parser.cpp.o
-
-parser.i: parser.cpp.i
-
-.PHONY : parser.i
-
-# target to preprocess a source file
-parser.cpp.i:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/parser.cpp.i
-.PHONY : parser.cpp.i
-
-parser.s: parser.cpp.s
-
-.PHONY : parser.s
-
-# target to generate assembly for a file
-parser.cpp.s:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/parser.cpp.s
-.PHONY : parser.cpp.s
 
 quack.tab.o: quack.tab.cxx.o
 
@@ -237,7 +237,7 @@ quack.tab.o: quack.tab.cxx.o
 
 # target to build an object file
 quack.tab.cxx.o:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/quack.tab.cxx.o
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/quack.tab.cxx.o
 .PHONY : quack.tab.cxx.o
 
 quack.tab.i: quack.tab.cxx.i
@@ -246,7 +246,7 @@ quack.tab.i: quack.tab.cxx.i
 
 # target to preprocess a source file
 quack.tab.cxx.i:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/quack.tab.cxx.i
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/quack.tab.cxx.i
 .PHONY : quack.tab.cxx.i
 
 quack.tab.s: quack.tab.cxx.s
@@ -255,7 +255,7 @@ quack.tab.s: quack.tab.cxx.s
 
 # target to generate assembly for a file
 quack.tab.cxx.s:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/quack.tab.cxx.s
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/quack.tab.cxx.s
 .PHONY : quack.tab.cxx.s
 
 typecheck.o: typecheck.cpp.o
@@ -264,7 +264,7 @@ typecheck.o: typecheck.cpp.o
 
 # target to build an object file
 typecheck.cpp.o:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/typecheck.cpp.o
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/typecheck.cpp.o
 .PHONY : typecheck.cpp.o
 
 typecheck.i: typecheck.cpp.i
@@ -273,7 +273,7 @@ typecheck.i: typecheck.cpp.i
 
 # target to preprocess a source file
 typecheck.cpp.i:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/typecheck.cpp.i
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/typecheck.cpp.i
 .PHONY : typecheck.cpp.i
 
 typecheck.s: typecheck.cpp.s
@@ -282,7 +282,7 @@ typecheck.s: typecheck.cpp.s
 
 # target to generate assembly for a file
 typecheck.cpp.s:
-	$(MAKE) -f CMakeFiles/parser.dir/build.make CMakeFiles/parser.dir/typecheck.cpp.s
+	$(MAKE) -f CMakeFiles/compiler.dir/build.make CMakeFiles/compiler.dir/typecheck.cpp.s
 .PHONY : typecheck.cpp.s
 
 # Help Target
@@ -293,19 +293,19 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... parser"
+	@echo "... compiler"
 	@echo "... AST.o"
 	@echo "... AST.i"
 	@echo "... AST.s"
 	@echo "... Messages.o"
 	@echo "... Messages.i"
 	@echo "... Messages.s"
+	@echo "... driver.o"
+	@echo "... driver.i"
+	@echo "... driver.s"
 	@echo "... lex.yy.o"
 	@echo "... lex.yy.i"
 	@echo "... lex.yy.s"
-	@echo "... parser.o"
-	@echo "... parser.i"
-	@echo "... parser.s"
 	@echo "... quack.tab.o"
 	@echo "... quack.tab.i"
 	@echo "... quack.tab.s"

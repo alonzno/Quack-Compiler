@@ -3,6 +3,7 @@
 
 CMakeFiles/parser.dir/AST.cpp.o: AST.cpp
 CMakeFiles/parser.dir/AST.cpp.o: AST.h
+CMakeFiles/parser.dir/AST.cpp.o: SymTable.h
 
 CMakeFiles/parser.dir/Messages.cpp.o: Messages.cpp
 CMakeFiles/parser.dir/Messages.cpp.o: Messages.h
@@ -11,32 +12,19 @@ CMakeFiles/parser.dir/Messages.cpp.o: position.hh
 
 CMakeFiles/parser.dir/lex.yy.cpp.o: AST.h
 CMakeFiles/parser.dir/lex.yy.cpp.o: Messages.h
+CMakeFiles/parser.dir/lex.yy.cpp.o: SymTable.h
 CMakeFiles/parser.dir/lex.yy.cpp.o: lex.yy.cpp
 CMakeFiles/parser.dir/lex.yy.cpp.o: location.hh
 CMakeFiles/parser.dir/lex.yy.cpp.o: position.hh
 CMakeFiles/parser.dir/lex.yy.cpp.o: quack.tab.hxx
-CMakeFiles/parser.dir/lex.yy.cpp.o: stack.hh
 
 CMakeFiles/parser.dir/parser.cpp.o: AST.h
 CMakeFiles/parser.dir/parser.cpp.o: Messages.h
+CMakeFiles/parser.dir/parser.cpp.o: SymTable.h
 CMakeFiles/parser.dir/parser.cpp.o: lex.yy.h
 CMakeFiles/parser.dir/parser.cpp.o: location.hh
 CMakeFiles/parser.dir/parser.cpp.o: parser.cpp
 CMakeFiles/parser.dir/parser.cpp.o: position.hh
 CMakeFiles/parser.dir/parser.cpp.o: quack.tab.hxx
-CMakeFiles/parser.dir/parser.cpp.o: stack.hh
-CMakeFiles/parser.dir/parser.cpp.o: typecheck.h
 
-CMakeFiles/parser.dir/quack.tab.cxx.o: AST.h
-CMakeFiles/parser.dir/quack.tab.cxx.o: Messages.h
-CMakeFiles/parser.dir/quack.tab.cxx.o: lex.yy.h
-CMakeFiles/parser.dir/quack.tab.cxx.o: location.hh
-CMakeFiles/parser.dir/quack.tab.cxx.o: position.hh
-CMakeFiles/parser.dir/quack.tab.cxx.o: quack.tab.cxx
-CMakeFiles/parser.dir/quack.tab.cxx.o: quack.tab.hxx
-CMakeFiles/parser.dir/quack.tab.cxx.o: stack.hh
-
-CMakeFiles/parser.dir/typecheck.cpp.o: typecheck.cpp
-CMakeFiles/parser.dir/typecheck.cpp.o: typecheck.h
-CMakeFiles/parser.dir/typecheck.cpp.o: AST.h
 

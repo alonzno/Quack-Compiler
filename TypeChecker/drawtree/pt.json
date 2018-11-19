@@ -1,202 +1,226 @@
-{ "kind" : "Block","stmts_" : [
-    { "kind" : "Block","stmts_" : [
-        { "kind" : "Class",
-            "class_name_" : 
-            { "kind" : "Ident","text_" : "Pt"},
-            "super_name_" : 
-            { "kind" : "Ident","text_" : ""},
-            "constructor_" : 
-            { "kind" : "Method",
-                "name_" : 
-                { "kind" : "Ident","text_" : "Pt"},
-                "return_type_" : 
-                { "kind" : "Ident","text_" : "Pt"},
-                "args_" : 
-                { "kind" : "Block","stmts_" : [
-                    { "kind" : "Arg",
-                        "param_name_" : 
-                        { "kind" : "Ident","text_" : "x"},
-                        "param_type_" : 
-                        { "kind" : "Ident","text_" : "Int"} }, 
-                    { "kind" : "Arg",
-                        "param_name_" : 
-                        { "kind" : "Ident","text_" : "y"},
-                        "param_type_" : 
-                        { "kind" : "Ident","text_" : "Int"} }]},
-                "stmts_" : 
-                { "kind" : "Block","stmts_" : [
-                    { "kind" : "Assign",
-                        "l_expr_" : 
-                        { "kind" : "Member",
-                            "obj_" : 
-                            { "kind" : "Ident","text_" : "this"},
-                            "field_" : 
-                            { "kind" : "Ident","text_" : "x"} },
-                        "type_" : 
-                        { "kind" : "Ident","text_" : ""},
-                        "r_expr_" : 
-                        { "kind" : "Ident","text_" : "x"} }, 
-                    { "kind" : "Assign",
-                        "l_expr_" : 
-                        { "kind" : "Member",
-                            "obj_" : 
-                            { "kind" : "Ident","text_" : "this"},
-                            "field_" : 
-                            { "kind" : "Ident","text_" : "y"} },
-                        "type_" : 
-                        { "kind" : "Ident","text_" : ""},
-                        "r_expr_" : 
-                        { "kind" : "Ident","text_" : "y"} }]} },
-            "methods_" : 
+{ "kind" : "Program","classes_" : [
+    { "kind" : "Class",
+        "class_name_" : 
+        { "kind" : "Ident","text_" : "Pt"},
+        "super_name_" : 
+        { "kind" : "Ident","text_" : ""},
+        "args_" : 
+        { "kind" : "FormalArgs","args_" : [
+            { "kind" : "Arg",
+                "param_name_" : 
+                { "kind" : "Ident","text_" : "x"},
+                "param_type_" : 
+                { "kind" : "Ident","text_" : "Int"} }, 
+            { "kind" : "Arg",
+                "param_name_" : 
+                { "kind" : "Ident","text_" : "y"},
+                "param_type_" : 
+                { "kind" : "Ident","text_" : "Int"} }]},
+        "stmts_" : 
+        { "kind" : "Block","stmts_" : [
+            { "kind" : "Assign",
+                "l_expr_" : 
+                { "kind" : "L_Expr",
+                    "r_expr_" : 
+                    { "kind" : "L_Expr",
+                        "name_" : 
+                        { "kind" : "Ident","text_" : "this"} },
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "x"} },
+                "type_" : 
+                { "kind" : "Ident","text_" : ""},
+                "r_expr_" : 
+                { "kind" : "L_Expr",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "x"} } }, 
+            { "kind" : "Assign",
+                "l_expr_" : 
+                { "kind" : "L_Expr",
+                    "r_expr_" : 
+                    { "kind" : "L_Expr",
+                        "name_" : 
+                        { "kind" : "Ident","text_" : "this"} },
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "y"} },
+                "type_" : 
+                { "kind" : "Ident","text_" : ""},
+                "r_expr_" : 
+                { "kind" : "L_Expr",
+                    "name_" : 
+                    { "kind" : "Ident","text_" : "y"} } }]},"methods_" : [
+        { "kind" : "Method",
+            "name_" : 
+            { "kind" : "Ident","text_" : "_get_x"},
+            "return_type_" : 
+            { "kind" : "Ident","text_" : "Int"},
+            "args_" : 
+            { "kind" : "FormalArgs","args_" : []},
+            "stmts_" : 
             { "kind" : "Block","stmts_" : [
-                { "kind" : "Method",
-                    "name_" : 
-                    { "kind" : "Ident","text_" : "_get_x"},
-                    "return_type_" : 
-                    { "kind" : "Ident","text_" : "Int"},
-                    "args_" : 
-                    { "kind" : "Block","stmts_" : []},
-                    "stmts_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Return",
-                            "ret_val_" : 
-                            { "kind" : "Member",
-                                "obj_" : 
-                                { "kind" : "Ident","text_" : "this"},
-                                "field_" : 
-                                { "kind" : "Ident","text_" : "x"} } }]} }, 
-                { "kind" : "Method",
-                    "name_" : 
-                    { "kind" : "Ident","text_" : "_get_y"},
-                    "return_type_" : 
-                    { "kind" : "Ident","text_" : "Int"},
-                    "args_" : 
-                    { "kind" : "Block","stmts_" : []},
-                    "stmts_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Return",
-                            "ret_val_" : 
-                            { "kind" : "Member",
-                                "obj_" : 
-                                { "kind" : "Ident","text_" : "this"},
-                                "field_" : 
-                                { "kind" : "Ident","text_" : "y"} } }]} }, 
-                { "kind" : "Method",
-                    "name_" : 
-                    { "kind" : "Ident","text_" : "translate"},
-                    "return_type_" : 
-                    { "kind" : "Ident","text_" : "Nothing"},
-                    "args_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Arg",
-                            "param_name_" : 
-                            { "kind" : "Ident","text_" : "dx"},
-                            "param_type_" : 
-                            { "kind" : "Ident","text_" : "Int"} }, 
-                        { "kind" : "Arg",
-                            "param_name_" : 
-                            { "kind" : "Ident","text_" : "dy"},
-                            "param_type_" : 
-                            { "kind" : "Ident","text_" : "Int"} }]},
-                    "stmts_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Assign",
-                            "l_expr_" : 
-                            { "kind" : "Member",
-                                "obj_" : 
-                                { "kind" : "Ident","text_" : "this"},
-                                "field_" : 
-                                { "kind" : "Ident","text_" : "x"} },
-                            "type_" : 
-                            { "kind" : "Ident","text_" : ""},
+                { "kind" : "Return",
+                    "ret_val_" : 
+                    { "kind" : "L_Expr",
+                        "r_expr_" : 
+                        { "kind" : "L_Expr",
+                            "name_" : 
+                            { "kind" : "Ident","text_" : "this"} },
+                        "name_" : 
+                        { "kind" : "Ident","text_" : "x"} } }]} }, 
+        { "kind" : "Method",
+            "name_" : 
+            { "kind" : "Ident","text_" : "_get_y"},
+            "return_type_" : 
+            { "kind" : "Ident","text_" : "Int"},
+            "args_" : 
+            { "kind" : "FormalArgs","args_" : []},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Return",
+                    "ret_val_" : 
+                    { "kind" : "L_Expr",
+                        "r_expr_" : 
+                        { "kind" : "L_Expr",
+                            "name_" : 
+                            { "kind" : "Ident","text_" : "this"} },
+                        "name_" : 
+                        { "kind" : "Ident","text_" : "y"} } }]} }, 
+        { "kind" : "Method",
+            "name_" : 
+            { "kind" : "Ident","text_" : "translate"},
+            "return_type_" : 
+            { "kind" : "Ident","text_" : "Nothing"},
+            "args_" : 
+            { "kind" : "FormalArgs","args_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "dx"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }, 
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "dy"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Int"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "L_Expr",
+                        "r_expr_" : 
+                        { "kind" : "L_Expr",
+                            "name_" : 
+                            { "kind" : "Ident","text_" : "this"} },
+                        "name_" : 
+                        { "kind" : "Ident","text_" : "x"} },
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Call",
+                        "obj_" : 
+                        { "kind" : "L_Expr",
                             "r_expr_" : 
+                            { "kind" : "L_Expr",
+                                "name_" : 
+                                { "kind" : "Ident","text_" : "this"} },
+                            "name_" : 
+                            { "kind" : "Ident","text_" : "x"} },
+                        "method_" : 
+                        { "kind" : "Ident","text_" : "PLUS"},
+                        "args_" : 
+                        { "kind" : "ActualArgs","args_" : [
+                            { "kind" : "L_Expr",
+                                "name_" : 
+                                { "kind" : "Ident","text_" : "dx"} }]} } }, 
+                { "kind" : "Assign",
+                    "l_expr_" : 
+                    { "kind" : "L_Expr",
+                        "r_expr_" : 
+                        { "kind" : "L_Expr",
+                            "name_" : 
+                            { "kind" : "Ident","text_" : "this"} },
+                        "name_" : 
+                        { "kind" : "Ident","text_" : "y"} },
+                    "type_" : 
+                    { "kind" : "Ident","text_" : ""},
+                    "r_expr_" : 
+                    { "kind" : "Call",
+                        "obj_" : 
+                        { "kind" : "L_Expr",
+                            "r_expr_" : 
+                            { "kind" : "L_Expr",
+                                "name_" : 
+                                { "kind" : "Ident","text_" : "this"} },
+                            "name_" : 
+                            { "kind" : "Ident","text_" : "y"} },
+                        "method_" : 
+                        { "kind" : "Ident","text_" : "PLUS"},
+                        "args_" : 
+                        { "kind" : "ActualArgs","args_" : [
+                            { "kind" : "L_Expr",
+                                "name_" : 
+                                { "kind" : "Ident","text_" : "dy"} }]} } }]} }, 
+        { "kind" : "Method",
+            "name_" : 
+            { "kind" : "Ident","text_" : "PLUS"},
+            "return_type_" : 
+            { "kind" : "Ident","text_" : "Pt"},
+            "args_" : 
+            { "kind" : "FormalArgs","args_" : [
+                { "kind" : "Arg",
+                    "param_name_" : 
+                    { "kind" : "Ident","text_" : "other"},
+                    "param_type_" : 
+                    { "kind" : "Ident","text_" : "Pt"} }]},
+            "stmts_" : 
+            { "kind" : "Block","stmts_" : [
+                { "kind" : "Return",
+                    "ret_val_" : 
+                    { "kind" : "Constructor",
+                        "type_" : 
+                        { "kind" : "Ident","text_" : "Pt"},
+                        "args_" : 
+                        { "kind" : "ActualArgs","args_" : [
                             { "kind" : "Call",
                                 "obj_" : 
-                                { "kind" : "Member",
-                                    "obj_" : 
-                                    { "kind" : "Ident","text_" : "this"},
-                                    "field_" : 
+                                { "kind" : "L_Expr",
+                                    "r_expr_" : 
+                                    { "kind" : "L_Expr",
+                                        "name_" : 
+                                        { "kind" : "Ident","text_" : "this"} },
+                                    "name_" : 
                                     { "kind" : "Ident","text_" : "x"} },
                                 "method_" : 
                                 { "kind" : "Ident","text_" : "PLUS"},
                                 "args_" : 
-                                { "kind" : "Block","stmts_" : [
-                                    { "kind" : "Ident","text_" : "dx"}]} } }, 
-                        { "kind" : "Assign",
-                            "l_expr_" : 
-                            { "kind" : "Member",
-                                "obj_" : 
-                                { "kind" : "Ident","text_" : "this"},
-                                "field_" : 
-                                { "kind" : "Ident","text_" : "y"} },
-                            "type_" : 
-                            { "kind" : "Ident","text_" : ""},
-                            "r_expr_" : 
+                                { "kind" : "ActualArgs","args_" : [
+                                    { "kind" : "L_Expr",
+                                        "r_expr_" : 
+                                        { "kind" : "L_Expr",
+                                            "name_" : 
+                                            { "kind" : "Ident","text_" : "other"} },
+                                        "name_" : 
+                                        { "kind" : "Ident","text_" : "x"} }]} }, 
                             { "kind" : "Call",
                                 "obj_" : 
-                                { "kind" : "Member",
-                                    "obj_" : 
-                                    { "kind" : "Ident","text_" : "this"},
-                                    "field_" : 
+                                { "kind" : "L_Expr",
+                                    "r_expr_" : 
+                                    { "kind" : "L_Expr",
+                                        "name_" : 
+                                        { "kind" : "Ident","text_" : "this"} },
+                                    "name_" : 
                                     { "kind" : "Ident","text_" : "y"} },
                                 "method_" : 
                                 { "kind" : "Ident","text_" : "PLUS"},
                                 "args_" : 
-                                { "kind" : "Block","stmts_" : [
-                                    { "kind" : "Ident","text_" : "dy"}]} } }]} }, 
-                { "kind" : "Method",
-                    "name_" : 
-                    { "kind" : "Ident","text_" : "PLUS"},
-                    "return_type_" : 
-                    { "kind" : "Ident","text_" : "Pt"},
-                    "args_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Arg",
-                            "param_name_" : 
-                            { "kind" : "Ident","text_" : "other"},
-                            "param_type_" : 
-                            { "kind" : "Ident","text_" : "Pt"} }]},
-                    "stmts_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Return",
-                            "ret_val_" : 
-                            { "kind" : "Constructor",
-                                "type_" : 
-                                { "kind" : "Ident","text_" : "Pt"},
-                                "args_" : 
-                                { "kind" : "Block","stmts_" : [
-                                    { "kind" : "Call",
-                                        "obj_" : 
-                                        { "kind" : "Member",
-                                            "obj_" : 
-                                            { "kind" : "Ident","text_" : "this"},
-                                            "field_" : 
-                                            { "kind" : "Ident","text_" : "x"} },
-                                        "method_" : 
-                                        { "kind" : "Ident","text_" : "PLUS"},
-                                        "args_" : 
-                                        { "kind" : "Block","stmts_" : [
-                                            { "kind" : "Member",
-                                                "obj_" : 
-                                                { "kind" : "Ident","text_" : "other"},
-                                                "field_" : 
-                                                { "kind" : "Ident","text_" : "x"} }]} }, 
-                                    { "kind" : "Call",
-                                        "obj_" : 
-                                        { "kind" : "Member",
-                                            "obj_" : 
-                                            { "kind" : "Ident","text_" : "this"},
-                                            "field_" : 
-                                            { "kind" : "Ident","text_" : "y"} },
-                                        "method_" : 
-                                        { "kind" : "Ident","text_" : "PLUS"},
-                                        "args_" : 
-                                        { "kind" : "Block","stmts_" : [
-                                            { "kind" : "Member",
-                                                "obj_" : 
-                                                { "kind" : "Ident","text_" : "other"},
-                                                "field_" : 
-                                                { "kind" : "Ident","text_" : "y"} }]} }]} } }]} }]} }]}, 
+                                { "kind" : "ActualArgs","args_" : [
+                                    { "kind" : "L_Expr",
+                                        "r_expr_" : 
+                                        { "kind" : "L_Expr",
+                                            "name_" : 
+                                            { "kind" : "Ident","text_" : "other"} },
+                                        "name_" : 
+                                        { "kind" : "Ident","text_" : "y"} }]} }]} } }]} }]}],
+    "stmts_" : 
     { "kind" : "Block","stmts_" : [
         { "kind" : "Call",
             "obj_" : 
@@ -204,11 +228,10 @@
                 "type_" : 
                 { "kind" : "Ident","text_" : "Pt"},
                 "args_" : 
-                { "kind" : "Block","stmts_" : [
+                { "kind" : "ActualArgs","args_" : [
                     { "kind" : "IntConst","value_" : "13"}, 
                     { "kind" : "IntConst","value_" : "42"}]} },
             "method_" : 
             { "kind" : "Ident","text_" : "PRINT"},
             "args_" : 
-            { "kind" : "Block","stmts_" : []} }]}]}
-
+            { "kind" : "ActualArgs","args_" : []} }]} }

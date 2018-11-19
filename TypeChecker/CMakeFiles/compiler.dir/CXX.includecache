@@ -6,6 +6,12 @@
 
 #IncludeRegexTransform: 
 
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.cpp
+AST.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.h
+SymTable.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/SymTable.h
+
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.h
 string
 -
@@ -31,6 +37,24 @@ vector
 -
 map
 -
+AST.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.h
+
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/driver.cpp
+lex.yy.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/lex.yy.h
+Messages.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/Messages.h
+iostream
+-
+fstream
+-
+string
+-
+AST.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.h
+typecheck.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.h
 
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/lex.yy.cpp
 quack.tab.hxx
@@ -56,20 +80,6 @@ reflex/abslexer.h
 position.hh
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/position.hh
 
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/parser.cpp
-lex.yy.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/lex.yy.h
-Messages.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/Messages.h
-iostream
--
-fstream
--
-string
--
-AST.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.h
-
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/position.hh
 algorithm
 -
@@ -77,6 +87,16 @@ iostream
 -
 string
 -
+
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.tab.cxx
+quack.tab.hxx
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.tab.hxx
+lex.yy.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/lex.yy.h
+libintl.h
+-
+Messages.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/Messages.h
 
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.tab.hxx
 AST.h
@@ -95,4 +115,28 @@ stack.hh
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/stack.hh
 location.hh
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/location.hh
+
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/stack.hh
+vector
+-
+
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.cpp
+stack
+-
+iostream
+-
+algorithm
+-
+typecheck.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.h
+
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.h
+map
+-
+stack
+-
+AST.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.h
+SymTable.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/SymTable.h
 

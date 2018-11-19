@@ -4,11 +4,12 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/parser.dir/AST.cpp.o"
-  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/Messages.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/parser.dir/Messages.cpp.o"
-  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/lex.yy.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/parser.dir/lex.yy.cpp.o"
-  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/parser.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/parser.dir/parser.cpp.o"
-  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.tab.cxx" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/parser.dir/quack.tab.cxx.o"
+  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/compiler.dir/AST.cpp.o"
+  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/Messages.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/compiler.dir/Messages.cpp.o"
+  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/driver.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/compiler.dir/driver.cpp.o"
+  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/lex.yy.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/compiler.dir/lex.yy.cpp.o"
+  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/quack.tab.cxx" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/compiler.dir/quack.tab.cxx.o"
+  "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.cpp" "/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/compiler.dir/typecheck.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

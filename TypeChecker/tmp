@@ -1,171 +1,79 @@
-Finished parse with no errors
-{ "kind" : "Block","stmts_" : [
-    { "kind" : "Block","stmts_" : [
-        { "kind" : "Class",
-            "class_name_" : 
-            { "kind" : "Ident","text_" : "Hand"},
-            "super_name_" : 
-            { "kind" : "Ident","text_" : ""},
-            "args_" : 
-            { "kind" : "Block","stmts_" : []},
-            "stmts_" : 
-            { "kind" : "Block","stmts_" : []},
-            "methods_" : 
-            { "kind" : "Block","stmts_" : []} }, 
-        { "kind" : "Class",
-            "class_name_" : 
-            { "kind" : "Ident","text_" : "LeftHand"},
-            "super_name_" : 
-            { "kind" : "Ident","text_" : "Hand"},
-            "args_" : 
-            { "kind" : "Block","stmts_" : [
-                { "kind" : "Arg",
-                    "param_name_" : 
-                    { "kind" : "Ident","text_" : "x"},
-                    "param_type_" : 
-                    { "kind" : "Ident","text_" : "Int"} }]},
-            "stmts_" : 
-            { "kind" : "Block","stmts_" : [
-                { "kind" : "Assign",
-                    "l_expr_" : 
-                    { "kind" : "Member",
-                        "obj_" : 
-                        { "kind" : "Ident","text_" : "this"},
-                        "field_" : 
-                        { "kind" : "Ident","text_" : "x"} },
-                    "type_" : 
-                    { "kind" : "Ident","text_" : ""},
-                    "r_expr_" : 
-                    { "kind" : "Ident","text_" : "x"} }]},
-            "methods_" : 
-            { "kind" : "Block","stmts_" : [
-                { "kind" : "Method",
-                    "name_" : 
-                    { "kind" : "Ident","text_" : "foo"},
-                    "return_type_" : 
-                    { "kind" : "Ident","text_" : "Int"},
-                    "args_" : 
-                    { "kind" : "Block","stmts_" : []},
-                    "stmts_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Return",
-                            "ret_val_" : 
-                            { "kind" : "IntConst","value_" : "42"} }]} }]} }, 
-        { "kind" : "Class",
-            "class_name_" : 
-            { "kind" : "Ident","text_" : "RightHand"},
-            "super_name_" : 
-            { "kind" : "Ident","text_" : "Hand"},
-            "args_" : 
-            { "kind" : "Block","stmts_" : [
-                { "kind" : "Arg",
-                    "param_name_" : 
-                    { "kind" : "Ident","text_" : "x"},
-                    "param_type_" : 
-                    { "kind" : "Ident","text_" : "Int"} }]},
-            "stmts_" : 
-            { "kind" : "Block","stmts_" : [
-                { "kind" : "Assign",
-                    "l_expr_" : 
-                    { "kind" : "Member",
-                        "obj_" : 
-                        { "kind" : "Ident","text_" : "this"},
-                        "field_" : 
-                        { "kind" : "Ident","text_" : "x"} },
-                    "type_" : 
-                    { "kind" : "Ident","text_" : ""},
-                    "r_expr_" : 
-                    { "kind" : "Ident","text_" : "x"} }]},
-            "methods_" : 
-            { "kind" : "Block","stmts_" : [
-                { "kind" : "Method",
-                    "name_" : 
-                    { "kind" : "Ident","text_" : "foo"},
-                    "return_type_" : 
-                    { "kind" : "Ident","text_" : "Int"},
-                    "args_" : 
-                    { "kind" : "Block","stmts_" : []},
-                    "stmts_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Return",
-                            "ret_val_" : 
-                            { "kind" : "IntConst","value_" : "42"} }]} }]} }, 
-        { "kind" : "Class",
-            "class_name_" : 
-            { "kind" : "Ident","text_" : "Bot"},
-            "super_name_" : 
-            { "kind" : "Ident","text_" : ""},
-            "args_" : 
-            { "kind" : "Block","stmts_" : [
-                { "kind" : "Arg",
-                    "param_name_" : 
-                    { "kind" : "Ident","text_" : "x"},
-                    "param_type_" : 
-                    { "kind" : "Ident","text_" : "Int"} }]},
-            "stmts_" : 
-            { "kind" : "Block","stmts_" : [
-                { "kind" : "If_Else",
-                    "cond_" : 
-                    { "kind" : "Stub","text_" : "NI: If cond"},
-                    "if_stmts_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Assign",
-                            "l_expr_" : 
-                            { "kind" : "Member",
-                                "obj_" : 
-                                { "kind" : "Ident","text_" : "this"},
-                                "field_" : 
-                                { "kind" : "Ident","text_" : "hand"} },
-                            "type_" : 
-                            { "kind" : "Ident","text_" : ""},
-                            "r_expr_" : 
-                            { "kind" : "Constructor",
-                                "type_" : 
-                                { "kind" : "Ident","text_" : "LeftHand"},
-                                "args_" : 
-                                { "kind" : "Block","stmts_" : [
-                                    { "kind" : "IntConst","value_" : "3"}]} } }]},
-                    "elifs_" : 
-                    { "kind" : "Block","stmts_" : []},
-                    "else_stmts_" : 
-                    { "kind" : "Block","stmts_" : [
-                        { "kind" : "Assign",
-                            "l_expr_" : 
-                            { "kind" : "Member",
-                                "obj_" : 
-                                { "kind" : "Ident","text_" : "this"},
-                                "field_" : 
-                                { "kind" : "Ident","text_" : "hand"} },
-                            "type_" : 
-                            { "kind" : "Ident","text_" : ""},
-                            "r_expr_" : 
-                            { "kind" : "Constructor",
-                                "type_" : 
-                                { "kind" : "Ident","text_" : "RightHand"},
-                                "args_" : 
-                                { "kind" : "Block","stmts_" : [
-                                    { "kind" : "IntConst","value_" : "7"}]} } }]} }, 
-                { "kind" : "Assign",
-                    "l_expr_" : 
-                    { "kind" : "Member",
-                        "obj_" : 
-                        { "kind" : "Ident","text_" : "this"},
-                        "field_" : 
-                        { "kind" : "Ident","text_" : "answer"} },
-                    "type_" : 
-                    { "kind" : "Ident","text_" : ""},
-                    "r_expr_" : 
-                    { "kind" : "Call",
-                        "obj_" : 
-                        { "kind" : "Member",
-                            "obj_" : 
-                            { "kind" : "Ident","text_" : "this"},
-                            "field_" : 
-                            { "kind" : "Ident","text_" : "hand"} },
-                        "method_" : 
-                        { "kind" : "Ident","text_" : "foo"},
-                        "args_" : 
-                        { "kind" : "Block","stmts_" : []} } }]},
-            "methods_" : 
-            { "kind" : "Block","stmts_" : []} }]}, 
-    { "kind" : "Block","stmts_" : []}]}
+/*
+ * Stubs for built-in classes of Quack. We do not generate code
+ * for these.  These are used only for static semantics checking.
+ * Their real code is hand-written C code.
+ */
+
+ class Obj() {
+    def PRINT() { }
+    def STR() { }
+    def EQUALS(other: Obj): Boolean {} // Default is object identity
+ }
+
+ class Nothing() { }
+
+ class String() {
+    def PLUS(other: String): String { }      // +
+    def EQUALS(other: String): Boolean { }   // ==
+    def ATMOST(other: String): Boolean { }   // <=
+    def LESS(other: String): Boolean { }     // <
+    def ATLEAST(other: String): Boolean { }  // >=
+    def MORE(other: String): Boolean { }     // >
+ }
+
+ class Boolean() { }
+
+ class Int() {
+    def PLUS(right: Int): Int {}   // this + right
+    def TIMES(right: Int): Int {}  // this * right
+    def MINUS(right: Int): Int {}  // this - right
+    def DIVIDE(right: Int): Int {}    // this / right
+    def ATMOST(other: Int): Boolean { }     // <=
+    def LESS(other: Int): Boolean { }       // <
+    def ATLEAST(other: Int): Boolean { }    // >=
+    def MORE(other: Int): Boolean { }       // >
+ }
+/*
+ * A point has an x component and a y component
+ */
+ class Pt(x: Int, y: Int) {
+     this.x = x;
+     this.y = y;
+
+     /* Note type of this.x and this.y is
+      * fixed in the object --- methods cannot
+      * change it.  Essentially, the flow relation is
+      * from every method to every other method.
+      */  
+
+     def _get_x(): Int {
+       return this.x; 
+     }   
+
+     def _get_y(): Int {
+     return this.y;
+     }   
+
+     /* Mutator: Evaluate for effect */
+     def translate(dx: Int, dy: Int): Nothing {
+     this.x = this.x + dx; 
+this.y = this.y + dy; 
+     }   
+
+     /* More functional style: Evaluate for value */
+     def PLUS(other: Pt): Pt {
+     return Pt(this.x + other.x, this.y + other.y); 
+     }   
+     
+     def EQUAL(other: Obj): Boolean {
+        typecase other {
+            pt: Pt { return this.x == pt.x and this.y == pt.y; }
+            thing: Obj { return false; }
+        }
+     }
+}
+
+p1 = Pt(1,2);
+p3 = not p1 == p1 or p1 == p1;
+Pt(13,42).PRINT(); 
+
