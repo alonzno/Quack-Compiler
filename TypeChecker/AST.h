@@ -5,10 +5,11 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
+#include <deque>
 
 #include "SymTable.h"
 
-#define NUM_LINES_IN_DUMMY 35
+#define NUM_LINES_IN_DUMMY 34
 
 namespace AST {
     
@@ -36,15 +37,36 @@ namespace AST {
             void json_child(std::string field, ASTNode& child, std::ostream& out, AST_print_context& ctx, char sep=',');
             void setLine(int l, int c) { line_ = l; column_ = c; }
             int getLine() { return line_ - NUM_LINES_IN_DUMMY; }
+
+            //DEBUG
+            static void printClassesAndMethods() {
+                std::cerr << "-------------------- CLASS MAP ---------------" << std::endl;
+                for(auto c: class_map) {
+                    std::cerr << "---------------- Begin Class ------------------" << std::endl;
+                    std::cerr << "Class Name:\t" <<  c.first << std::endl;
+                    if (c.second == NULL) continue;
+                    std::cerr << "---------------- Begin Methods ------------------" << std::endl;
+                    for (auto m: c.second -> methods_) {
+                        std::cerr << "Method name:\t" << m.first << "\t";
+                        for (auto a: m.second -> args_) {
+                            std::cerr << " " << a -> class_name_;
+                        }
+                        std::cerr << " --> " << m.second -> type_ -> class_name_ << std::endl;
+                    }
+                    std::cerr << "---------------- End Methods ------------------" << std::endl;
+                    std::cerr << "---------------- End Class ------------------" << std::endl;
+                }
+            }
     };
     
     class Statement: public ASTNode {
         public:
+            void updateSymTab(NameClassMap *map) { return; }
     };
 
     class R_Expr: public Statement {
         public:
-            virtual ClassRow* getType(NameClassMap *map) = 0;
+            virtual ClassRow* getType(ClassRow *class_row, MethodRow *method_row, bool &changed) = 0;
             bool isThis() { return false; }
     };
 
@@ -159,7 +181,8 @@ namespace AST {
             L_Expr(R_Expr *r_expr, Ident *name): r_expr_(r_expr), name_(name) {}
             std::string getName() { return name_ -> getText(); }
             R_Expr *getR_Expr() { return r_expr_; }
-            ClassRow *getType(NameClassMap *map) { 
+            ClassRow *getType(ClassRow *class_row, MethodRow *method_row, bool &changed) { 
+                /*
                 if (r_expr_ == NULL) {
                     if (map -> find(name_ -> getText()) != map -> end()) {
                         return (*map)[name_ -> getText()];
@@ -171,6 +194,7 @@ namespace AST {
                     return row -> fields_[name_ -> getText()];
                 }
                 std::cerr << "l_ExpR NOt FoUnd" << std::endl;
+                */
                 return NULL;
             }
 
@@ -186,10 +210,23 @@ namespace AST {
             Ident *type_;
             R_Expr *r_expr_;
         public:
+            Assign(L_Expr *l_expr, Ident *type, R_Expr *r_expr): l_expr_(l_expr), type_(type), r_expr_(r_expr) {}
             L_Expr *getL_Expr() { return l_expr_; }
             R_Expr *getR_Expr() { return r_expr_; }
             std::string getType() { return type_ -> getText(); }
-            Assign(L_Expr *l_expr, Ident *type, R_Expr *r_expr): l_expr_(l_expr), type_(type), r_expr_(r_expr) {}
+            void updateSymTab(NameClassMap *map) { 
+                /*
+                if (l_expr_ -> canAssign()) {
+                    R_Expr *r = l_expr_ -> getR_Expr();
+                    if (r) {
+                        NameClassMap new_map = r -> getType(map) -> fields_;
+                        new_map[l_expr_ -> getName()] = r_expr_ -> getType(map);
+                    }
+                }
+                error_count++;
+                std::cerr << "Error: cannot assign fields outside of a constructor/methods" << std::endl;
+                */
+            }
             void json(std::ostream &out, AST_print_context &ctx);
     };
     
@@ -204,6 +241,9 @@ namespace AST {
         public:
             Method(Ident *name, Ident *return_type, FormalArgs *args, Block *stmts): 
                 name_(name), return_type_(return_type), args_(args), stmts_(stmts) {
+                    if (return_type_ -> getText() == "") {
+                        return_type_ -> setText("Nothing");
+                    }
                     method_row_ = new MethodRow();
                 }
             std::string getName() { return name_ -> getText(); }
@@ -258,6 +298,8 @@ namespace AST {
 
             std::vector<Class *> *classes_;
             Block *stmts_;
+
+            MethodRow *main_;
         public:
             Program(std::vector<Class *> *classes, Block *stmts): classes_(classes), stmts_(stmts){}
             std::vector<Class *> *getClasses() { return classes_; }
@@ -275,6 +317,8 @@ namespace AST {
                     else {
                         std::cerr << "Redefinition of class " << class_name << " on line " 
                             << c -> getLine() << std::endl;
+                        std::cerr << "Ignoring..." << std::endl;
+
                         auto my_it = std::find(classes_ -> begin(), classes_ -> end(), c);
                         if (my_it != classes_ -> end()) {
                             classes_ -> erase(my_it);
@@ -286,22 +330,41 @@ namespace AST {
                 for (Class *c: *classes_) {
                     class_name = c -> getClassName();
                     row = c -> getClassRow();
+                    if (class_map.find(c -> getSuperName()) == class_map.end()) {
+                        std::cerr << "Undeclared Type: " << c -> getSuperName() 
+                            << " on line " << c -> getLine() << std::endl;
+                        std::cerr << "Aborting..." << std::endl;
+                        exit(2);
+                    }
                     row -> super_class_ = class_map[c -> getSuperName()];
-                    row -> sym_["true"] = AST::ASTNode::class_map["Boolean"];
-                    row -> sym_["false"] = AST::ASTNode::class_map["Boolean"];
-                    row -> sym_["none"] = AST::ASTNode::class_map["Nothing"];
+                    row -> sym_["true"] = class_map["Boolean"];
+                    row -> sym_["false"] = class_map["Boolean"];
+                    row -> sym_["none"] = class_map["Nothing"];
                     if (class_name == "Obj") {
                         row -> super_class_ = NULL;
                     }
                     for (Method *m: *(c -> getMethods())) {
+                        if ( row -> methods_.find(m -> getName()) != row -> methods_.end()) {
+                            std::cerr << "Redefinition of method: " << m -> getName() 
+                                << " on line " << m -> getLine() << std::endl;
+                            std::cerr << "Aborting..." << std::endl;
+                            exit(2);
+                        }
                         row -> methods_[m -> getName()] = m -> getMethodRow();
                         m -> getMethodRow() -> class_ = row;
                         m -> getMethodRow() -> method_name_ = m -> getName();
+
+                        if (class_map.find(m -> getType()) == class_map.end()) {
+                            std::cerr << "Undeclared Type: " << m -> getType() 
+                                << " on line " << m -> getLine() << std::endl;
+                            std::cerr << "Aborting..." << std::endl;
+                            exit(2);
+                        }
                         m -> getMethodRow() -> type_ = class_map[m -> getType()];
                         
-                        m -> getMethodRow() -> sym_["true"] = AST::ASTNode::class_map["Boolean"];
-                        m -> getMethodRow() -> sym_["false"] = AST::ASTNode::class_map["Boolean"];
-                        m -> getMethodRow() -> sym_["none"] = AST::ASTNode::class_map["Nothing"];
+                        m -> getMethodRow() -> sym_["true"] = class_map["Boolean"];
+                        m -> getMethodRow() -> sym_["false"] = class_map["Boolean"];
+                        m -> getMethodRow() -> sym_["none"] = class_map["Nothing"];
                         for (std::pair<std::string, std::string> a: m -> getArgs()) {
                             m -> getMethodRow() -> args_.push_back(class_map[a.second]);
                             m -> getMethodRow() -> sym_[a.first] = class_map[a.second];
@@ -313,16 +376,21 @@ namespace AST {
                     row -> constructor_ -> type_ = row;
 
 
-                    row -> constructor_ -> sym_["true"] = AST::ASTNode::class_map["Boolean"];
-                    row -> constructor_ -> sym_["false"] = AST::ASTNode::class_map["Boolean"];
-                    row -> constructor_ -> sym_["none"] = AST::ASTNode::class_map["Nothing"];
+                    row -> constructor_ -> sym_["true"] = class_map["Boolean"];
+                    row -> constructor_ -> sym_["false"] = class_map["Boolean"];
+                    row -> constructor_ -> sym_["none"] = class_map["Nothing"];
 
                     for (std::pair<std::string, std::string> a: c -> getArgs()) {
+                        if (class_map.find(a.second) == class_map.end()) {
+                            std::cerr << "Undeclared Type: " << a.second 
+                                << " on line " << c -> getLine() << std::endl;
+                            std::cerr << "Aborting..." << std::endl;
+                            exit(2);
+                        }
                         row -> constructor_ -> args_.push_back(class_map[a.second]);
                         row -> constructor_ -> sym_[a.first] = class_map[a.second];
                     }
                 }
-
             }
     };
 
@@ -348,7 +416,7 @@ namespace AST {
         public:
             IntConst(int value): value_(value) {}
             int getValue() { return value_; }
-            ClassRow *getType(NameClassMap *map) { return class_map["Int"]; }
+            ClassRow *getType(ClassRow *class_row, MethodRow *method_row, bool &changed) { return class_map["Int"]; }
             void json(std::ostream &out, AST_print_context &ctx);
     };
 
@@ -360,7 +428,7 @@ namespace AST {
         public:
             StrConst(std::string value): value_(value) {}
             std::string getValue() { return value_; }
-            ClassRow *getType(NameClassMap *map) { return class_map["String"]; }
+            ClassRow *getType(ClassRow *class_row, MethodRow *method_row, bool &changed) { return class_map["String"]; }
             void json(std::ostream &out, AST_print_context &ctx);
     };
 
@@ -374,11 +442,14 @@ namespace AST {
             R_Expr *getObj() { return obj_; }
             std::vector<R_Expr *> getArgs() { return args_ -> getArgs(); }
             std::string getMethodName() { return method_ -> getText(); }
-            ClassRow *getType(NameClassMap *map) { 
+            ClassRow *getType(ClassRow *class_row, MethodRow *method_row, bool &changed) { 
+                /*
                 ClassRow *type = obj_ -> getType(map);
                 if (type == NULL) return NULL;
                 MethodRow *method = type -> methods_[method_ -> getText()];
                 return method -> type_;
+                */
+                return NULL;
             }
             Call(R_Expr *obj, Ident *method, ActualArgs *args): obj_(obj), method_(method), args_(args) {}
             void json(std::ostream &out, AST_print_context &ctx);
@@ -391,8 +462,9 @@ namespace AST {
             ActualArgs *args_;
         public:
             Constructor(Ident *type, ActualArgs *args): type_(type), args_(args) {}
-            ClassRow *getType(NameClassMap *map) {
-                return class_map[type_ -> getText()];
+            ClassRow *getType(ClassRow *class_row, MethodRow *method_row, bool &changed) {
+                //return class_map[type_ -> getText()];
+                return NULL;
             }
             void json(std::ostream &out, AST_print_context &ctx);
     };
@@ -416,7 +488,8 @@ namespace AST {
             And(R_Expr *l_child, R_Expr *r_child): l_child_(l_child), r_child_(r_child) {}
             R_Expr *getL_Child() { return l_child_; }
             R_Expr *getR_Child() { return r_child_; }
-            ClassRow *getType(NameClassMap *map) { 
+            ClassRow *getType(ClassRow *class_row, MethodRow *method_row, bool &changed) { 
+                /*
                 if ( l_child_ -> getType(map) -> class_name_ == "Boolean" &&
                      r_child_ -> getType(map) -> class_name_ == "Boolean") {
                     return class_map["Boolean"];
@@ -424,6 +497,8 @@ namespace AST {
                 error_count++;
                 std::cerr << "AND operator on line " << getLine() << " is not being given Boolean operands" << std::endl;
                 return class_map["Boolean"];
+                */
+                return NULL;
             }
             void json(std::ostream &out, AST_print_context &ctx);
     };
@@ -437,14 +512,16 @@ namespace AST {
             Or(R_Expr *l_child, R_Expr *r_child): l_child_(l_child), r_child_(r_child) {}
             R_Expr *getL_Child() { return l_child_; }
             R_Expr *getR_Child() { return r_child_; }
-            ClassRow *getType(NameClassMap *map) { 
+            ClassRow *getType(ClassRow *class_row, MethodRow *method_row, bool &changed) { 
+                /*
                 if ( l_child_ -> getType(map) -> class_name_ == "Boolean" &&
                      r_child_ -> getType(map) -> class_name_ == "Boolean") {
                     return class_map["Boolean"];
                 }
                 error_count++;
                 std::cerr << "OR operator on line " << getLine() << " is not being given Boolean operands" << std::endl;
-                return class_map["Boolean"];
+                return class_map["Boolean"];*/
+                return NULL;
             }
             void json(std::ostream &out, AST_print_context &ctx);
     };
@@ -456,13 +533,16 @@ namespace AST {
         public:
             Neg(R_Expr *operand): operand_(operand) {}
             R_Expr *getOperand() { return operand_; }
-            ClassRow *getType(NameClassMap *map) { 
+            ClassRow *getType(ClassRow *class_row, MethodRow *method_row, bool &changed) { 
+                /*
                 if (operand_ -> getType(map) -> class_name_ == "Boolean") {
                     return class_map["Boolean"];
                 }
                 error_count++;
                 std::cerr << "Negation on line " << getLine() << " is not being given a Boolean operand" << std::endl;
                 return class_map["Boolean"];
+                */
+                return NULL;
             }
             void json(std::ostream &out, AST_print_context &ctx);
     };

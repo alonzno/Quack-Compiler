@@ -14,8 +14,26 @@ class TypeChecker
     LCA_Table LCA;
     
     public:
-        TypeChecker(AST::Program **root): root_(root) {};
         bool checkClasses();
+        bool inheritMethods();
+        TypeChecker(AST::Program **root): root_(root) {
+
+            //Build Symbol Table
+            (*root) -> updateClasses();
+            
+            //Check Class Heirarchy Well Formed
+            if (!checkClasses()) {
+                std::cerr << "Aborting..." << std::endl;
+                exit(1);
+            }
+
+            //Inherit Methods to Subtypes
+            if (!inheritMethods()) {
+                std::cerr << "Aborting..." << std::endl;
+                exit(1);
+            }
+            
+        };
 };
 
 #endif

@@ -31,6 +31,65 @@ std::string getLCA(AdjMatrix list, std::string a, std::string b) {
     return a_path[i-1];
 }
 
+bool TypeChecker::inheritMethods() {
+    std::deque<std::string> queue;
+    std::string class_name;
+    ClassRow *current_class, *child_class;
+    MethodRow *old_method, *new_method;
+    
+    queue.push_back("Obj");
+    while (!queue.empty()) {
+        class_name = queue.front();
+        current_class = AST::ASTNode::class_map[class_name];
+        if (class_heir_.find(class_name) != class_heir_.end()) {
+            for (auto child_name: class_heir_[class_name]) {
+                queue.push_back(child_name);
+                child_class = AST::ASTNode::class_map[child_name];
+                for (auto m: current_class -> methods_) {
+                    if (child_class -> methods_.find(m.first) == child_class -> methods_.end()) {
+                        child_class -> methods_[m.first] = m.second;
+                    }
+                    else {
+                        old_method = m.second;
+                        new_method = child_class -> methods_[m.first];
+                        if (old_method -> args_.size() != new_method -> args_.size()) {
+                            std::cerr << "Redefined method " << m.first << " in class "
+                                << child_name << " does not have same number of args " 
+                                << "as defined in super." << std::endl;
+                            return false;
+                        }
+                        int num_args = old_method -> args_.size();
+                        for (int i = 0; i < num_args; i++) {
+                            std::string sub_arg = old_method -> args_[i] -> class_name_;
+                            std::string super_arg = new_method -> args_[i] -> class_name_;
+                            if(LCA[sub_arg][super_arg] != super_arg) {
+                                std::cerr << "In Class " << child_name << ", inherited method \""
+                                    << m.first << "\", arg #" << (i+1) << ", the type is "
+                                    << super_arg << " which is not a supertype of "
+                                    << sub_arg << std::endl;
+                                return false;
+                            }
+                        }
+                        
+                        std::string super_return = old_method -> type_ -> class_name_;
+                        std::string sub_return = new_method -> type_ -> class_name_;
+                        if (LCA[super_return][sub_return] != super_return) {
+                            std::cerr << "In Class " << child_name << ", inherited method \""
+                                << m.first << "\" return type is "
+                                << sub_return << " which is not a subtype of "
+                                << super_return << std::endl;
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        queue.pop_front();
+    }
+
+    return true;
+}
+
 bool TypeChecker::checkClasses() {
     std::vector<AST::Class *> *classes_ = (*root_) -> getClasses();
 
@@ -111,6 +170,7 @@ bool TypeChecker::checkClasses() {
             c_name = getLCA(class_heir_, a_name, b_name);
 
             LCA[a_name][b_name] = c_name;
+            //DEBUG std::cerr << a_name << "\t" << b_name << "\t" << c_name << std::endl;
         }
     } 
     

@@ -6,7 +6,7 @@
 
  class Obj() {
     def PRINT() { }
-    def STR() { }
+    def STR(): String { }
     def EQUALS(other: Obj): Boolean {} // Default is object identity
  }
 
@@ -14,7 +14,7 @@
 
  class String() {
     def PLUS(other: String): String { }      // +
-    def EQUALS(other: String): Boolean { }   // ==
+    def EQUALS(other: Obj): Boolean { }   // ==
     def ATMOST(other: String): Boolean { }   // <=
     def LESS(other: String): Boolean { }     // <
     def ATLEAST(other: String): Boolean { }  // >=
@@ -32,4 +32,5 @@
     def LESS(other: Int): Boolean { }       // <
     def ATLEAST(other: Int): Boolean { }    // >=
     def MORE(other: Int): Boolean { }       // >
+    def EQUALS(other: Obj): Boolean { }       // ==
  }

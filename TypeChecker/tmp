@@ -6,7 +6,7 @@
 
  class Obj() {
     def PRINT() { }
-    def STR() { }
+    def STR(): String { }
     def EQUALS(other: Obj): Boolean {} // Default is object identity
  }
 
@@ -14,7 +14,7 @@
 
  class String() {
     def PLUS(other: String): String { }      // +
-    def EQUALS(other: String): Boolean { }   // ==
+    def EQUALS(other: Obj): Boolean { }   // ==
     def ATMOST(other: String): Boolean { }   // <=
     def LESS(other: String): Boolean { }     // <
     def ATLEAST(other: String): Boolean { }  // >=
@@ -32,11 +32,49 @@
     def LESS(other: Int): Boolean { }       // <
     def ATLEAST(other: Int): Boolean { }    // >=
     def MORE(other: Int): Boolean { }       // >
+    def EQUALS(other: Obj): Boolean { }       // ==
  }
-class Schroedinger(box: Int) {
-    if box > 0 {
-       this.living = 1; 
-    } else {
-       this.dead = 0;
-    }
+/*
+ * A point has an x component and a y component
+ */
+ class Pt(x: Int, y: Int) {
+     this.x = x;
+     this.y = y;
+
+     /* Note type of this.x and this.y is
+      * fixed in the object --- methods cannot
+      * change it.  Essentially, the flow relation is
+      * from every method to every other method.
+      */  
+
+     def _get_x(): Int {
+       return this.x; 
+     }   
+
+     def _get_y(): Int {
+     return this.y;
+     }   
+
+     /* Mutator: Evaluate for effect */
+     def translate(dx: Int, dy: Int): Nothing {
+     this.x = this.x + dx; 
+this.y = this.y + dy; 
+     }   
+
+     /* More functional style: Evaluate for value */
+     def PLUS(other: Pt): Pt {
+     return Pt(this.x + other.x, this.y + other.y); 
+     }   
+     
+     def EQUAL(other: Obj): Boolean {
+        typecase other {
+            pt: Pt { return this.x == pt.x and this.y == pt.y; }
+            thing: Obj { return false; }
+        }
+     }
 }
+
+p1 = Pt(1,2);
+p3 = not p1 == p1 or p1 == p1;
+Pt(13,42).PRINT(); 
+

@@ -24,12 +24,14 @@ class Driver {
 
         bool parse_result() {
             int result = parser->parse();
-            root -> updateClasses();
+            //root -> updateClasses();
+
             /*//DEBUG
             for (NameClassMap::iterator it = root -> AST::ASTNode::class_map.begin(); it != AST::ASTNode::class_map.end(); it++) {
                 std::cout << it -> first << std::endl;
             }
             */
+
             return result == 0 && report::ok();
         }
 
@@ -39,11 +41,9 @@ class Driver {
         }
         void checkTypes() {
             type_checker = new TypeChecker(&root);
-
-            if (!type_checker -> checkClasses()) {
-                std::cerr << "Aborting..." << std::endl;
-                exit(1);
-            }
+            
+            //DEBUG
+            AST::ASTNode::printClassesAndMethods();
         }
     private:
         yy::Lexer *lexer;
