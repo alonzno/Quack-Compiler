@@ -14,8 +14,6 @@ struct MethodRow
     struct ClassRow *type_;
     std::vector<ClassRow *> args_;
     std::map<std::string, ClassRow *> sym_;
-
-    
 };
 
 struct ClassRow
@@ -31,11 +29,13 @@ struct ClassRow
     ClassRow(std::string class_name): class_name_(class_name) {}
 };
 
+typedef std::vector<std::string> InitTable;
 typedef std::map<std::string, ClassRow *> NameClassMap;
 typedef std::pair<std::string, ClassRow *> ClassEntry;
 typedef std::pair<std::string, MethodRow *> MethodEntry;
 typedef std::pair<std::string, std::vector<std::string>> AdjEntry;
 typedef std::map<std::string, std::vector<std::string>> AdjMatrix;
+typedef std::map<std::string, std::pair<bool, ClassRow *>> SymbolTable;
 typedef std::map<std::string, std::map<std::string, std::string>> LCA_Table;
 
 #endif
