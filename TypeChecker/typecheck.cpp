@@ -5,6 +5,56 @@
 
 #include "typecheck.h"
 
+bool TypeChecker::checkInit() {
+    for (auto clazz: *((*root_) -> getClasses())) {
+        if (std::find(builtins_.begin(), builtins_.end(), clazz -> getClassName()) != builtins_.end()) {
+            continue;
+        }
+        std::cerr << "Checking Class: " << clazz -> getClassName() << std::endl;
+        InitTable localInit_cons;
+        InitTable fieldInit_cons;
+        ClassRow *row = clazz -> getClassRow();
+
+        localInit_cons.push_back("true");
+        localInit_cons.push_back("false");
+        localInit_cons.push_back("none");
+
+        for (auto a: clazz -> getArgs()) {
+            localInit_cons.push_back(a.first);
+            //std::cerr << "ARG: " << a.first << " " << a.second << std::endl;    //DEBUG
+            row -> sym_[a.first] = std::pair<bool, ClassRow*>(true, AST::ASTNode::class_map[a.second]);
+        } 
+
+
+        clazz -> getStmts() -> makeSym(localInit_cons,
+                                       fieldInit_cons,
+                                       clazz -> getClassRow() -> sym_,
+                                       clazz -> getClassRow() -> fields_,
+                                       true,
+                                       false);
+        
+        //Begin Debugging
+        std::cerr << "======================== Locals ==================" << std::endl;
+        for (auto s: localInit_cons) {
+            std::cerr << s << std::endl;
+        }
+        std::cerr << "======================== Fields ==================" << std::endl;
+        for (auto s: fieldInit_cons) {
+            std::cerr << s << std::endl;
+        }
+        //End Debugging
+
+        
+        for (auto method: *(clazz -> getMethods())) {
+            InitTable localInit_meth;
+            InitTable FieldInit_meth;
+            
+
+        }
+    }
+    return true;
+}
+
 std::deque<std::string> findPath(AdjMatrix list, std::string a) {
     std::deque<std::string> ret_val;
     ClassRow *row  = AST::ASTNode::class_map[a];

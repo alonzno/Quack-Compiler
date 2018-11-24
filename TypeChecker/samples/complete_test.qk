@@ -32,7 +32,7 @@ this.y = this.y + dy;
      
      def EQUAL(other: Obj): Boolean {
         typecase other {
-            pt: Pt { return this.x == pt.x and this.y == pt.y; }
+            pt: Pt{ return this.x == pt.x and this.y == pt.y; }
             thing: Obj { return false; }
         }
      }

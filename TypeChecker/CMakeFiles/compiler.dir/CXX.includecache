@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.cpp
-AST.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.h
-SymTable.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/SymTable.h
-
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/AST.h
 string
 -
@@ -27,6 +21,12 @@ algorithm
 -
 SymTable.h
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/SymTable.h
+
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/Messages.cpp
+Messages.h
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/Messages.h
+location.hh
+/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/location.hh
 
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/Messages.h
 location.hh
@@ -123,18 +123,6 @@ location.hh
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/stack.hh
 vector
 -
-
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.cpp
-stack
--
-deque
--
-iostream
--
-algorithm
--
-typecheck.h
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.h
 
 /Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/typecheck.h
 map

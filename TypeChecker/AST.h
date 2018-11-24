@@ -90,7 +90,7 @@ namespace AST {
     
     class Statement: public ASTNode {
         public:
-            void makeSym(InitTable &localInit, 
+            virtual void makeSym(InitTable &localInit, 
                          InitTable &fieldInit,
                          SymbolTable &localSym,
                          SymbolTable &fieldSym,
@@ -101,7 +101,7 @@ namespace AST {
     class R_Expr: public Statement {
         public:
             virtual ClassRow* getType(ClassRow *class_row, MethodRow *method_row, bool &changed) = 0;
-            bool isThis() { return false; }
+            virtual bool isThis() { return false; }
     };
 
     // ==================== Concrete Classes ======================
@@ -122,7 +122,11 @@ namespace AST {
                          SymbolTable &fieldSym,
                          bool inConstructor = false,
                          bool inProgStmts = false) { 
+                //std::cerr << "In Block Make Sym" << std::endl;  //DEBUG
+                //AST_print_context ctx;          // DEBUG
                 for (auto s: stmts_) {
+                    //std::cerr << "Making a sym" << std::endl;  //DEBUG
+                    //s -> json(std::cerr, ctx);                  //DEBUG
                     s -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
                 }
             }
@@ -253,7 +257,7 @@ namespace AST {
             }
 
             bool isThis() { return r_expr_ == NULL && name_ -> getText() == "this"; }
-            bool isField() { return r_expr_ -> isThis(); }
+            bool isField() { return r_expr_ != NULL; }
             bool canAssign() { 
                 if (r_expr_ == NULL && name_ -> getText() == "true") {
                     std::cerr << "Attempting to assign builtin \"true\" on line " << getLine() << std::endl;
@@ -275,7 +279,9 @@ namespace AST {
                     std::cerr << "Aborting..." << std::endl;
                     exit(2);
                 }
+
                 return r_expr_ == NULL || r_expr_ -> isThis(); }
+
             void makeSym(InitTable &localInit, 
                          InitTable &fieldInit,
                          SymbolTable &localSym,
@@ -319,12 +325,18 @@ namespace AST {
                          SymbolTable &fieldSym,
                          bool inConstructor = false,
                          bool inProgStmts = false) { 
+                
                 r_expr_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
                 
                 //Begin L_Expr
+                std::cerr << "In Assign make Sym" << std::endl;
                 if (l_expr_ -> isField()) {
+                    std::cerr << "In is field" << std::endl; //DEBUG
                     if (l_expr_ -> canAssign()) {
+                        std::cerr << "In is Can Assign" << std::endl; //DEBUG
                         if (inConstructor) {
+                            std::cerr << "In is Constructor" << std::endl; //DEBUG
+                            std::cerr << type_ << " " << l_expr_ << " " << r_expr_ << std::endl; // DEBUG
                             if (type_ -> getText() != "") {
                                 if (std::find(fieldInit.begin(), fieldInit.end(), l_expr_ -> getName()) == fieldInit.end()) {
                                     fieldInit.push_back(l_expr_ -> getName());
@@ -335,7 +347,7 @@ namespace AST {
                                         error_count++;
                                         exit(2);
                                     }
-                                    ClassRow *clazz = class_map[l_expr_ -> getName()];
+                                    ClassRow *clazz = class_map[type_ -> getText()];
                                     fieldSym[l_expr_ -> getName()] = std::pair<bool, ClassRow *>(true, clazz);
                                 } 
                                 else {
@@ -354,11 +366,15 @@ namespace AST {
                             }
                             //Not Typed
                             else {
+                                std::cerr << "In not typed" << std::endl;  //DEBUG
+                                std::cerr << l_expr_ -> getName() << std::endl;
                                 if (std::find(fieldInit.begin(), fieldInit.end(), l_expr_ -> getName()) == fieldInit.end()) {
                                     fieldInit.push_back(l_expr_ -> getName());
                                     fieldSym[l_expr_ -> getName()] = std::pair<bool, ClassRow *>(false, NULL);
+                                std::cerr << "leaving not typed" << std::endl; // DEBUG
                                 }
                                 else {
+                                std::cerr << "leaving not typed" << std::endl; // DEBUG
                                     //Don't even trip, Dawg
                                 }
                             }
@@ -437,6 +453,7 @@ namespace AST {
                     }
                     else {
                         error_count++;
+                        std::cerr << "Unassignable variable" << std::endl;
                     }
                 }
                 
@@ -499,6 +516,7 @@ namespace AST {
             std::string getClassName() { return class_name_ -> getText(); }
             std::string getSuperName() { return super_name_ -> getText(); }
             std::vector<Method *> *getMethods() { return methods_; }
+            Block *getStmts() { return stmts_; }
             std::vector<std::pair<std::string, std::string>> getArgs() { return args_ -> getArgs(); }
 
             ClassRow *getClassRow() {
@@ -552,9 +570,9 @@ namespace AST {
                         exit(2);
                     }
                     row -> super_class_ = class_map[c -> getSuperName()];
-                    row -> sym_["true"] = class_map["Boolean"];
-                    row -> sym_["false"] = class_map["Boolean"];
-                    row -> sym_["none"] = class_map["Nothing"];
+                    row -> sym_["true"] = std::pair<bool, ClassRow *>(true, class_map["Boolean"]);
+                    row -> sym_["false"] = std::pair<bool, ClassRow *>(true, class_map["Boolean"]);
+                    row -> sym_["none"] = std::pair<bool, ClassRow *>(true, class_map["Nothing"]);
                     if (class_name == "Obj") {
                         row -> super_class_ = NULL;
                     }
@@ -577,12 +595,18 @@ namespace AST {
                         }
                         m -> getMethodRow() -> type_ = class_map[m -> getType()];
                         
-                        m -> getMethodRow() -> sym_["true"] = class_map["Boolean"];
-                        m -> getMethodRow() -> sym_["false"] = class_map["Boolean"];
-                        m -> getMethodRow() -> sym_["none"] = class_map["Nothing"];
+                        m -> getMethodRow() -> sym_["true"] = std::pair<bool, ClassRow *>(true, class_map["Boolean"]);
+                        m -> getMethodRow() -> sym_["false"] = std::pair<bool, ClassRow *>(true, class_map["Boolean"]);
+                        m -> getMethodRow() -> sym_["none"] = std::pair<bool, ClassRow *>(true, class_map["Nothing"]);
                         for (std::pair<std::string, std::string> a: m -> getArgs()) {
+                            if (class_map.find(a.second) == class_map.end()) {
+                                std::cerr << "Undeclared Type: " << a.second
+                                    << " on line " << m -> getLine() << std::endl;
+                                std::cerr << "Aborting..." << std::endl;
+                                exit(2);
+                            }
                             m -> getMethodRow() -> args_.push_back(class_map[a.second]);
-                            m -> getMethodRow() -> sym_[a.first] = class_map[a.second];
+                            m -> getMethodRow() -> sym_[a.first] = std::pair<bool, ClassRow*>(true, class_map[a.second]);
                         }
                     }
                     row -> constructor_ = new MethodRow();
@@ -591,9 +615,9 @@ namespace AST {
                     row -> constructor_ -> type_ = row;
 
 
-                    row -> constructor_ -> sym_["true"] = class_map["Boolean"];
-                    row -> constructor_ -> sym_["false"] = class_map["Boolean"];
-                    row -> constructor_ -> sym_["none"] = class_map["Nothing"];
+                    row -> constructor_ -> sym_["true"] = std::pair<bool, ClassRow *>(true, class_map["Boolean"]);
+                    row -> constructor_ -> sym_["false"] = std::pair<bool, ClassRow *>(true, class_map["Boolean"]);
+                    row -> constructor_ -> sym_["none"] = std::pair<bool, ClassRow *>(true, class_map["Nothing"]);
 
                     for (std::pair<std::string, std::string> a: c -> getArgs()) {
                         if (class_map.find(a.second) == class_map.end()) {
@@ -603,7 +627,7 @@ namespace AST {
                             exit(2);
                         }
                         row -> constructor_ -> args_.push_back(class_map[a.second]);
-                        row -> constructor_ -> sym_[a.first] = class_map[a.second];
+                        row -> constructor_ -> sym_[a.first] = std::pair<bool, ClassRow *>(false, class_map[a.second]);
                     }
                 }
             }
@@ -624,7 +648,33 @@ namespace AST {
                          SymbolTable &localSym,
                          SymbolTable &fieldSym,
                          bool inConstructor = false,
-                         bool inProgStmts = false) { return; }
+                         bool inProgStmts = false) {
+                if (else_stmts_ != NULL) {
+                    InitTable localInit_cp_1 = localInit;
+                    InitTable localInit_cp_2 = localInit;
+
+                    InitTable fieldInit_cp_1 = fieldInit;
+                    InitTable fieldInit_cp_2 = fieldInit;
+                
+                    if_stmts_ -> makeSym(localInit_cp_1, fieldInit_cp_1, localSym, fieldSym, inConstructor, inProgStmts);
+                    else_stmts_ -> makeSym(localInit_cp_2, fieldInit_cp_2, localSym, fieldSym, inConstructor, inProgStmts);
+                    std::cerr << "Getting intersections" << std::endl;
+                    InitTable localInit_inter = vecIntersection(localInit_cp_1, localInit_cp_2);
+                    InitTable fieldInit_inter = vecIntersection(fieldInit_cp_1, fieldInit_cp_2);
+                    std::cerr << "Got intersections" << std::endl;
+
+                    for (auto s: localInit_inter) {
+                        localInit.push_back(s);
+                    }
+                    for (auto s: fieldInit_inter) {
+                        fieldInit.push_back(s);
+                    }
+                }
+                else {
+                    if_stmts_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
+                }
+            }
+
             void json(std::ostream &out, AST_print_context &ctx);
     };
     
@@ -858,25 +908,6 @@ namespace AST {
                 operand_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts); }
             void json(std::ostream &out, AST_print_context &ctx);
     };
-
-    class Typecase: public Statement {
-        private:
-            
-            R_Expr *r_expr_;
-            std::vector<class TypeAlt *> *type_alts_;
-        public:
-            Typecase(R_Expr *r_expr, std::vector<class TypeAlt *> *type_alts): 
-                r_expr_(r_expr), type_alts_(type_alts) {}
-            R_Expr *getR_Expr() { return r_expr_; }
-            std::vector<class TypeAlt *> *getTypeAlts() { return type_alts_; }
-            void makeSym(InitTable &localInit, 
-                         InitTable &fieldInit,
-                         SymbolTable &localSym,
-                         SymbolTable &fieldSym,
-                         bool inConstructor = false,
-                         bool inProgStmts = false) { return; }
-            void json(std::ostream &out, AST_print_context &ctx);
-    };
     
     class TypeAlt: public ASTNode {
         private:
@@ -887,9 +918,56 @@ namespace AST {
             std::pair<std::string, std::string> getArg() 
                 { return std::pair<std::string, std::string>(arg_ -> getName(), arg_ -> getType()); }
             TypeAlt(Arg *arg, Block *stmts): arg_(arg), stmts_(stmts) {}
+            //Arg *getArg() { return arg_; }
             Block *getStmts() { return stmts_; }
             void json(std::ostream &out, AST_print_context &ctx);
     };
+
+    class Typecase: public Statement {
+        private:
+            
+            R_Expr *r_expr_;
+            std::vector<TypeAlt *> *type_alts_;
+        public:
+            Typecase(R_Expr *r_expr, std::vector<TypeAlt *> *type_alts): 
+                r_expr_(r_expr), type_alts_(type_alts) {}
+            R_Expr *getR_Expr() { return r_expr_; }
+            std::vector<TypeAlt *> *getTypeAlts() { return type_alts_; }
+            void makeSym(InitTable &localInit, 
+                         InitTable &fieldInit,
+                         SymbolTable &localSym,
+                         SymbolTable &fieldSym,
+                         bool inConstructor = false,
+                         bool inProgStmts = false) { 
+                r_expr_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
+
+                for (auto type_alt: *(type_alts_)) {
+                    //Here check if arg_ is of valid type.
+                    //
+                    //
+                    //Then check if the l_exprs_ in stmts_ are properly initialized.
+                    
+                    if (class_map.find(type_alt -> getArg().second) == class_map.end()) {
+                        std::cerr << "Undeclared type \"" << type_alt -> getArg().second << "\" in typecase on line "
+                            << getLine() << std::endl;
+                        error_count++;
+
+                        //REMOVE THIS
+                        std::cerr << "Aborting..." << std::endl;
+                        exit(2);
+                    }
+
+                    InitTable localInit_cp = localInit;
+                    InitTable fieldInit_cp = fieldInit;
+
+
+
+                    return;
+                }
+            }
+            void json(std::ostream &out, AST_print_context &ctx);
+    };
+    
     
 }
 

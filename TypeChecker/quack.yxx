@@ -228,15 +228,12 @@ if_statement: IF r_expr statement_block opt_elif opt_else {
 
          int num_if = elif_block -> size();
          for (int i = 0; i < num_if; i++) {
-            if (i == num_if - 1) {
-                current_if -> setElseBlock(final_else);
-                break;
-            }
             block_wrapper = new AST::Block();
             block_wrapper -> append((*elif_block)[i]);
             current_if -> setElseBlock(block_wrapper);
             current_if = (*elif_block)[i];
          }
+         current_if -> setElseBlock(final_else);
          
          delete elif_block;
 
