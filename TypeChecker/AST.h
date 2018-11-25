@@ -289,9 +289,31 @@ namespace AST {
                          bool inConstructor = false,
                          bool inProgStmts = false) { 
                 if (r_expr_ == NULL) {
+                    if (localSym.find(getName()) == localSym.end()) {
+                        std::cerr << "Reference to undeclared local variable \"" << getName()
+                            << "\" on line " << getLine() << std::endl;
+                        error_count++;
+                        //std::cerr << "Aborting..." << std::endl;
+                        //exit(2);
+                        return;
+                    }
                     return;
                 }
-                r_expr_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts); }
+                else if (r_expr_ -> isThis()) {
+                    if (fieldSym.find(getName()) == fieldSym.end()) {
+                        std::cerr << "Reference to undeclared field \"this." << getName()
+                            << "\" on line " << getLine() << std::endl;
+                        error_count++;
+                        //std::cerr << "Aborting..." << std::endl;
+                        //exit(2);
+                    }
+                }
+                else {
+                    r_expr_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts); 
+                }
+
+            }
+
             void json(std::ostream &out, AST_print_context &ctx);
     };
     
@@ -329,26 +351,27 @@ namespace AST {
                 r_expr_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
                 
                 //Begin L_Expr
-                std::cerr << "In Assign make Sym" << std::endl;
+                //std::cerr << "In Assign make Sym" << std::endl; //DEBUG
                 if (l_expr_ -> isField()) {
-                    std::cerr << "In is field" << std::endl; //DEBUG
+                    //std::cerr << "In is field" << std::endl; //DEBUG
                     if (l_expr_ -> canAssign()) {
-                        std::cerr << "In is Can Assign" << std::endl; //DEBUG
+                        //std::cerr << "In is Can Assign" << std::endl; //DEBUG
                         if (inConstructor) {
-                            std::cerr << "In is Constructor" << std::endl; //DEBUG
-                            std::cerr << type_ << " " << l_expr_ << " " << r_expr_ << std::endl; // DEBUG
+                            //std::cerr << "In is Constructor" << std::endl; //DEBUG
+                            //std::cerr << type_ << " " << l_expr_ << " " << r_expr_ << std::endl; // DEBUG
                             if (type_ -> getText() != "") {
                                 if (std::find(fieldInit.begin(), fieldInit.end(), l_expr_ -> getName()) == fieldInit.end()) {
                                     fieldInit.push_back(l_expr_ -> getName());
                                     if (class_map.find(type_ -> getText()) == class_map.end()) {
                                         std::cerr << "Undeclared Type \"" << type_ -> getText() << " on line "
                                             << getLine() << std::endl;
-                                        std::cerr << "Aborting..." << std::endl;
+                                        //std::cerr << "Aborting..." << std::endl;
+                                        //exit(2);
                                         error_count++;
-                                        exit(2);
                                     }
                                     ClassRow *clazz = class_map[type_ -> getText()];
                                     fieldSym[l_expr_ -> getName()] = std::pair<bool, ClassRow *>(true, clazz);
+                                    //std::cerr << "Adding typed symbol " << l_expr_ -> getName() << std::endl;  //DEBUG
                                 } 
                                 else {
                                     if (fieldSym[l_expr_ -> getName()].second == class_map[type_ -> getText()]) {
@@ -358,38 +381,39 @@ namespace AST {
                                         std::cerr << "Explicitly declared field \"this." << l_expr_ -> getName()
                                             << "\" on line " << getLine() << " previously declared type \""
                                             << fieldSym[l_expr_ -> getName()].second -> class_name_ << "\"" << std::endl;
-                                        std::cerr << "Aborting..." << std::endl;
-                                        error_count++;
+                                        //std::cerr << "Aborting..." << std::endl;
+                                        //error_count++;
                                         exit(2);
                                     }
                                 }
                             }
                             //Not Typed
                             else {
-                                std::cerr << "In not typed" << std::endl;  //DEBUG
-                                std::cerr << l_expr_ -> getName() << std::endl;
+                                //std::cerr << "In not typed" << std::endl;  //DEBUG
+                                //std::cerr << l_expr_ -> getName() << std::endl;  //DEBUG
                                 if (std::find(fieldInit.begin(), fieldInit.end(), l_expr_ -> getName()) == fieldInit.end()) {
+                                    //std::cerr << "Adding symbol " << l_expr_ -> getName() << std::endl;  //DEBUG
                                     fieldInit.push_back(l_expr_ -> getName());
                                     fieldSym[l_expr_ -> getName()] = std::pair<bool, ClassRow *>(false, NULL);
-                                std::cerr << "leaving not typed" << std::endl; // DEBUG
+                                //std::cerr << "leaving not typed" << std::endl; // DEBUG
                                 }
                                 else {
-                                std::cerr << "leaving not typed" << std::endl; // DEBUG
+                                //std::cerr << "leaving not typed" << std::endl; // DEBUG
                                     //Don't even trip, Dawg
                                 }
                             }
                         }
                         //Not in Constructor
                         else {
-                            if (std::find(fieldInit.begin(), fieldInit.end(), l_expr_ -> getName()) == fieldInit.begin()) {
+                            if (std::find(fieldInit.begin(), fieldInit.end(), l_expr_ -> getName()) != fieldInit.end()) {
                                 //No-op
                             }
                             else {
                                 std::cerr << "Reference to undeclared field \"this." << l_expr_ -> getName()
                                     << "\" on line " << getLine() << std::endl;
-                                std::cerr << "Aborting..." << std::endl;
+                                //std::cerr << "Aborting..." << std::endl;
+                                //exit(2);
                                 error_count++;
-                                exit(2);
                             }
                         }
                     }
@@ -397,9 +421,9 @@ namespace AST {
                     else {
                         std::cerr << "Attempting to assign unassignable field named \"" << l_expr_ -> getName()
                             << "\" on line " << getLine() << std::endl;
-                        std::cerr << "Aborting..." << std::endl;
+                        //std::cerr << "Aborting..." << std::endl;
+                        //exit(2);
                         error_count++;
-                        exit(2);
                     }
                 }
                 //Not a field
@@ -414,9 +438,9 @@ namespace AST {
                                 if (class_map.find(type_ -> getText()) == class_map.end()) {
                                     std::cerr << "Undeclared Type \"" << type_ -> getText() << " on line "
                                         << getLine() << std::endl;
-                                    std::cerr << "Aborting..." << std::endl;
+                                    //std::cerr << "Aborting..." << std::endl;
+                                    //exit(2);
                                     error_count++;
-                                    exit(2);
                                 }
                                 else {
                                     localSym[l_expr_ -> getName()] = std::pair<bool, ClassRow *>(true, class_map[type_ -> getText()]);
@@ -431,9 +455,9 @@ namespace AST {
                                 if (class_map.find(type_ -> getText()) == class_map.end()) {
                                     std::cerr << "Undeclared Type \"" << type_ -> getText() << " on line "
                                         << getLine() << std::endl;
-                                    std::cerr << "Aborting..." << std::endl;
+                                    //std::cerr << "Aborting..." << std::endl;
+                                    //exit(2);
                                     error_count++;
-                                    exit(2);
                                 }
                                 else {
                                     if (localSym[l_expr_ -> getName()].second == class_map[type_ -> getText()]) {
@@ -443,9 +467,9 @@ namespace AST {
                                         std::cerr << "Explicitly declared variable \"" << l_expr_ -> getName()
                                             << "\" on line " << getLine() << " previously declared type \""
                                             << fieldSym[l_expr_ -> getName()].second -> class_name_ << "\"" << std::endl;
-                                        std::cerr << "Aborting..." << std::endl;
+                                        //std::cerr << "Aborting..." << std::endl;
+                                        //exit(2);
                                         error_count++;
-                                        exit(2);
                                     }
                                 }
                             }
@@ -481,16 +505,7 @@ namespace AST {
             std::string getName() { return name_ -> getText(); }
             std::string getType() { return return_type_ -> getText(); }
             std::vector<std::pair<std::string, std::string>> getArgs() { return args_ -> getArgs(); }
-            std::vector<Statement *> getStmts() {
-                std::vector<Statement *> retVal;
-                Statement *stmt;
-                int num_stmts = stmts_ -> getNumStmts();
-                for (int i = 0; i < num_stmts; i++) {
-                    stmt = (Statement *)(stmts_ -> getStmtAt(i));
-                    retVal.push_back(stmt);
-                }
-                return retVal;
-            }
+            Block *getStmts() { return stmts_; }
             MethodRow *getMethodRow() { return method_row_; }
             void json(std::ostream &out, AST_print_context &ctx);
     };
@@ -551,6 +566,7 @@ namespace AST {
                         std::cerr << "Redefinition of class " << class_name << " on line " 
                             << c -> getLine() << std::endl;
                         std::cerr << "Ignoring..." << std::endl;
+                        error_count++;
 
                         auto my_it = std::find(classes_ -> begin(), classes_ -> end(), c);
                         if (my_it != classes_ -> end()) {
@@ -566,8 +582,9 @@ namespace AST {
                     if (class_map.find(c -> getSuperName()) == class_map.end()) {
                         std::cerr << "Undeclared Type: " << c -> getSuperName() 
                             << " on line " << c -> getLine() << std::endl;
-                        std::cerr << "Aborting..." << std::endl;
-                        exit(2);
+                        //std::cerr << "Aborting..." << std::endl;
+                        //exit(2);
+                        error_count++;
                     }
                     row -> super_class_ = class_map[c -> getSuperName()];
                     row -> sym_["true"] = std::pair<bool, ClassRow *>(true, class_map["Boolean"]);
@@ -580,8 +597,9 @@ namespace AST {
                         if ( row -> methods_.find(m -> getName()) != row -> methods_.end()) {
                             std::cerr << "Redefinition of method: " << m -> getName() 
                                 << " on line " << m -> getLine() << std::endl;
-                            std::cerr << "Aborting..." << std::endl;
-                            exit(2);
+                            //std::cerr << "Aborting..." << std::endl;
+                            //exit(2);
+                            error_count++;
                         }
                         row -> methods_[m -> getName()] = m -> getMethodRow();
                         m -> getMethodRow() -> class_ = row;
@@ -590,8 +608,9 @@ namespace AST {
                         if (class_map.find(m -> getType()) == class_map.end()) {
                             std::cerr << "Undeclared Type: " << m -> getType() 
                                 << " on line " << m -> getLine() << std::endl;
-                            std::cerr << "Aborting..." << std::endl;
-                            exit(2);
+                            //std::cerr << "Aborting..." << std::endl;
+                            //exit(2);
+                            error_count++;
                         }
                         m -> getMethodRow() -> type_ = class_map[m -> getType()];
                         
@@ -602,8 +621,9 @@ namespace AST {
                             if (class_map.find(a.second) == class_map.end()) {
                                 std::cerr << "Undeclared Type: " << a.second
                                     << " on line " << m -> getLine() << std::endl;
-                                std::cerr << "Aborting..." << std::endl;
-                                exit(2);
+                                //std::cerr << "Aborting..." << std::endl;
+                                //exit(2);
+                                error_count++;
                             }
                             m -> getMethodRow() -> args_.push_back(class_map[a.second]);
                             m -> getMethodRow() -> sym_[a.first] = std::pair<bool, ClassRow*>(true, class_map[a.second]);
@@ -623,8 +643,9 @@ namespace AST {
                         if (class_map.find(a.second) == class_map.end()) {
                             std::cerr << "Undeclared Type: " << a.second 
                                 << " on line " << c -> getLine() << std::endl;
-                            std::cerr << "Aborting..." << std::endl;
-                            exit(2);
+                            //std::cerr << "Aborting..." << std::endl;
+                            //exit(2);
+                            error_count++;
                         }
                         row -> constructor_ -> args_.push_back(class_map[a.second]);
                         row -> constructor_ -> sym_[a.first] = std::pair<bool, ClassRow *>(false, class_map[a.second]);
@@ -658,16 +679,22 @@ namespace AST {
                 
                     if_stmts_ -> makeSym(localInit_cp_1, fieldInit_cp_1, localSym, fieldSym, inConstructor, inProgStmts);
                     else_stmts_ -> makeSym(localInit_cp_2, fieldInit_cp_2, localSym, fieldSym, inConstructor, inProgStmts);
-                    std::cerr << "Getting intersections" << std::endl;
+                    //std::cerr << "Getting intersections" << std::endl;
                     InitTable localInit_inter = vecIntersection(localInit_cp_1, localInit_cp_2);
                     InitTable fieldInit_inter = vecIntersection(fieldInit_cp_1, fieldInit_cp_2);
-                    std::cerr << "Got intersections" << std::endl;
+                    //std::cerr << "Got intersections" << std::endl;
 
                     for (auto s: localInit_inter) {
-                        localInit.push_back(s);
+                        //std::cerr << s << std::endl;
+                        if (std::find(localInit.begin(), localInit.end(), s) == localInit.end()) {
+                            localInit.push_back(s);
+                        }
                     }
                     for (auto s: fieldInit_inter) {
-                        fieldInit.push_back(s);
+                        //std::cerr << s << std::endl;
+                        if (std::find(fieldInit.begin(), fieldInit.end(), s) == fieldInit.end()) {
+                            fieldInit.push_back(s);
+                        }
                     }
                 }
                 else {
@@ -731,7 +758,7 @@ namespace AST {
                          bool inConstructor = false,
                          bool inProgStmts = false) { 
 
-                std::cerr << "In a method call make sym" << std::endl;
+                //std::cerr << "In a method call make sym" << std::endl;
                 for (auto r_exp: getArgs()) {
                     r_exp -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
                 }
@@ -760,8 +787,9 @@ namespace AST {
                 if (class_map.find(type_ -> getText()) == class_map.end()) {
                     std::cerr << "Attempting to construct object of unrecognized class \"" 
                         << type_ -> getText() << "\" on line " << getLine() << std::endl;
-                    std::cerr << "Aborting..." << std::endl;
-                    exit(2);
+                    //std::cerr << "Aborting..." << std::endl;
+                    //exit(2);
+                    error_count++;
                 } 
                 for (auto r_expr: getArgs()){
                     r_expr -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
@@ -788,6 +816,7 @@ namespace AST {
                          bool inConstructor = false,
                          bool inProgStmts = false) { 
                 if (ret_val_ != NULL) {
+                    //std::cerr << "In Return" << std::endl; //DEBUG
                     ret_val_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
                 }
                 else {
@@ -942,7 +971,7 @@ namespace AST {
                 r_expr_ -> makeSym(localInit, fieldInit, localSym, fieldSym, inConstructor, inProgStmts);
 
                 for (auto type_alt: *(type_alts_)) {
-                    //Here check if arg_ is of valid type.
+                    //Here check if arg_ is of valid type. TODO
                     //
                     //
                     //Then check if the l_exprs_ in stmts_ are properly initialized.

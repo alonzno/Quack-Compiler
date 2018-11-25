@@ -43,7 +43,7 @@ class Driver {
             type_checker = new TypeChecker(&root);
             
             //DEBUG
-            AST::ASTNode::printClassesAndMethods();
+            //AST::ASTNode::printClassesAndMethods();
         }
     private:
         yy::Lexer *lexer;

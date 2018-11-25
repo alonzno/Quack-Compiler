@@ -5,12 +5,46 @@
 
 #include "typecheck.h"
 
+bool TypeChecker::inheritVariables() {
+    std::deque<std::string> queue;
+    std::string class_name;
+    ClassRow *current_class;
+    ClassRow *child_class;
+
+    SymbolTable current_sym;
+    SymbolTable child_sym;
+
+    queue.push_back("Obj");
+    while (!queue.empty()) {
+        class_name = queue.front();
+        queue.pop_front();
+        
+        current_class = AST::ASTNode::class_map[class_name];
+        current_sym = current_class -> fields_;
+        if (class_heir_.find(class_name) != class_heir_.end()) {
+            for (auto child_name: class_heir_[class_name]) {
+                queue.push_back(child_name);
+                child_class = AST::ASTNode::class_map[child_name];
+                child_sym = child_class -> fields_;
+                for (auto pair: current_sym) {
+                    if (child_sym.find(pair.first) == child_sym.end()) {
+                        std::cerr << "Class \"" << child_name << "\" does not define field \"" << pair.first
+                            << "\" of super class \"" << class_name << std::endl;
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    return true;
+}
+
 bool TypeChecker::checkInit() {
     for (auto clazz: *((*root_) -> getClasses())) {
         if (std::find(builtins_.begin(), builtins_.end(), clazz -> getClassName()) != builtins_.end()) {
             continue;
         }
-        std::cerr << "Checking Class: " << clazz -> getClassName() << std::endl;
+        //std::cerr << "Checking Class: " << clazz -> getClassName() << std::endl; //DEBUG
         InitTable localInit_cons;
         InitTable fieldInit_cons;
         ClassRow *row = clazz -> getClassRow();
@@ -34,22 +68,63 @@ bool TypeChecker::checkInit() {
                                        false);
         
         //Begin Debugging
+        /*
         std::cerr << "======================== Locals ==================" << std::endl;
         for (auto s: localInit_cons) {
             std::cerr << s << std::endl;
+            std::cerr << (row -> sym_.find(s) != row -> sym_.end()) << std::endl;
         }
         std::cerr << "======================== Fields ==================" << std::endl;
         for (auto s: fieldInit_cons) {
             std::cerr << s << std::endl;
+            std::cerr << (row -> fields_.find(s) != row -> fields_.end()) << std::endl;
         }
+        */
         //End Debugging
+        for (auto p: row -> fields_) {
+            if (std::find(fieldInit_cons.begin(), fieldInit_cons.end(), p.first) == fieldInit_cons.end()) {
+                std::cerr << "In class \"" << clazz -> getClassName() << "\", field \"this." << p.first
+                    << "\" is not initialized on all code paths." << std::endl;
+                AST::ASTNode::error_count++;
+            }
+        }
 
         
         for (auto method: *(clazz -> getMethods())) {
             InitTable localInit_meth;
-            InitTable FieldInit_meth;
+            InitTable fieldInit_meth;
             
+            MethodRow *m_row = row -> methods_[method -> getName()];
+            //std::cerr << "Checking method: " << method -> getName() << std::endl; //DEBUG
 
+            for (auto a: method -> getArgs()) {
+                //std::cerr <<"Got args" << std::endl; //DEBUG
+                localInit_meth.push_back(a.first);
+                m_row -> sym_[a.first] = std::pair<bool, ClassRow*>(true, AST::ASTNode::class_map[a.second]);
+                //std::cerr << "Added arg" << std::endl; //DEBUG
+            }
+                //std::cerr << "Getting Statement" << std::endl; //DEBUG
+            method -> getStmts() -> makeSym(localInit_meth,
+                                            fieldInit_cons,
+                                            m_row -> sym_,
+                                            row -> sym_,
+                                            false,
+                                            false);
+        //Begin Debugging
+        /*
+        std::cerr << "======================== Locals ==================" << std::endl;
+        for (auto s: localInit_meth){
+            std::cerr << s << std::endl;
+            std::cerr << (m_row -> sym_.find(s) != m_row -> sym_.end()) << std::endl;
+        }
+        std::cerr << "======================== Fields ==================" << std::endl;
+        for (auto s: fieldInit_meth) {
+            std::cerr << s << std::endl;
+            std::cerr << (m_row -> class_ -> fields_.find(s) != m_row -> class_ -> fields_.end()) << std::endl;
+        }
+        */
+        //End Debugging
+            
         }
     }
     return true;

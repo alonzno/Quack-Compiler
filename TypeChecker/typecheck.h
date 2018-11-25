@@ -17,6 +17,7 @@ class TypeChecker
     public:
         bool checkClasses();
         bool inheritMethods();
+        bool inheritVariables();
         bool checkInit();
         TypeChecker(AST::Program **root): root_(root) {
             builtins_.push_back("Obj");
@@ -47,6 +48,18 @@ class TypeChecker
                 std::cerr << "Aborting..." << std::endl;
                 exit(1);
             
+            }
+
+            if (AST::ASTNode::error_count > 0) {
+                std::cerr << "Too many errors" << std::endl;
+                std::cerr << "Aborting..." << std::endl;
+                exit(1);
+            }
+
+            if (!inheritVariables()) {
+                std::cerr << "Error Inheriting Variables" << std::endl;
+                std::cerr << "Aborting..." << std::endl;
+                exit(1);
             }
             
         };
