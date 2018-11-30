@@ -1,0 +1,12 @@
+class Bar(){
+    this.w = 4;
+    this.child = 2;
+    def method(child:Int): Bar{
+        return Bar();
+    }
+}
+
+foo = Bar();
+x = foo.method(foo.child).w;
+x.PRINT();
+(5).PRINT();

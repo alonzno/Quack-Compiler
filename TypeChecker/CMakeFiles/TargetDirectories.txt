@@ -1,3 +1,0 @@
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/rebuild_cache.dir
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/edit_cache.dir
-/Users/alonzoaltamirano/Repos/Quack-Compiler/TypeChecker/CMakeFiles/compiler.dir
