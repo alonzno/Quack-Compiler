@@ -1,6 +1,5 @@
 # Quack C Compiler(qcc)
 ##### A Fully Functional Quack Compiler
-##### By Alonzo Altamirano & Taylor Santos
 ---
 ### Our Interpretations of Quack Language Ambiguities:
 1. **Constructors don't have explicit return statements.**  We believe that treating a constructor as any old method raises additional questions.  Can a constructor return a subtype of the class it is defined for?  When collecting fields, wouldn't all fields following the first encounterable return statement be moot?  We answer these questions by simply forbidding explicit return statements and by appending an implicit `return this` at the end of a constructor.  As a result, good_adv_constructor_init.qk yields an error.
