@@ -20,9 +20,12 @@
 | Boolean | false |
 | Nothing |  none |
 ---
-## Credit Where Credit is Due
-Cloned from https://github.com/UO-cis561/reflex-bison-ast. Modified to parse Quack (.qk) source code. 
-
+## Dependencies
+* lex
+* bison
+* cmake
+* make
+* gcc
 ---
 ## Building
 Run the following commands from the project's root directory:
